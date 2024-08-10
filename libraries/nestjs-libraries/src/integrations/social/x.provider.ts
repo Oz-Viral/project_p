@@ -171,7 +171,7 @@ export class XProvider extends SocialAbstract implements SocialProvider {
           '𝔫𝔢𝔴𝔩𝔦𝔫𝔢',
           '\n'
         ),
-        ...(media_ids.length ? { media: { media_ids } } : {}),
+        ...(media_ids.length ? { media: { media_ids: media_ids as [string, string, string, string] } } : {}),
         ...(ids.length
           ? { reply: { in_reply_to_tweet_id: ids[ids.length - 1].postId } }
           : {}),

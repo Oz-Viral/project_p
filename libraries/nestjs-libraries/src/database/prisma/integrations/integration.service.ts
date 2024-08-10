@@ -32,8 +32,16 @@ export class IntegrationService {
     isBetweenSteps = false,
     refresh?: string
   ) {
-    const loadImage = await axios.get(picture, { responseType: 'arraybuffer' });
-    const uploadedPicture = await simpleUpload(loadImage.data, `${makeId(10)}.png`, 'image/png');
+    // TODO - 이미지 관련 처리 필요
+    if (picture) {
+      const loadImage = await axios.get(picture, {
+        responseType: 'arraybuffer',
+      });
+    }
+
+    const uploadedPicture =
+      'https://tistory1.daumcdn.net/tistory/6259884/attach/2a141cb100884781a95803d992d29573';
+    // (await simpleUpload(loadImage.data, `${makeId(10)}.png`, 'image/png'));
 
     return this._integrationRepository.createOrUpdateIntegration(
       org,

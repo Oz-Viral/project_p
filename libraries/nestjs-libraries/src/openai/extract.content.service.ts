@@ -33,7 +33,7 @@ export class ExtractContentService {
       .reverse();
 
     const findTheOneWithMostTitles = allTitles.reduce(
-      (all, current) => {
+      (all:any, current:any) => {
         const depth = findDepth(current);
         const calculate = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].reduce(
           (total, tag) => {

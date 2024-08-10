@@ -13,7 +13,6 @@ import { YoutubeSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/provide
 import { SocialAbstract } from '@gitroom/nestjs-libraries/integrations/social.abstract';
 import * as process from 'node:process';
 import dayjs from 'dayjs';
-import { GaxiosError } from 'gaxios/build/src/common';
 
 const clientAndYoutube = () => {
   const client = new google.auth.OAuth2({

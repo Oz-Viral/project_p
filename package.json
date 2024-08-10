@@ -77,6 +77,8 @@
     "copy-to-clipboard": "^3.3.3",
     "crypto-hash": "^3.0.0",
     "dayjs": "^1.11.10",
+    "express": "^4.19.2",
+    "form-data": "^4.0.0",
     "google-auth-library": "^9.11.0",
     "googleapis": "^137.1.0",
     "ioredis": "^5.3.2",
@@ -120,6 +122,7 @@
     "twitter-api-v2": "^1.16.0",
     "use-debounce": "^10.0.0",
     "utf-8-validate": "^5.0.10",
+    "uuid": "^10.0.0",
     "yargs": "^17.7.2",
     "yup": "^1.4.0"
   },
@@ -145,7 +148,9 @@
     "@testing-library/react": "14.0.0",
     "@types/cache-manager-redis-store": "^2.0.4",
     "@types/cookie-parser": "^1.4.6",
+    "@types/express": "^4.17.21",
     "@types/jest": "^29.4.0",
+    "@types/jsdom": "^21.1.7",
     "@types/node": "18.16.9",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
@@ -187,7 +192,5 @@
   "nx": {
     "includedScripts": []
   },
-  "workspaces": [
-    "apps/*"
-  ]
+  "packageManager": "pnpm@9.0.5+sha512.a722575c18fd791f9ef71e387c6e16cc03c90d859b9b0998d0428ca0e3220828b32a96e6de73cea34edbc0f50824771b1a69c7ea36b86daa3b89c7e6d9a3d912"
 }
