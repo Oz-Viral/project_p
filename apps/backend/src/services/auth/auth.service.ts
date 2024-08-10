@@ -168,6 +168,7 @@ export class AuthService {
       if (getUserAgain.activated) {
         return false;
       }
+
       await this._userService.activateUser(user.id);
       user.activated = true;
       await NewsletterService.register(user.email);

@@ -145,7 +145,8 @@ export class AuthController {
   ) {
     const activate = await this._authService.activate(code);
     if (!activate) {
-      return response.status(200).send({ can: false });
+      response.status(200).send({ can: false });
+      return;
     }
 
     response.cookie('auth', activate, {
@@ -158,7 +159,7 @@ export class AuthController {
     });
 
     response.header('onboarding', 'true');
-    return response.status(200).send({ can: true });
+    response.status(200).send({ can: true });
   }
 
   @Post('/oauth/:provider/exists')
@@ -169,7 +170,8 @@ export class AuthController {
   ) {
     const { jwt, token } = await this._authService.checkExists(provider, code);
     if (token) {
-      return response.json({ token });
+      response.json({ token });
+      return;
     }
 
     response.cookie('auth', jwt, {

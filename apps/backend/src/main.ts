@@ -8,7 +8,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {SubscriptionExceptionFilter} from "@gitroom/backend/services/auth/permissions/subscription.exception";
 import { HttpExceptionFilter } from '@gitroom/nestjs-libraries/services/exception.filter';
-
+import { GlobalExceptionFilter } from '@gitroom/nestjs-libraries/services/global.exception.filter';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     rawBody: true,
@@ -26,6 +26,7 @@ async function bootstrap() {
   app.use(cookieParser());
   app.useGlobalFilters(new SubscriptionExceptionFilter());
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new GlobalExceptionFilter());
 
   loadSwagger(app);
 
