@@ -5,6 +5,7 @@
     "dbaeumer.vscode-eslint",
     "firsttris.vscode-jest-runner",
     "bradlc.vscode-tailwindcss",
-    "yoavbls.pretty-ts-errors"
+    "yoavbls.pretty-ts-errors",
+    "prisma.prisma"
   ]
 }
