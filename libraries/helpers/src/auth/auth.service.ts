@@ -17,12 +17,15 @@ export class AuthService {
     return verify(token, process.env.JWT_SECRET!);
   }
 
+  static iv = crypto.randomBytes(16);
+  
+
   static fixedEncryption(value: string) {
     // encryption algorithm
     const algorithm = 'aes-256-cbc';
 
     // create a cipher object
-    const cipher = crypto.createCipher(algorithm, process.env.JWT_SECRET);
+    const cipher = crypto.createCipheriv(algorithm, process.env.JWT_SECRET!, AuthService.iv);
 
     // encrypt the plain text
     let encrypted = cipher.update(value, 'utf8', 'hex');
@@ -33,7 +36,7 @@ export class AuthService {
 
   static fixedDecryption(hash: string) {
     const algorithm = 'aes-256-cbc';
-    const decipher = crypto.createDecipher(algorithm, process.env.JWT_SECRET);
+    const decipher = crypto.createDecipheriv(algorithm, process.env.JWT_SECRET!, AuthService.iv);
 
     // decrypt the encrypted text
     let decrypted = decipher.update(hash, 'hex', 'utf8');
