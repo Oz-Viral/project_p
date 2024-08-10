@@ -135,7 +135,8 @@ export class UsersController {
     const getOrgFromCookie = this._authService.getOrgFromCookie(org);
 
     if (!getOrgFromCookie) {
-      return response.status(200).json({ id: null });
+      response.status(200).json({ id: null });
+      return;
     }
 
     const addedOrg = await this._orgService.addUserToOrg(
