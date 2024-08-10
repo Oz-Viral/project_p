@@ -20,22 +20,7 @@
       }
     },
     "serve": {
-      "executor": "@nx/next:server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "frontend:build",
-        "dev": true
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "frontend:build:development",
-          "dev": true
-        },
-        "production": {
-          "buildTarget": "frontend:build:production",
-          "dev": false
-        }
-      }
+      "command": "cd apps/frontend && node server.js"
     },
     "export": {
       "executor": "@nx/next:export",

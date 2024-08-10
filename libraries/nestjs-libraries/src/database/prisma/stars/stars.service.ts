@@ -455,9 +455,7 @@ export class StarsService {
     const dates = trendings.map((result) => dayjs(result.date).toDate());
     const intervals = dates
       .slice(1)
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      .map((date, i) => (date - dates[i]) / (1000 * 60 * 60 * 24));
+      .map((date, i) => (date.getTime() - dates[i].getTime()) / (1000 * 60 * 60 * 24));
     const nextInterval = intervals.length === 0 ? null : mean(intervals);
     const lastTrendingDate = dates[dates.length - 1];
     const nextTrendingDate = !nextInterval

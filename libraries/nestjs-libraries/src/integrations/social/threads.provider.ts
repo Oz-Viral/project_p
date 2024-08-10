@@ -42,7 +42,7 @@ export class ThreadsProvider extends SocialAbstract implements SocialProvider {
         `?client_id=${process.env.THREADS_APP_ID}` +
         `&redirect_uri=${encodeURIComponent(
           process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
-            ? `https://integration.git.sn/integrations/social/threads`
+            ? `${process.env.FRONTEND_URL}/integrations/social/threads`
             : `${process.env.FRONTEND_URL}/integrations/social/threads${
                 refresh ? `?refresh=${refresh}` : ''
               }`
@@ -65,7 +65,7 @@ export class ThreadsProvider extends SocialAbstract implements SocialProvider {
           `?client_id=${process.env.THREADS_APP_ID}` +
           `&redirect_uri=${encodeURIComponent(
             process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
-              ? `https://integration.git.sn/integrations/social/threads`
+              ? `${process.env.FRONTEND_URL}/integrations/social/threads`
               : `${process.env.FRONTEND_URL}/integrations/social/threads${
                   params.refresh ? `?refresh=${params.refresh}` : ''
                 }`
@@ -104,8 +104,15 @@ export class ThreadsProvider extends SocialAbstract implements SocialProvider {
     };
   }
 
-  private async checkLoaded(mediaContainerId: string, accessToken: string): Promise<boolean> {
-    const {status, id, error_message} = await (await this.fetch(`https://graph.threads.net/v1.0/${mediaContainerId}?fields=status,error_message&access_token=${accessToken}`)).json();
+  private async checkLoaded(
+    mediaContainerId: string,
+    accessToken: string
+  ): Promise<boolean> {
+    const { status, id, error_message } = await (
+      await this.fetch(
+        `https://graph.threads.net/v1.0/${mediaContainerId}?fields=status,error_message&access_token=${accessToken}`
+      )
+    ).json();
     console.log(status, error_message);
     if (status === 'ERROR') {
       throw new Error(id);
@@ -205,12 +212,8 @@ export class ThreadsProvider extends SocialAbstract implements SocialProvider {
           mediaLoad.path.indexOf('.mp4') > -1 ? 'video_url' : 'image_url';
 
         const media = new URLSearchParams({
-          ...(type === 'video_url'
-            ? { video_url: mediaLoad.path }
-            : {}),
-          ...(type === 'image_url'
-            ? { image_url: mediaLoad.path }
-            : {}),
+          ...(type === 'video_url' ? { video_url: mediaLoad.path } : {}),
+          ...(type === 'image_url' ? { image_url: mediaLoad.path } : {}),
           is_carousel_item: 'true',
           media_type:
             type === 'video_url'
@@ -234,7 +237,9 @@ export class ThreadsProvider extends SocialAbstract implements SocialProvider {
         medias.push(mediaId);
       }
 
-      await Promise.all(medias.map((p: string) => this.checkLoaded(p, accessToken)));
+      await Promise.all(
+        medias.map((p: string) => this.checkLoaded(p, accessToken))
+      );
 
       const { id: containerId } = await (
         await this.fetch(

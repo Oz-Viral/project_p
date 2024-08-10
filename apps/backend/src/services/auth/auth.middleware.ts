@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import { AuthService } from '@gitroom/helpers/auth/auth.service';
-import { User } from '@prisma/client';
+import { Organization, User } from '@prisma/client';
 import { OrganizationService } from '@gitroom/nestjs-libraries/database/prisma/organizations/organization.service';
 import { UsersService } from '@gitroom/nestjs-libraries/database/prisma/users/users.service';
 import { removeSubdomain } from '@gitroom/helpers/subdomain/subdomain.management';
@@ -26,7 +26,7 @@ export class AuthMiddleware implements NestMiddleware {
     private _organizationService: OrganizationService,
     private _userService: UsersService
   ) {}
-  async use(req: Request, res: Response, next: NextFunction) {
+  async use(req: Request & {user?: User, org?: Organization}, res: Response, next: NextFunction) {
     const auth = req.headers.auth || req.cookies.auth;
     if (!auth) {
       throw new HttpForbiddenException();
@@ -53,8 +53,6 @@ export class AuthMiddleware implements NestMiddleware {
           user.isSuperAdmin = true;
           delete user.password;
 
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
           req.user = user;
 
           // @ts-ignore
@@ -62,8 +60,7 @@ export class AuthMiddleware implements NestMiddleware {
             loadImpersonate.organization.users.filter(
               (f) => f.userId === user.id
             );
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
+
           req.org = loadImpersonate.organization;
           next();
           return;
@@ -82,11 +79,11 @@ export class AuthMiddleware implements NestMiddleware {
       }
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
+      // ts-expect-error
       req.user = user;
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
+      // ts-expect-error
       req.org = setOrg;
     } catch (err) {
       throw new HttpForbiddenException();

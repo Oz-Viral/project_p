@@ -15,7 +15,7 @@ export class PoliciesGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request: Request = context.switchToHttp().getRequest();
+    const request: Request & {org: Organization} = context.switchToHttp().getRequest();
     if (request.path.indexOf('/auth') > -1 || request.path.indexOf('/stripe') > -1) {
       return true;
     }
@@ -30,9 +30,7 @@ export class PoliciesGuard implements CanActivate {
       return true;
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    const { org } : {org: Organization} = request;
+    const { org } = request;
 
     // @ts-ignore
     const ability = await this._authorizationService.check(org.id, org.createdAt, org.users[0].role, policyHandlers);
