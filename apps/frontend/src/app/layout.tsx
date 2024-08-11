@@ -10,12 +10,13 @@ import { ReactNode } from 'react';
 import { Chakra_Petch } from 'next/font/google';
 import { isGeneral } from '@kursor/react/helpers/is.general';
 import PlausibleProvider from 'next-plausible';
+import { ThemeProvider } from 'next-themes';
 
 const chakra = Chakra_Petch({ weight: '400', subsets: ['latin'] });
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
   return (
-    <html className={interClass}>
+    <html suppressHydrationWarning className={interClass}>
       <head>
         <link
           rel="icon"
@@ -24,9 +25,11 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body className={chakra.className}>
-        <PlausibleProvider domain="kursor.com">
-          <LayoutContext>{children}</LayoutContext>
-        </PlausibleProvider>
+        <ThemeProvider>
+          <PlausibleProvider domain="kursor.com">
+            <LayoutContext>{children}</LayoutContext>
+          </PlausibleProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
