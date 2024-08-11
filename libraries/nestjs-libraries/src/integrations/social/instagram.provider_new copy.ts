@@ -19,13 +19,10 @@ export class InstagramProvider
   name = 'Instagram';
   isBetweenSteps = true;
   scopes = [
-    'instagram_basic',
-    'pages_show_list',
-    'pages_read_engagement',
-    'business_management',
-    'instagram_content_publish',
-    'instagram_manage_comments',
-    'instagram_manage_insights',
+    'business_basic',
+    'business_content_publish',
+    'business_manage_messages',
+    'business_manage_comments',
   ];
 
   async refreshToken(refresh_token: string): Promise<AuthTokenDetails> {
@@ -44,17 +41,16 @@ export class InstagramProvider
     const state = makeId(6);
     return {
       url:
-        'https://www.facebook.com/v20.0/dialog/oauth' +
-        `?client_id=${process.env.FACEBOOK_APP_ID}` +
+        'https://www.instagram.com/oauth/authorize' +
+        `?client_id=${process.env.INSTAGRAM_CLIENT_ID}` +
         `&redirect_uri=${encodeURIComponent(
           `${process.env.FRONTEND_URL}/integrations/social/instagram${
             refresh ? `?refresh=${refresh}` : ''
           }`
         )}` +
+        `&response_type=code` +
         `&state=${state}` +
-        `&scope=${encodeURIComponent(
-          'instagram_basic,pages_show_list,pages_read_engagement,business_management,instagram_content_publish,instagram_manage_comments,instagram_manage_insights'
-        )}`,
+        `&scope=${encodeURIComponent(this.scopes.join(','))}`,
       codeVerifier: makeId(10),
       state,
     };
@@ -66,40 +62,59 @@ export class InstagramProvider
     refresh: string;
   }) {
     const getAccessToken = await (
-      await this.fetch(
-        'https://graph.facebook.com/v20.0/oauth/access_token' +
-          `?client_id=${process.env.FACEBOOK_APP_ID}` +
-          `&redirect_uri=${encodeURIComponent(
-            `${process.env.FRONTEND_URL}/integrations/social/instagram${
-              params.refresh ? `?refresh=${params.refresh}` : ''
-            }`
-          )}` +
-          `&client_secret=${process.env.FACEBOOK_APP_SECRET}` +
-          `&code=${params.code}`
-      )
+      await this.fetch('https://api.instagram.com/oauth/access_token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          client_id: process.env.INSTAGRAM_CLIENT_ID,
+          client_secret: process.env.INSTAGRAM_CLIENT_SECRET,
+          code: params.code,
+          grant_type: 'authorization_code',
+          redirect_uri: `${process.env.FRONTEND_URL}/integrations/social/instagram`,
+        }),
+      })
     ).json();
 
     const { access_token, expires_in, ...all } = await (
       await this.fetch(
-        'https://graph.facebook.com/v20.0/oauth/access_token' +
-          '?grant_type=fb_exchange_token' +
-          `&client_id=${process.env.FACEBOOK_APP_ID}` +
-          `&client_secret=${process.env.FACEBOOK_APP_SECRET}` +
-          `&fb_exchange_token=${getAccessToken.access_token}`
+        'https://graph.instagram.com/access_token' +
+          '?grant_type=ig_exchange_token' +
+          `&client_secret=${process.env.INSTAGRAM_CLIENT_SECRET}` +
+          `&access_token=${getAccessToken.access_token}`
       )
     ).json();
 
-    const {
-      id,
-      name,
-      picture: {
-        data: { url },
-      },
-    } = await (
+    // const { data } = await (
+    //   await this.fetch(
+    //     `https://graph.facebook.com/v20.0/me/permissions?access_token=${access_token}`
+    //   )
+    // ).json();
+
+    // const permissions = data
+    //   .filter((d: any) => d.status === 'granted')
+    //   .map((p: any) => p.permission);
+    // this.checkScopes(this.scopes, permissions);
+
+    const data = await (
       await this.fetch(
-        `https://graph.facebook.com/v20.0/me?fields=id,name,picture&access_token=${access_token}`
+        `https://graph.instagram.com/v20.0/me?fields=${[
+          'id',
+          'user_id',
+          'username',
+          'name',
+          'profile_picture_url',
+          'followers_count',
+          'follows_count',
+          'media_count',
+          'account_type',
+          'biography',
+          'website',
+        ].join(',')}&access_token=${access_token}`
       )
     ).json();
+    const { id, name, profile_picture_url, username } = data;
 
     if (params.refresh) {
       const findPage = (await this.pages(access_token)).find(
@@ -127,8 +142,8 @@ export class InstagramProvider
       accessToken: access_token,
       refreshToken: access_token,
       expiresIn: dayjs().add(59, 'days').unix() - dayjs().unix(),
-      picture: url,
-      username: '',
+      picture: profile_picture_url,
+      username,
     };
   }
 
@@ -352,13 +367,15 @@ export class InstagramProvider
 
     console.log(all);
 
-    return data?.map((d: any) => ({
-      label: d.title,
-      percentageChange: 5,
-      data: d.values.map((v: any) => ({
-        total: v.value,
-        date: dayjs(v.end_time).format('YYYY-MM-DD'),
-      })),
-    })) || [];
+    return (
+      data?.map((d: any) => ({
+        label: d.title,
+        percentageChange: 5,
+        data: d.values.map((v: any) => ({
+          total: v.value,
+          date: dayjs(v.end_time).format('YYYY-MM-DD'),
+        })),
+      })) || []
+    );
   }
 }
