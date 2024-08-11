@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { withProvider } from '@gitroom/frontend/components/launches/providers/high.order.provider';
+import { withProvider } from '@kursor/frontend/components/launches/providers/high.order.provider';
 import localFont from 'next/font/local';
 import clsx from 'clsx';
-import { useIntegration } from '@gitroom/frontend/components/launches/helpers/use.integration';
-import { useFormatting } from '@gitroom/frontend/components/launches/helpers/use.formatting';
-import { useMediaDirectory } from '@gitroom/react/helpers/use.media.directory';
-import { VideoOrImage } from '@gitroom/react/helpers/video.or.image';
+import { useIntegration } from '@kursor/frontend/components/launches/helpers/use.integration';
+import { useFormatting } from '@kursor/frontend/components/launches/helpers/use.formatting';
+import { useMediaDirectory } from '@kursor/react/helpers/use.media.directory';
+import { VideoOrImage } from '@kursor/react/helpers/video.or.image';
 
 const chirp = localFont({
   src: [

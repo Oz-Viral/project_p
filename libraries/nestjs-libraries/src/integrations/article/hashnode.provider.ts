@@ -1,7 +1,7 @@
-import { ArticleProvider } from '@gitroom/nestjs-libraries/integrations/article/article.integrations.interface';
-import { tags } from '@gitroom/nestjs-libraries/integrations/article/hashnode.tags';
+import { ArticleProvider } from '@kursor/nestjs-libraries/integrations/article/article.integrations.interface';
+import { tags } from '@kursor/nestjs-libraries/integrations/article/hashnode.tags';
 import { jsonToGraphQLQuery } from 'json-to-graphql-query';
-import { HashnodeSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/hashnode.settings.dto';
+import { HashnodeSettingsDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/hashnode.settings.dto';
 
 export class HashnodeProvider implements ArticleProvider {
   identifier = 'hashnode';

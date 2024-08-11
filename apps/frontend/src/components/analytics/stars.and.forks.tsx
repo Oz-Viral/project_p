@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { StarsAndForksInterface } from '@gitroom/frontend/components/analytics/stars.and.forks.interface';
-import { Chart } from '@gitroom/frontend/components/analytics/chart';
-import { UtcToLocalDateRender } from '@gitroom/react/helpers/utc.date.render';
+import { StarsAndForksInterface } from '@kursor/frontend/components/analytics/stars.and.forks.interface';
+import { Chart } from '@kursor/frontend/components/analytics/chart';
+import { UtcToLocalDateRender } from '@kursor/react/helpers/utc.date.render';
 import clsx from 'clsx';
 
 export const StarsAndForks: FC<StarsAndForksInterface> = (props) => {

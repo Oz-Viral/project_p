@@ -1,9 +1,9 @@
 import { Ability, AbilityBuilder, AbilityClass } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
-import { pricing } from '@gitroom/nestjs-libraries/database/prisma/subscriptions/pricing';
-import { SubscriptionService } from '@gitroom/nestjs-libraries/database/prisma/subscriptions/subscription.service';
-import { PostsService } from '@gitroom/nestjs-libraries/database/prisma/posts/posts.service';
-import { IntegrationService } from '@gitroom/nestjs-libraries/database/prisma/integrations/integration.service';
+import { pricing } from '@kursor/nestjs-libraries/database/prisma/subscriptions/pricing';
+import { SubscriptionService } from '@kursor/nestjs-libraries/database/prisma/subscriptions/subscription.service';
+import { PostsService } from '@kursor/nestjs-libraries/database/prisma/posts/posts.service';
+import { IntegrationService } from '@kursor/nestjs-libraries/database/prisma/integrations/integration.service';
 import dayjs from 'dayjs';
 
 export enum Sections {
@@ -11,7 +11,7 @@ export enum Sections {
   POSTS_PER_MONTH = 'posts_per_month',
   TEAM_MEMBERS = 'team_members',
   COMMUNITY_FEATURES = 'community_features',
-  FEATURED_BY_GITROOM = 'featured_by_gitroom',
+  FEATURED_BY_KURSOR = 'featured_by_kursor',
   AI = 'ai',
   IMPORT_FROM_CHANNELS = 'import_from_channels',
   ADMIN = 'admin',
@@ -135,8 +135,8 @@ export class PermissionsService {
       }
 
       if (
-        section === Sections.FEATURED_BY_GITROOM &&
-        options.featured_by_gitroom
+        section === Sections.FEATURED_BY_KURSOR &&
+        options.featured_by_kursor
       ) {
         can(action, section);
         continue;

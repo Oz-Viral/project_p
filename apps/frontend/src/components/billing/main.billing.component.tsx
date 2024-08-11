@@ -1,25 +1,25 @@
 'use client';
 
-import { Slider } from '@gitroom/react/form/slider';
+import { Slider } from '@kursor/react/form/slider';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { Button } from '@gitroom/react/form/button';
+import { Button } from '@kursor/react/form/button';
 import { sortBy } from 'lodash';
-import { Track } from '@gitroom/react/form/track';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { Track } from '@kursor/react/form/track';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import { Subscription } from '@prisma/client';
 import { useDebouncedCallback } from 'use-debounce';
 import ReactLoading from 'react-loading';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
-import { useToaster } from '@gitroom/react/toaster/toaster';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
+import { useToaster } from '@kursor/react/toaster/toaster';
 import dayjs from 'dayjs';
 import clsx from 'clsx';
-import { pricing } from '@gitroom/nestjs-libraries/database/prisma/subscriptions/pricing';
-import { FAQComponent } from '@gitroom/frontend/components/billing/faq.component';
+import { pricing } from '@kursor/nestjs-libraries/database/prisma/subscriptions/pricing';
+import { FAQComponent } from '@kursor/frontend/components/billing/faq.component';
 import { useSWRConfig } from 'swr';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
-import interClass from '@gitroom/react/helpers/inter.font';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
+import interClass from '@kursor/react/helpers/inter.font';
 import { useRouter } from 'next/navigation';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 export interface Tiers {
   month: Array<{

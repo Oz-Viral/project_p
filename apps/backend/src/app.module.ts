@@ -1,9 +1,9 @@
 import {Global, Module} from '@nestjs/common';
 
-import {DatabaseModule} from "@gitroom/nestjs-libraries/database/prisma/database.module";
-import {ApiModule} from "@gitroom/backend/api/api.module";
+import {DatabaseModule} from "@kursor/nestjs-libraries/database/prisma/database.module";
+import {ApiModule} from "@kursor/backend/api/api.module";
 import {APP_GUARD} from "@nestjs/core";
-import {PoliciesGuard} from "@gitroom/backend/services/auth/permissions/permissions.guard";
+import {PoliciesGuard} from "@kursor/backend/services/auth/permissions/permissions.guard";
 
 @Global()
 @Module({

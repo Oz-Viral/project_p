@@ -1,19 +1,19 @@
 import React, { FC, useCallback, useContext, useMemo, useState } from 'react';
-import { MarketplaceProvider } from '@gitroom/frontend/components/marketplace/marketplace.provider';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
+import { MarketplaceProvider } from '@kursor/frontend/components/marketplace/marketplace.provider';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
 import { useModals } from '@mantine/modals';
-import { TopTitle } from '@gitroom/frontend/components/launches/helpers/top.title.component';
-import { Input } from '@gitroom/react/form/input';
-import { CustomSelect } from '@gitroom/react/form/custom.select';
+import { TopTitle } from '@kursor/frontend/components/launches/helpers/top.title.component';
+import { Input } from '@kursor/react/form/input';
+import { CustomSelect } from '@kursor/react/form/custom.select';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
-import { Total } from '@gitroom/react/form/total';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { Total } from '@kursor/react/form/total';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import useSWR from 'swr';
-import { Button } from '@gitroom/react/form/button';
+import { Button } from '@kursor/react/form/button';
 import { array, number, object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useToaster } from '@gitroom/react/toaster/toaster';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
+import { useToaster } from '@kursor/react/toaster/toaster';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 
 const schema = object({
   socialMedia: array()

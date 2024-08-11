@@ -4,12 +4,12 @@ import {
   PostDetails,
   PostResponse,
   SocialProvider,
-} from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
+} from '@kursor/nestjs-libraries/integrations/social/social.integrations.interface';
 import { lookup } from 'mime-types';
 import sharp from 'sharp';
-import { readOrFetch } from '@gitroom/helpers/utils/read.or.fetch';
+import { readOrFetch } from '@kursor/helpers/utils/read.or.fetch';
 import removeMd from 'remove-markdown';
-import { SocialAbstract } from '@gitroom/nestjs-libraries/integrations/social.abstract';
+import { SocialAbstract } from '@kursor/nestjs-libraries/integrations/social.abstract';
 
 export class XProvider extends SocialAbstract implements SocialProvider {
   identifier = 'x';

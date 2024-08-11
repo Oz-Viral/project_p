@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import interClass from '@gitroom/react/helpers/inter.font';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import interClass from '@kursor/react/helpers/inter.font';
 
 export const GithubProvider = () => {
   const fetch = useFetch();

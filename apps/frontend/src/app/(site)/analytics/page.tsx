@@ -1,13 +1,13 @@
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 export const dynamic = 'force-dynamic';
 
-import { AnalyticsComponent } from '@gitroom/frontend/components/analytics/analytics.component';
+import { AnalyticsComponent } from '@kursor/frontend/components/analytics/analytics.component';
 import { Metadata } from 'next';
-import { PlatformAnalytics } from '@gitroom/frontend/components/platform-analytics/platform.analytics';
+import { PlatformAnalytics } from '@kursor/frontend/components/platform-analytics/platform.analytics';
 
 export const metadata: Metadata = {
-  title: `${isGeneral() ? 'Postiz' : 'Gitroom'} Analytics`,
+  title: `Kursor Analytics`,
   description: '',
 };
 

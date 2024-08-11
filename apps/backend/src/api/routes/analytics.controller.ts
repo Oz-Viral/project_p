@@ -8,15 +8,15 @@ import {
   Query,
 } from '@nestjs/common';
 import { Organization } from '@prisma/client';
-import { GetOrgFromRequest } from '@gitroom/nestjs-libraries/user/org.from.request';
-import { StarsService } from '@gitroom/nestjs-libraries/database/prisma/stars/stars.service';
+import { GetOrgFromRequest } from '@kursor/nestjs-libraries/user/org.from.request';
+import { StarsService } from '@kursor/nestjs-libraries/database/prisma/stars/stars.service';
 import dayjs from 'dayjs';
-import { StarsListDto } from '@gitroom/nestjs-libraries/dtos/analytics/stars.list.dto';
+import { StarsListDto } from '@kursor/nestjs-libraries/dtos/analytics/stars.list.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { IntegrationService } from '@gitroom/nestjs-libraries/database/prisma/integrations/integration.service';
-import { IntegrationManager } from '@gitroom/nestjs-libraries/integrations/integration.manager';
-import { ioRedis } from '@gitroom/nestjs-libraries/redis/redis.service';
-import { RefreshToken } from '@gitroom/nestjs-libraries/integrations/social.abstract';
+import { IntegrationService } from '@kursor/nestjs-libraries/database/prisma/integrations/integration.service';
+import { IntegrationManager } from '@kursor/nestjs-libraries/integrations/integration.manager';
+import { ioRedis } from '@kursor/nestjs-libraries/redis/redis.service';
+import { RefreshToken } from '@kursor/nestjs-libraries/integrations/social.abstract';
 
 @ApiTags('Analytics')
 @Controller('/analytics')

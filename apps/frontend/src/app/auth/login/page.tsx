@@ -1,12 +1,12 @@
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 export const dynamic = 'force-dynamic';
 
-import {Login} from "@gitroom/frontend/components/auth/login";
+import {Login} from "@kursor/frontend/components/auth/login";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-  title: `${isGeneral() ? 'Postiz' : 'Gitroom'} Login`,
+  title: `Kursor Login`,
   description: '',
 };
 

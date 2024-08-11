@@ -10,47 +10,47 @@ import React, {
   useState,
 } from 'react';
 import dayjs from 'dayjs';
-import { Integrations } from '@gitroom/frontend/components/launches/calendar.context';
+import { Integrations } from '@kursor/frontend/components/launches/calendar.context';
 import clsx from 'clsx';
 import { commands } from '@uiw/react-md-editor';
-import { usePreventWindowUnload } from '@gitroom/react/helpers/use.prevent.window.unload';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
+import { usePreventWindowUnload } from '@kursor/react/helpers/use.prevent.window.unload';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 import { useModals } from '@mantine/modals';
-import { useHideTopEditor } from '@gitroom/frontend/components/launches/helpers/use.hide.top.editor';
-import { Button } from '@gitroom/react/form/button';
+import { useHideTopEditor } from '@kursor/frontend/components/launches/helpers/use.hide.top.editor';
+import { Button } from '@kursor/react/form/button';
 // @ts-ignore
 import useKeypress from 'react-use-keypress';
 import {
   getValues,
   resetValues,
-} from '@gitroom/frontend/components/launches/helpers/use.values';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { useMoveToIntegration } from '@gitroom/frontend/components/launches/helpers/use.move.to.integration';
-import { useExistingData } from '@gitroom/frontend/components/launches/helpers/use.existing.data';
-import { newImage } from '@gitroom/frontend/components/launches/helpers/new.image.component';
-import { MultiMediaComponent } from '@gitroom/frontend/components/media/media.component';
-import { useExpend } from '@gitroom/frontend/components/launches/helpers/use.expend';
-import { TopTitle } from '@gitroom/frontend/components/launches/helpers/top.title.component';
-import { PickPlatforms } from '@gitroom/frontend/components/launches/helpers/pick.platform.component';
-import { ProvidersOptions } from '@gitroom/frontend/components/launches/providers.options';
+} from '@kursor/frontend/components/launches/helpers/use.values';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { useMoveToIntegration } from '@kursor/frontend/components/launches/helpers/use.move.to.integration';
+import { useExistingData } from '@kursor/frontend/components/launches/helpers/use.existing.data';
+import { newImage } from '@kursor/frontend/components/launches/helpers/new.image.component';
+import { MultiMediaComponent } from '@kursor/frontend/components/media/media.component';
+import { useExpend } from '@kursor/frontend/components/launches/helpers/use.expend';
+import { TopTitle } from '@kursor/frontend/components/launches/helpers/top.title.component';
+import { PickPlatforms } from '@kursor/frontend/components/launches/helpers/pick.platform.component';
+import { ProvidersOptions } from '@kursor/frontend/components/launches/providers.options';
 import { v4 as uuidv4 } from 'uuid';
 import useSWR, { useSWRConfig } from 'swr';
-import { useToaster } from '@gitroom/react/toaster/toaster';
-import { postSelector } from '@gitroom/frontend/components/post-url-selector/post.url.selector';
-import { UpDownArrow } from '@gitroom/frontend/components/launches/up.down.arrow';
-import { DatePicker } from '@gitroom/frontend/components/launches/helpers/date.picker';
+import { useToaster } from '@kursor/react/toaster/toaster';
+import { postSelector } from '@kursor/frontend/components/post-url-selector/post.url.selector';
+import { UpDownArrow } from '@kursor/frontend/components/launches/up.down.arrow';
+import { DatePicker } from '@kursor/frontend/components/launches/helpers/date.picker';
 import { arrayMoveImmutable } from 'array-move';
 import {
   Information,
   PostToOrganization,
-} from '@gitroom/frontend/components/launches/post.to.organization';
-import { Submitted } from '@gitroom/frontend/components/launches/submitted';
-import { supportEmitter } from '@gitroom/frontend/components/layout/support';
-import { Editor } from '@gitroom/frontend/components/launches/editor';
-import { AddPostButton } from '@gitroom/frontend/components/launches/add.post.button';
-import { useStateCallback } from '@gitroom/react/helpers/use.state.callback';
+} from '@kursor/frontend/components/launches/post.to.organization';
+import { Submitted } from '@kursor/frontend/components/launches/submitted';
+import { supportEmitter } from '@kursor/frontend/components/layout/support';
+import { Editor } from '@kursor/frontend/components/launches/editor';
+import { AddPostButton } from '@kursor/frontend/components/launches/add.post.button';
+import { useStateCallback } from '@kursor/react/helpers/use.state.callback';
 import { CopilotPopup } from '@copilotkit/react-ui';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
 
 export const AddEditModal: FC<{
   date: dayjs.Dayjs;

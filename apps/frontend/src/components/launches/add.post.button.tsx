@@ -1,4 +1,4 @@
-import { Button } from '@gitroom/react/form/button';
+import { Button } from '@kursor/react/form/button';
 import React, { FC } from 'react';
 import { useCopilotAction, useCopilotReadable } from '@copilotkit/react-core';
 

@@ -1,6 +1,6 @@
 import {Command, Positional} from 'nestjs-command';
 import { Injectable } from '@nestjs/common';
-import {BullMqClient} from "@gitroom/nestjs-libraries/bull-mq-transport/client/bull-mq.client";
+import {BullMqClient} from "@kursor/nestjs-libraries/bull-mq-transport/client/bull-mq.client";
 
 @Injectable()
 export class CheckStars {

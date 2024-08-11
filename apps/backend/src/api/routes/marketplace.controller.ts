@@ -1,19 +1,19 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { Organization, User } from '@prisma/client';
 import { ApiTags } from '@nestjs/swagger';
-import { GetUserFromRequest } from '@gitroom/nestjs-libraries/user/user.from.request';
-import { ItemUserService } from '@gitroom/nestjs-libraries/database/prisma/marketplace/item.user.service';
-import { AddRemoveItemDto } from '@gitroom/nestjs-libraries/dtos/marketplace/add.remove.item.dto';
-import { StripeService } from '@gitroom/nestjs-libraries/services/stripe.service';
-import { UsersService } from '@gitroom/nestjs-libraries/database/prisma/users/users.service';
-import { ChangeActiveDto } from '@gitroom/nestjs-libraries/dtos/marketplace/change.active.dto';
-import { ItemsDto } from '@gitroom/nestjs-libraries/dtos/marketplace/items.dto';
-import { GetOrgFromRequest } from '@gitroom/nestjs-libraries/user/org.from.request';
-import { AudienceDto } from '@gitroom/nestjs-libraries/dtos/marketplace/audience.dto';
-import { NewConversationDto } from '@gitroom/nestjs-libraries/dtos/marketplace/new.conversation.dto';
-import { MessagesService } from '@gitroom/nestjs-libraries/database/prisma/marketplace/messages.service';
-import { CreateOfferDto } from '@gitroom/nestjs-libraries/dtos/marketplace/create.offer.dto';
-import { PostsService } from '@gitroom/nestjs-libraries/database/prisma/posts/posts.service';
+import { GetUserFromRequest } from '@kursor/nestjs-libraries/user/user.from.request';
+import { ItemUserService } from '@kursor/nestjs-libraries/database/prisma/marketplace/item.user.service';
+import { AddRemoveItemDto } from '@kursor/nestjs-libraries/dtos/marketplace/add.remove.item.dto';
+import { StripeService } from '@kursor/nestjs-libraries/services/stripe.service';
+import { UsersService } from '@kursor/nestjs-libraries/database/prisma/users/users.service';
+import { ChangeActiveDto } from '@kursor/nestjs-libraries/dtos/marketplace/change.active.dto';
+import { ItemsDto } from '@kursor/nestjs-libraries/dtos/marketplace/items.dto';
+import { GetOrgFromRequest } from '@kursor/nestjs-libraries/user/org.from.request';
+import { AudienceDto } from '@kursor/nestjs-libraries/dtos/marketplace/audience.dto';
+import { NewConversationDto } from '@kursor/nestjs-libraries/dtos/marketplace/new.conversation.dto';
+import { MessagesService } from '@kursor/nestjs-libraries/database/prisma/marketplace/messages.service';
+import { CreateOfferDto } from '@kursor/nestjs-libraries/dtos/marketplace/create.offer.dto';
+import { PostsService } from '@kursor/nestjs-libraries/database/prisma/posts/posts.service';
 
 @ApiTags('Marketplace')
 @Controller('/marketplace')

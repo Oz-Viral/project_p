@@ -1,8 +1,8 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import { useCustomProviderFunction } from '@gitroom/frontend/components/launches/helpers/use.custom.provider.function';
-import { useSettings } from '@gitroom/frontend/components/launches/helpers/use.values';
+import { useCustomProviderFunction } from '@kursor/frontend/components/launches/helpers/use.custom.provider.function';
+import { useSettings } from '@kursor/frontend/components/launches/helpers/use.values';
 import { ReactTags } from 'react-tag-autocomplete';
-import interClass from '@gitroom/react/helpers/inter.font';
+import interClass from '@kursor/react/helpers/inter.font';
 
 export const DevtoTags: FC<{
   name: string;

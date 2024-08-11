@@ -1,9 +1,9 @@
 import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
-import { CommentsService } from '@gitroom/nestjs-libraries/database/prisma/comments/comments.service';
-import { GetOrgFromRequest } from '@gitroom/nestjs-libraries/user/org.from.request';
+import { CommentsService } from '@kursor/nestjs-libraries/database/prisma/comments/comments.service';
+import { GetOrgFromRequest } from '@kursor/nestjs-libraries/user/org.from.request';
 import { Organization, User } from '@prisma/client';
-import { GetUserFromRequest } from '@gitroom/nestjs-libraries/user/user.from.request';
-import { AddCommentDto } from '@gitroom/nestjs-libraries/dtos/comments/add.comment.dto';
+import { GetUserFromRequest } from '@kursor/nestjs-libraries/user/user.from.request';
+import { AddCommentDto } from '@kursor/nestjs-libraries/dtos/comments/add.comment.dto';
 import {ApiTags} from "@nestjs/swagger";
 
 @ApiTags('Comments')

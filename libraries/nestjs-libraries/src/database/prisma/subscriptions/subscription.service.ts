@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { pricing } from '@gitroom/nestjs-libraries/database/prisma/subscriptions/pricing';
-import { SubscriptionRepository } from '@gitroom/nestjs-libraries/database/prisma/subscriptions/subscription.repository';
-import { IntegrationService } from '@gitroom/nestjs-libraries/database/prisma/integrations/integration.service';
-import { OrganizationService } from '@gitroom/nestjs-libraries/database/prisma/organizations/organization.service';
+import { pricing } from '@kursor/nestjs-libraries/database/prisma/subscriptions/pricing';
+import { SubscriptionRepository } from '@kursor/nestjs-libraries/database/prisma/subscriptions/subscription.repository';
+import { IntegrationService } from '@kursor/nestjs-libraries/database/prisma/integrations/integration.service';
+import { OrganizationService } from '@kursor/nestjs-libraries/database/prisma/organizations/organization.service';
 import { Organization } from '@prisma/client';
 import dayjs from 'dayjs';
 

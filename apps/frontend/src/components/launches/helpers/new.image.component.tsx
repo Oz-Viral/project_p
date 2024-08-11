@@ -6,7 +6,7 @@ import {
   selectWord,
   TextAreaTextApi,
 } from '@uiw/react-md-editor';
-import { showMediaBox } from '@gitroom/frontend/components/media/media.component';
+import { showMediaBox } from '@kursor/frontend/components/media/media.component';
 
 export const newImage: ICommand = {
   name: 'image',

@@ -1,7 +1,7 @@
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 import { useCallback } from 'react';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 
 export const LogoutComponent = () => {
   const fetch = useFetch();
@@ -15,5 +15,5 @@ export const LogoutComponent = () => {
     }
   }, []);
 
-  return <div className="text-red-400 cursor-pointer" onClick={logout}>Logout from {isGeneral() ? 'Postiz' : 'Gitroom'}</div>;
+  return <div className="text-red-400 cursor-pointer" onClick={logout}>Logout from Kursor</div>;
 };

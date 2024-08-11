@@ -1,5 +1,5 @@
 'use client';
-import { useCalendar } from '@gitroom/frontend/components/launches/calendar.context';
+import { useCalendar } from '@kursor/frontend/components/launches/calendar.context';
 import dayjs from 'dayjs';
 import {useCallback} from "react";
 

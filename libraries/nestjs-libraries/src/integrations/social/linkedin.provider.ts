@@ -4,13 +4,13 @@ import {
   PostDetails,
   PostResponse,
   SocialProvider,
-} from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
-import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
+} from '@kursor/nestjs-libraries/integrations/social/social.integrations.interface';
+import { makeId } from '@kursor/nestjs-libraries/services/make.is';
 import sharp from 'sharp';
 import { lookup } from 'mime-types';
-import { readOrFetch } from '@gitroom/helpers/utils/read.or.fetch';
-import { removeMarkdown } from '@gitroom/helpers/utils/remove.markdown';
-import { SocialAbstract } from '@gitroom/nestjs-libraries/integrations/social.abstract';
+import { readOrFetch } from '@kursor/helpers/utils/read.or.fetch';
+import { removeMarkdown } from '@kursor/helpers/utils/remove.markdown';
+import { SocialAbstract } from '@kursor/nestjs-libraries/integrations/social.abstract';
 
 export class LinkedinProvider extends SocialAbstract implements SocialProvider {
   identifier = 'linkedin';

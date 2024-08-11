@@ -11,7 +11,7 @@ import { BaseExceptionFilter } from '@nestjs/core';
 import { RpcException } from '@nestjs/microservices';
 import { Observable, of, throwError } from 'rxjs';
 import { BULLMQ_MODULE_OPTIONS } from '../constants/bull-mq.constants';
-import {IBullMqModuleOptions} from "@gitroom/nestjs-libraries/bull-mq-transport/interfaces/bull-mq-module-options.interface";
+import {IBullMqModuleOptions} from "@kursor/nestjs-libraries/bull-mq-transport/interfaces/bull-mq-module-options.interface";
 
 @Catch(RpcException)
 export class BullMqRpcExceptionFilter

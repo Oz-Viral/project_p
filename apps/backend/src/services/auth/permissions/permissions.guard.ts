@@ -1,9 +1,9 @@
 import {CanActivate, ExecutionContext, Injectable} from "@nestjs/common";
 import {Reflector} from "@nestjs/core";
-import {AppAbility, PermissionsService} from "@gitroom/backend/services/auth/permissions/permissions.service";
-import {AbilityPolicy, CHECK_POLICIES_KEY} from "@gitroom/backend/services/auth/permissions/permissions.ability";
+import {AppAbility, PermissionsService} from "@kursor/backend/services/auth/permissions/permissions.service";
+import {AbilityPolicy, CHECK_POLICIES_KEY} from "@kursor/backend/services/auth/permissions/permissions.ability";
 import {Organization} from "@prisma/client";
-import {SubscriptionException} from "@gitroom/backend/services/auth/permissions/subscription.exception";
+import {SubscriptionException} from "@kursor/backend/services/auth/permissions/subscription.exception";
 import {Request} from "express";
 
 

@@ -1,12 +1,12 @@
 import { Body, Controller, Get, Param, Post, Req, Res } from '@nestjs/common';
 import { Response, Request } from 'express';
 
-import { CreateOrgUserDto } from '@gitroom/nestjs-libraries/dtos/auth/create.org.user.dto';
-import { LoginUserDto } from '@gitroom/nestjs-libraries/dtos/auth/login.user.dto';
-import { AuthService } from '@gitroom/backend/services/auth/auth.service';
-import { ForgotReturnPasswordDto } from '@gitroom/nestjs-libraries/dtos/auth/forgot-return.password.dto';
-import { ForgotPasswordDto } from '@gitroom/nestjs-libraries/dtos/auth/forgot.password.dto';
-import { removeSubdomain } from '@gitroom/helpers/subdomain/subdomain.management';
+import { CreateOrgUserDto } from '@kursor/nestjs-libraries/dtos/auth/create.org.user.dto';
+import { LoginUserDto } from '@kursor/nestjs-libraries/dtos/auth/login.user.dto';
+import { AuthService } from '@kursor/backend/services/auth/auth.service';
+import { ForgotReturnPasswordDto } from '@kursor/nestjs-libraries/dtos/auth/forgot-return.password.dto';
+import { ForgotPasswordDto } from '@kursor/nestjs-libraries/dtos/auth/forgot.password.dto';
+import { removeSubdomain } from '@kursor/helpers/subdomain/subdomain.management';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')

@@ -6,16 +6,16 @@ import {
   useState,
   useTransition,
 } from 'react';
-import { UtcToLocalDateRender } from '@gitroom/react/helpers/utc.date.render';
-import { Button } from '@gitroom/react/form/button';
+import { UtcToLocalDateRender } from '@kursor/react/helpers/utc.date.render';
+import { Button } from '@kursor/react/form/button';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import clsx from 'clsx';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import ReactLoading from 'react-loading';
-import interClass from '@gitroom/react/helpers/inter.font';
+import interClass from '@kursor/react/helpers/inter.font';
 
 export const UpDown: FC<{ name: string; param: string }> = (props) => {
   const { name, param } = props;

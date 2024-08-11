@@ -1,11 +1,11 @@
-import { Buyer } from '@gitroom/frontend/components/marketplace/buyer';
+import { Buyer } from '@kursor/frontend/components/marketplace/buyer';
 
 export const dynamic = 'force-dynamic';
 import { Metadata } from 'next';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 export const metadata: Metadata = {
-  title: `${isGeneral() ? 'Postiz' : 'Gitroom'} Marketplace`,
+  title: `Kursor Marketplace`,
   description: '',
 };
 export default async function Index({

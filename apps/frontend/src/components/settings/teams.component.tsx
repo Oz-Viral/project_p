@@ -1,21 +1,21 @@
-import { Button } from '@gitroom/react/form/button';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { Button } from '@kursor/react/form/button';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import useSWR from 'swr';
 import React, { useCallback, useMemo } from 'react';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
 import { capitalize } from 'lodash';
 import { useModals } from '@mantine/modals';
-import { TopTitle } from '@gitroom/frontend/components/launches/helpers/top.title.component';
-import { Input } from '@gitroom/react/form/input';
+import { TopTitle } from '@kursor/frontend/components/launches/helpers/top.title.component';
+import { Input } from '@kursor/react/form/input';
 import { useForm, FormProvider, useWatch } from 'react-hook-form';
-import { Select } from '@gitroom/react/form/select';
-import { Checkbox } from '@gitroom/react/form/checkbox';
+import { Select } from '@kursor/react/form/select';
+import { Checkbox } from '@kursor/react/form/checkbox';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
-import { AddTeamMemberDto } from '@gitroom/nestjs-libraries/dtos/settings/add.team.member.dto';
-import { useToaster } from '@gitroom/react/toaster/toaster';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
+import { AddTeamMemberDto } from '@kursor/nestjs-libraries/dtos/settings/add.team.member.dto';
+import { useToaster } from '@kursor/react/toaster/toaster';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 import copy from 'copy-to-clipboard';
-import interClass from '@gitroom/react/helpers/inter.font';
+import interClass from '@kursor/react/helpers/inter.font';
 
 const roles = [
   {

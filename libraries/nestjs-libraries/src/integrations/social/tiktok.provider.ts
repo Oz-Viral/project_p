@@ -3,10 +3,10 @@ import {
   PostDetails,
   PostResponse,
   SocialProvider,
-} from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
+} from '@kursor/nestjs-libraries/integrations/social/social.integrations.interface';
 import dayjs from 'dayjs';
-import { SocialAbstract } from '@gitroom/nestjs-libraries/integrations/social.abstract';
-import { TikTokDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/tiktok.dto';
+import { SocialAbstract } from '@kursor/nestjs-libraries/integrations/social.abstract';
+import { TikTokDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/tiktok.dto';
 
 export class TiktokProvider extends SocialAbstract implements SocialProvider {
   identifier = 'tiktok';

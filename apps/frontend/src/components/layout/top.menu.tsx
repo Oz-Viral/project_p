@@ -4,8 +4,8 @@ import { FC } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 const general = isGeneral();
 

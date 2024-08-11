@@ -1,16 +1,16 @@
 import { FC } from 'react';
-import { withProvider } from '@gitroom/frontend/components/launches/providers/high.order.provider';
-import { useSettings } from '@gitroom/frontend/components/launches/helpers/use.values';
-import { Input } from '@gitroom/react/form/input';
-import { MediumPublications } from '@gitroom/frontend/components/launches/providers/medium/medium.publications';
-import { MediumTags } from '@gitroom/frontend/components/launches/providers/medium/medium.tags';
-import { MediumSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/medium.settings.dto';
-import { useIntegration } from '@gitroom/frontend/components/launches/helpers/use.integration';
+import { withProvider } from '@kursor/frontend/components/launches/providers/high.order.provider';
+import { useSettings } from '@kursor/frontend/components/launches/helpers/use.values';
+import { Input } from '@kursor/react/form/input';
+import { MediumPublications } from '@kursor/frontend/components/launches/providers/medium/medium.publications';
+import { MediumTags } from '@kursor/frontend/components/launches/providers/medium/medium.tags';
+import { MediumSettingsDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/medium.settings.dto';
+import { useIntegration } from '@kursor/frontend/components/launches/helpers/use.integration';
 import clsx from 'clsx';
 import MDEditor from '@uiw/react-md-editor';
 import localFont from 'next/font/local'
-import {Canonical} from "@gitroom/react/form/canonical";
-import interClass from '@gitroom/react/helpers/inter.font';
+import {Canonical} from "@kursor/react/form/canonical";
+import interClass from '@kursor/react/helpers/inter.font';
 
 const charter = localFont({
   src: [

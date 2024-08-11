@@ -9,25 +9,25 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Checkbox } from '@gitroom/react/form/checkbox';
+import { Checkbox } from '@kursor/react/form/checkbox';
 import { useRouter, useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
-import interClass from '@gitroom/react/helpers/inter.font';
-import { Button } from '@gitroom/react/form/button';
+import interClass from '@kursor/react/helpers/inter.font';
+import { Button } from '@kursor/react/form/button';
 import {
   allTagsOptions,
   tagsList,
-} from '@gitroom/nestjs-libraries/database/prisma/marketplace/tags.list';
+} from '@kursor/nestjs-libraries/database/prisma/marketplace/tags.list';
 import { capitalize, chunk, fill } from 'lodash';
 import useSWR from 'swr';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import { useModals } from '@mantine/modals';
-import { TopTitle } from '@gitroom/frontend/components/launches/helpers/top.title.component';
-import { Textarea } from '@gitroom/react/form/textarea';
+import { TopTitle } from '@kursor/frontend/components/launches/helpers/top.title.component';
+import { Textarea } from '@kursor/react/form/textarea';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
-import { NewConversationDto } from '@gitroom/nestjs-libraries/dtos/marketplace/new.conversation.dto';
-import { OrderList } from '@gitroom/frontend/components/marketplace/order.list';
+import { NewConversationDto } from '@kursor/nestjs-libraries/dtos/marketplace/new.conversation.dto';
+import { OrderList } from '@kursor/frontend/components/marketplace/order.list';
 
 export interface Root {
   list: List[];

@@ -1,15 +1,15 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import { TopTitle } from '@gitroom/frontend/components/launches/helpers/top.title.component';
+import { TopTitle } from '@kursor/frontend/components/launches/helpers/top.title.component';
 import { useModals } from '@mantine/modals';
-import { Textarea } from '@gitroom/react/form/textarea';
-import { Button } from '@gitroom/react/form/button';
+import { Textarea } from '@kursor/react/form/textarea';
+import { Button } from '@kursor/react/form/button';
 import clsx from 'clsx';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
-import { Input } from '@gitroom/react/form/input';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
-import interClass from '@gitroom/react/helpers/inter.font';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
+import { Input } from '@kursor/react/form/input';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
+import interClass from '@kursor/react/helpers/inter.font';
 
 export const CommentBox: FC<{
   value?: string;

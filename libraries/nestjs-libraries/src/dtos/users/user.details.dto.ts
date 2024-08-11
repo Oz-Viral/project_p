@@ -1,4 +1,4 @@
-import { MediaDto } from '@gitroom/nestjs-libraries/dtos/media/media.dto';
+import { MediaDto } from '@kursor/nestjs-libraries/dtos/media/media.dto';
 import { IsOptional, IsString, MinLength, ValidateNested } from 'class-validator';
 
 export class UserDetailDto {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { NotificationsRepository } from '@gitroom/nestjs-libraries/database/prisma/notifications/notifications.repository';
-import { EmailService } from '@gitroom/nestjs-libraries/services/email.service';
-import { OrganizationRepository } from '@gitroom/nestjs-libraries/database/prisma/organizations/organization.repository';
+import { NotificationsRepository } from '@kursor/nestjs-libraries/database/prisma/notifications/notifications.repository';
+import { EmailService } from '@kursor/nestjs-libraries/services/email.service';
+import { OrganizationRepository } from '@kursor/nestjs-libraries/database/prisma/organizations/organization.repository';
 
 @Injectable()
 export class NotificationService {

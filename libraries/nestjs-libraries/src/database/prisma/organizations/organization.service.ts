@@ -1,11 +1,11 @@
-import { CreateOrgUserDto } from '@gitroom/nestjs-libraries/dtos/auth/create.org.user.dto';
+import { CreateOrgUserDto } from '@kursor/nestjs-libraries/dtos/auth/create.org.user.dto';
 import { Injectable } from '@nestjs/common';
-import { OrganizationRepository } from '@gitroom/nestjs-libraries/database/prisma/organizations/organization.repository';
-import { NotificationService } from '@gitroom/nestjs-libraries/database/prisma/notifications/notification.service';
-import { AddTeamMemberDto } from '@gitroom/nestjs-libraries/dtos/settings/add.team.member.dto';
-import { AuthService } from '@gitroom/helpers/auth/auth.service';
+import { OrganizationRepository } from '@kursor/nestjs-libraries/database/prisma/organizations/organization.repository';
+import { NotificationService } from '@kursor/nestjs-libraries/database/prisma/notifications/notification.service';
+import { AddTeamMemberDto } from '@kursor/nestjs-libraries/dtos/settings/add.team.member.dto';
+import { AuthService } from '@kursor/helpers/auth/auth.service';
 import dayjs from 'dayjs';
-import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
+import { makeId } from '@kursor/nestjs-libraries/services/make.is';
 import { Organization } from '@prisma/client';
 
 @Injectable()

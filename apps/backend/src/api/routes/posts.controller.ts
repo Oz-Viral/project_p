@@ -8,22 +8,22 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { PostsService } from '@gitroom/nestjs-libraries/database/prisma/posts/posts.service';
-import { GetOrgFromRequest } from '@gitroom/nestjs-libraries/user/org.from.request';
+import { PostsService } from '@kursor/nestjs-libraries/database/prisma/posts/posts.service';
+import { GetOrgFromRequest } from '@kursor/nestjs-libraries/user/org.from.request';
 import { Organization, User } from '@prisma/client';
-import { CreatePostDto } from '@gitroom/nestjs-libraries/dtos/posts/create.post.dto';
-import { GetPostsDto } from '@gitroom/nestjs-libraries/dtos/posts/get.posts.dto';
-import { CommentsService } from '@gitroom/nestjs-libraries/database/prisma/comments/comments.service';
-import { StarsService } from '@gitroom/nestjs-libraries/database/prisma/stars/stars.service';
-import { CheckPolicies } from '@gitroom/backend/services/auth/permissions/permissions.ability';
+import { CreatePostDto } from '@kursor/nestjs-libraries/dtos/posts/create.post.dto';
+import { GetPostsDto } from '@kursor/nestjs-libraries/dtos/posts/get.posts.dto';
+import { CommentsService } from '@kursor/nestjs-libraries/database/prisma/comments/comments.service';
+import { StarsService } from '@kursor/nestjs-libraries/database/prisma/stars/stars.service';
+import { CheckPolicies } from '@kursor/backend/services/auth/permissions/permissions.ability';
 import {
   AuthorizationActions,
   Sections,
-} from '@gitroom/backend/services/auth/permissions/permissions.service';
+} from '@kursor/backend/services/auth/permissions/permissions.service';
 import { ApiTags } from '@nestjs/swagger';
-import { MessagesService } from '@gitroom/nestjs-libraries/database/prisma/marketplace/messages.service';
-import { GeneratorDto } from '@gitroom/nestjs-libraries/dtos/generator/generator.dto';
-import { CreateGeneratedPostsDto } from '@gitroom/nestjs-libraries/dtos/generator/create.generated.posts.dto';
+import { MessagesService } from '@kursor/nestjs-libraries/database/prisma/marketplace/messages.service';
+import { GeneratorDto } from '@kursor/nestjs-libraries/dtos/generator/generator.dto';
+import { CreateGeneratedPostsDto } from '@kursor/nestjs-libraries/dtos/generator/create.generated.posts.dto';
 
 @ApiTags('Posts')
 @Controller('/posts')

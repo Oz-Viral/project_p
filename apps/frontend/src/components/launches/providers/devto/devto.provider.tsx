@@ -1,17 +1,17 @@
 import { FC } from 'react';
-import { withProvider } from '@gitroom/frontend/components/launches/providers/high.order.provider';
-import { DevToSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/dev.to.settings.dto';
-import { useSettings } from '@gitroom/frontend/components/launches/helpers/use.values';
-import { Input } from '@gitroom/react/form/input';
-import { MediaComponent } from '@gitroom/frontend/components/media/media.component';
-import { SelectOrganization } from '@gitroom/frontend/components/launches/providers/devto/select.organization';
-import { DevtoTags } from '@gitroom/frontend/components/launches/providers/devto/devto.tags';
-import { useMediaDirectory } from '@gitroom/react/helpers/use.media.directory';
+import { withProvider } from '@kursor/frontend/components/launches/providers/high.order.provider';
+import { DevToSettingsDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/dev.to.settings.dto';
+import { useSettings } from '@kursor/frontend/components/launches/helpers/use.values';
+import { Input } from '@kursor/react/form/input';
+import { MediaComponent } from '@kursor/frontend/components/media/media.component';
+import { SelectOrganization } from '@kursor/frontend/components/launches/providers/devto/select.organization';
+import { DevtoTags } from '@kursor/frontend/components/launches/providers/devto/devto.tags';
+import { useMediaDirectory } from '@kursor/react/helpers/use.media.directory';
 import clsx from 'clsx';
 import localFont from 'next/font/local';
 import MDEditor from '@uiw/react-md-editor';
-import { useIntegration } from '@gitroom/frontend/components/launches/helpers/use.integration';
-import { Canonical } from '@gitroom/react/form/canonical';
+import { useIntegration } from '@kursor/frontend/components/launches/helpers/use.integration';
+import { Canonical } from '@kursor/react/form/canonical';
 
 const font = localFont({
   src: [

@@ -1,18 +1,18 @@
 'use client';
 
-import { Slider } from '@gitroom/react/form/slider';
-import { Button } from '@gitroom/react/form/button';
-import { tagsList } from '@gitroom/nestjs-libraries/database/prisma/marketplace/tags.list';
-import { Options } from '@gitroom/frontend/components/marketplace/buyer';
+import { Slider } from '@kursor/react/form/slider';
+import { Button } from '@kursor/react/form/button';
+import { tagsList } from '@kursor/nestjs-libraries/database/prisma/marketplace/tags.list';
+import { Options } from '@kursor/frontend/components/marketplace/buyer';
 import { ChangeEvent, FC, useCallback, useEffect, useState } from 'react';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import useSWR from 'swr';
-import { Input } from '@gitroom/react/form/input';
+import { Input } from '@kursor/react/form/input';
 import { useDebouncedCallback } from 'use-debounce';
-import { OrderList } from '@gitroom/frontend/components/marketplace/order.list';
+import { OrderList } from '@kursor/frontend/components/marketplace/order.list';
 import { useModals } from '@mantine/modals';
-import { Select } from '@gitroom/react/form/select';
-import { countries } from '@gitroom/nestjs-libraries/services/stripe.country.list';
+import { Select } from '@kursor/react/form/select';
+import { countries } from '@kursor/nestjs-libraries/services/stripe.country.list';
 
 export const AddAccount: FC<{ openBankAccount: (country: string) => void }> = (
   props

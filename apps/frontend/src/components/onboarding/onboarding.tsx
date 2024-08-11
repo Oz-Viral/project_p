@@ -4,12 +4,12 @@ import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useModals } from '@mantine/modals';
 import clsx from 'clsx';
-import { GithubOnboarding } from '@gitroom/frontend/components/onboarding/github.onboarding';
-import { SettingsPopup } from '@gitroom/frontend/components/layout/settings.component';
-import { Button } from '@gitroom/react/form/button';
-import { ConnectChannels } from '@gitroom/frontend/components/onboarding/connect.channels';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
-import { AddAccount } from '@gitroom/frontend/components/marketplace/seller';
+import { GithubOnboarding } from '@kursor/frontend/components/onboarding/github.onboarding';
+import { SettingsPopup } from '@kursor/frontend/components/layout/settings.component';
+import { Button } from '@kursor/react/form/button';
+import { ConnectChannels } from '@kursor/frontend/components/onboarding/connect.channels';
+import { isGeneral } from '@kursor/react/helpers/is.general';
+import { AddAccount } from '@kursor/frontend/components/marketplace/seller';
 
 export const Step: FC<{
   step: number;

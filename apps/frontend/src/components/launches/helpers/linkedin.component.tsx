@@ -2,7 +2,7 @@
 
 import { EventEmitter } from 'events';
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { TopTitle } from '@gitroom/frontend/components/launches/helpers/top.title.component';
+import { TopTitle } from '@kursor/frontend/components/launches/helpers/top.title.component';
 import {
   executeCommand,
   ExecuteState,
@@ -10,10 +10,10 @@ import {
   selectWord,
   TextAreaTextApi,
 } from '@uiw/react-md-editor';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { Input } from '@gitroom/react/form/input';
-import { Button } from '@gitroom/react/form/button';
-import { useCustomProviderFunction } from '@gitroom/frontend/components/launches/helpers/use.custom.provider.function';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { Input } from '@kursor/react/form/input';
+import { Button } from '@kursor/react/form/button';
+import { useCustomProviderFunction } from '@kursor/frontend/components/launches/helpers/use.custom.provider.function';
 import dayjs from 'dayjs';
 
 const postUrlEmitter = new EventEmitter();
@@ -134,7 +134,7 @@ export const LinkedinCompany: FC<{
             label="URL"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
-            placeholder="https://www.linkedin.com/company/gitroom"
+            placeholder="https://www.linkedin.com/company/kursor"
           />
           <Button onClick={getCompany}>Add</Button>
         </div>

@@ -1,17 +1,17 @@
 'use client';
 
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import Link from 'next/link';
-import { Button } from '@gitroom/react/form/button';
-import { Input } from '@gitroom/react/form/input';
+import { Button } from '@kursor/react/form/button';
+import { Input } from '@kursor/react/form/input';
 import { useMemo, useState } from 'react';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
-import { LoginUserDto } from '@gitroom/nestjs-libraries/dtos/auth/login.user.dto';
-import { GithubProvider } from '@gitroom/frontend/components/auth/providers/github.provider';
-import interClass from '@gitroom/react/helpers/inter.font';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
-import { GoogleProvider } from '@gitroom/frontend/components/auth/providers/google.provider';
+import { LoginUserDto } from '@kursor/nestjs-libraries/dtos/auth/login.user.dto';
+import { GithubProvider } from '@kursor/frontend/components/auth/providers/github.provider';
+import interClass from '@kursor/react/helpers/inter.font';
+import { isGeneral } from '@kursor/react/helpers/is.general';
+import { GoogleProvider } from '@kursor/frontend/components/auth/providers/google.provider';
 
 type Inputs = {
   email: string;

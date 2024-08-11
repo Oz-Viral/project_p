@@ -7,9 +7,9 @@ import {
   RawBodyRequest,
   Req,
 } from '@nestjs/common';
-import { StripeService } from '@gitroom/nestjs-libraries/services/stripe.service';
+import { StripeService } from '@kursor/nestjs-libraries/services/stripe.service';
 import { ApiTags } from '@nestjs/swagger';
-import { CodesService } from '@gitroom/nestjs-libraries/services/codes.service';
+import { CodesService } from '@kursor/nestjs-libraries/services/codes.service';
 
 @ApiTags('Stripe')
 @Controller('/stripe')

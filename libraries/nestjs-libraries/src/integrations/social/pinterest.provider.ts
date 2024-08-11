@@ -4,13 +4,13 @@ import {
   PostDetails,
   PostResponse,
   SocialProvider,
-} from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
-import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
-import { PinterestSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/pinterest.dto';
+} from '@kursor/nestjs-libraries/integrations/social/social.integrations.interface';
+import { makeId } from '@kursor/nestjs-libraries/services/make.is';
+import { PinterestSettingsDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/pinterest.dto';
 import axios from 'axios';
 import FormData from 'form-data';
-import { timer } from '@gitroom/helpers/utils/timer';
-import { SocialAbstract } from '@gitroom/nestjs-libraries/integrations/social.abstract';
+import { timer } from '@kursor/helpers/utils/timer';
+import { SocialAbstract } from '@kursor/nestjs-libraries/integrations/social.abstract';
 import dayjs from 'dayjs';
 
 export class PinterestProvider

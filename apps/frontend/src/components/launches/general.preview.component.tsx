@@ -1,8 +1,8 @@
-import { useIntegration } from '@gitroom/frontend/components/launches/helpers/use.integration';
-import { useMediaDirectory } from '@gitroom/react/helpers/use.media.directory';
-import { useFormatting } from '@gitroom/frontend/components/launches/helpers/use.formatting';
+import { useIntegration } from '@kursor/frontend/components/launches/helpers/use.integration';
+import { useMediaDirectory } from '@kursor/react/helpers/use.media.directory';
+import { useFormatting } from '@kursor/frontend/components/launches/helpers/use.formatting';
 import clsx from 'clsx';
-import { VideoOrImage } from '@gitroom/react/helpers/video.or.image';
+import { VideoOrImage } from '@kursor/react/helpers/video.or.image';
 import { Chakra_Petch } from 'next/font/google';
 import { FC } from 'react';
 const chakra = Chakra_Petch({ weight: '400', subsets: ['latin'] });

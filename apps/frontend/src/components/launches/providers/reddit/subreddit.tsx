@@ -1,15 +1,15 @@
 import { FC, FormEvent, useCallback, useMemo, useState } from 'react';
-import { useCustomProviderFunction } from '@gitroom/frontend/components/launches/helpers/use.custom.provider.function';
-import { Input } from '@gitroom/react/form/input';
+import { useCustomProviderFunction } from '@kursor/frontend/components/launches/helpers/use.custom.provider.function';
+import { Input } from '@kursor/react/form/input';
 import { useDebouncedCallback } from 'use-debounce';
-import { Button } from '@gitroom/react/form/button';
+import { Button } from '@kursor/react/form/button';
 import clsx from 'clsx';
-import { MultiMediaComponent } from '@gitroom/frontend/components/media/media.component';
+import { MultiMediaComponent } from '@kursor/frontend/components/media/media.component';
 import { useWatch } from 'react-hook-form';
-import { Select } from '@gitroom/react/form/select';
-import { useSettings } from '@gitroom/frontend/components/launches/helpers/use.values';
-import { Canonical } from '@gitroom/react/form/canonical';
-import { useIntegration } from '@gitroom/frontend/components/launches/helpers/use.integration';
+import { Select } from '@kursor/react/form/select';
+import { useSettings } from '@kursor/frontend/components/launches/helpers/use.values';
+import { Canonical } from '@kursor/react/form/canonical';
+import { useIntegration } from '@kursor/frontend/components/launches/helpers/use.integration';
 
 export const RenderOptions: FC<{
   options: Array<'self' | 'link' | 'media'>;

@@ -4,9 +4,9 @@ import {
   PostDetails,
   PostResponse,
   SocialProvider,
-} from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
-import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
-import { LinkedinProvider } from '@gitroom/nestjs-libraries/integrations/social/linkedin.provider';
+} from '@kursor/nestjs-libraries/integrations/social/social.integrations.interface';
+import { makeId } from '@kursor/nestjs-libraries/services/make.is';
+import { LinkedinProvider } from '@kursor/nestjs-libraries/integrations/social/linkedin.provider';
 import dayjs from 'dayjs';
 
 export class LinkedinPageProvider

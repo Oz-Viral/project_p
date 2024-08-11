@@ -7,7 +7,7 @@ import {
 import { Job, Worker } from 'bullmq';
 import { BULLMQ_MODULE_OPTIONS } from '../constants/bull-mq.constants';
 import { WorkerFactory } from '../factories/worker.factory';
-import { IBullMqModuleOptions } from '@gitroom/nestjs-libraries/bull-mq-transport/interfaces/bull-mq-module-options.interface';
+import { IBullMqModuleOptions } from '@kursor/nestjs-libraries/bull-mq-transport/interfaces/bull-mq-module-options.interface';
 
 @Injectable()
 export class BullMqServer extends Server implements CustomTransportStrategy {

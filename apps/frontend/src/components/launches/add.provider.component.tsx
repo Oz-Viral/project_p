@@ -2,15 +2,15 @@
 
 import { useModals } from '@mantine/modals';
 import React, { FC, useCallback } from 'react';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { Input } from '@gitroom/react/form/input';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { Input } from '@kursor/react/form/input';
 import { FieldValues, FormProvider, useForm } from 'react-hook-form';
-import { Button } from '@gitroom/react/form/button';
+import { Button } from '@kursor/react/form/button';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
-import { ApiKeyDto } from '@gitroom/nestjs-libraries/dtos/integrations/api.key.dto';
+import { ApiKeyDto } from '@kursor/nestjs-libraries/dtos/integrations/api.key.dto';
 import { useRouter } from 'next/navigation';
-import { TopTitle } from '@gitroom/frontend/components/launches/helpers/top.title.component';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { TopTitle } from '@kursor/frontend/components/launches/helpers/top.title.component';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 const resolver = classValidatorResolver(ApiKeyDto);
 

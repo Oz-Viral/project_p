@@ -2,7 +2,7 @@ import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import concat from 'concat-stream';
 import { StorageEngine } from 'multer';
 import type { Request } from 'express';
-import {makeId} from "@gitroom/nestjs-libraries/services/make.is";
+import {makeId} from "@kursor/nestjs-libraries/services/make.is";
 import mime from 'mime-types';
 
 type CallbackFunction = (

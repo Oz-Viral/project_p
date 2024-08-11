@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
-import { useCustomProviderFunction } from '@gitroom/frontend/components/launches/helpers/use.custom.provider.function';
-import { Select } from '@gitroom/react/form/select';
-import { useSettings } from '@gitroom/frontend/components/launches/helpers/use.values';
+import { useCustomProviderFunction } from '@kursor/frontend/components/launches/helpers/use.custom.provider.function';
+import { Select } from '@kursor/react/form/select';
+import { useSettings } from '@kursor/frontend/components/launches/helpers/use.values';
 
 export const HashnodePublications: FC<{
   name: string;

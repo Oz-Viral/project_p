@@ -1,35 +1,35 @@
 'use client';
 
 import { ReactNode, useCallback } from 'react';
-import { Title } from '@gitroom/frontend/components/layout/title';
-import { ContextWrapper } from '@gitroom/frontend/components/layout/user.context';
-import { TopMenu } from '@gitroom/frontend/components/layout/top.menu';
-import { MantineWrapper } from '@gitroom/react/helpers/mantine.wrapper';
-import { ToolTip } from '@gitroom/frontend/components/layout/top.tip';
-import { ShowMediaBoxModal } from '@gitroom/frontend/components/media/media.component';
+import { Title } from '@kursor/frontend/components/layout/title';
+import { ContextWrapper } from '@kursor/frontend/components/layout/user.context';
+import { TopMenu } from '@kursor/frontend/components/layout/top.menu';
+import { MantineWrapper } from '@kursor/react/helpers/mantine.wrapper';
+import { ToolTip } from '@kursor/frontend/components/layout/top.tip';
+import { ShowMediaBoxModal } from '@kursor/frontend/components/media/media.component';
 import Image from 'next/image';
-import { Toaster } from '@gitroom/react/toaster/toaster';
-import { ShowPostSelector } from '@gitroom/frontend/components/post-url-selector/post.url.selector';
-import { OrganizationSelector } from '@gitroom/frontend/components/layout/organization.selector';
-import NotificationComponent from '@gitroom/frontend/components/notifications/notification.component';
+import { Toaster } from '@kursor/react/toaster/toaster';
+import { ShowPostSelector } from '@kursor/frontend/components/post-url-selector/post.url.selector';
+import { OrganizationSelector } from '@kursor/frontend/components/layout/organization.selector';
+import NotificationComponent from '@kursor/frontend/components/notifications/notification.component';
 import Link from 'next/link';
 import useSWR from 'swr';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import isBetween from 'dayjs/plugin/isBetween';
-import { ShowLinkedinCompany } from '@gitroom/frontend/components/launches/helpers/linkedin.component';
-import { SettingsComponent } from '@gitroom/frontend/components/layout/settings.component';
-import { Onboarding } from '@gitroom/frontend/components/onboarding/onboarding';
-import { Support } from '@gitroom/frontend/components/layout/support';
-import { ContinueProvider } from '@gitroom/frontend/components/layout/continue.provider';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { ShowLinkedinCompany } from '@kursor/frontend/components/launches/helpers/linkedin.component';
+import { SettingsComponent } from '@kursor/frontend/components/layout/settings.component';
+import { Onboarding } from '@kursor/frontend/components/onboarding/onboarding';
+import { Support } from '@kursor/frontend/components/layout/support';
+import { ContinueProvider } from '@kursor/frontend/components/layout/continue.provider';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 import { CopilotKit } from '@copilotkit/react-core';
-import { Impersonate } from '@gitroom/frontend/components/layout/impersonate';
+import { Impersonate } from '@kursor/frontend/components/layout/impersonate';
 import clsx from 'clsx';
-import { BillingComponent } from '@gitroom/frontend/components/billing/billing.component';
+import { BillingComponent } from '@kursor/frontend/components/billing/billing.component';
 
 dayjs.extend(utc);
 dayjs.extend(weekOfYear);
@@ -88,11 +88,7 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
                       !isGeneral() ? 'mt-[12px]' : 'min-w-[80px]'
                     )}
                   >
-                    {isGeneral() ? (
-                      <img src="/postiz-text.svg" className="w-[80px]" />
-                    ) : (
-                      'Gitroom'
-                    )}
+                    Kursor
                   </div>
                 </Link>
                 {user?.orgId && (user.tier !== 'FREE' || !isGeneral()) ? (
@@ -112,7 +108,7 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
                     <>
                       <div className="text-center mb-[20px] text-xl">
                         <h1 className="text-3xl">
-                          Join 1000+ Entrepreneurs Who Use Postiz
+                          Join 1000+ Entrepreneurs Who Use Kursor
                           <br />
                           To Manage All Your Social Media Channels
                         </h1>

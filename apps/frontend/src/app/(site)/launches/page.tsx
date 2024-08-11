@@ -1,12 +1,12 @@
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 export const dynamic = 'force-dynamic';
 
-import {LaunchesComponent} from "@gitroom/frontend/components/launches/launches.component";
+import {LaunchesComponent} from "@kursor/frontend/components/launches/launches.component";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-  title: `${isGeneral() ? 'Postiz Calendar' : 'Gitroom Launches'}`,
+  title: `${isGeneral() ? 'Kursor Calendar' : 'Kursor Launches'}`,
   description: '',
 }
 

@@ -1,4 +1,4 @@
-import { ProvidersInterface } from '@gitroom/backend/services/auth/providers.interface';
+import { ProvidersInterface } from '@kursor/backend/services/auth/providers.interface';
 
 export class GithubProvider implements ProvidersInterface {
   generateLink(): string {

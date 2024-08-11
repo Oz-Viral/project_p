@@ -20,13 +20,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@gitroom/backend/*": ["apps/backend/src/*"],
-      "@gitroom/cron/*": ["apps/cron/src/*"],
-      "@gitroom/frontend/*": ["apps/frontend/src/*"],
-      "@gitroom/helpers/*": ["libraries/helpers/src/*"],
-      "@gitroom/nestjs-libraries/*": ["libraries/nestjs-libraries/src/*"],
-      "@gitroom/react/*": ["libraries/react-shared-libraries/src/*"],
-      "@gitroom/workers/*": ["apps/workers/src/*"]
+      "@kursor/backend/*": ["apps/backend/src/*"],
+      "@kursor/cron/*": ["apps/cron/src/*"],
+      "@kursor/frontend/*": ["apps/frontend/src/*"],
+      "@kursor/helpers/*": ["libraries/helpers/src/*"],
+      "@kursor/nestjs-libraries/*": ["libraries/nestjs-libraries/src/*"],
+      "@kursor/react/*": ["libraries/react-shared-libraries/src/*"],
+      "@kursor/workers/*": ["apps/workers/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

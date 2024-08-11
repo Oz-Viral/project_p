@@ -1,8 +1,8 @@
-import { Input } from '@gitroom/react/form/input';
+import { Input } from '@kursor/react/form/input';
 import { useCallback, useMemo, useState } from 'react';
 import useSWR from 'swr';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
 
 export const Impersonate = () => {
   const fetch = useFetch();

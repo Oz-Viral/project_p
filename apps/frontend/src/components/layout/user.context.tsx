@@ -5,7 +5,7 @@ import { User } from '@prisma/client';
 import {
   pricing,
   PricingInnerInterface,
-} from '@gitroom/nestjs-libraries/database/prisma/subscriptions/pricing';
+} from '@kursor/nestjs-libraries/database/prisma/subscriptions/pricing';
 
 export const UserContext = createContext<
   | undefined

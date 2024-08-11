@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-  gitroom-postgres:
+  kursor-postgres:
     image: postgres:latest
-    container_name: gitroom-postgres
+    container_name: kursor-postgres
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
@@ -13,9 +13,9 @@ services:
       - postgres-volume:/var/lib/postgresql/data
     ports:
       - 5432:5432
-  gitroom-redis:
+  kursor-redis:
     image: redis:latest
-    container_name: gitroom-redis
+    container_name: kursor-redis
     restart: always
     ports:
       - 6379:6379

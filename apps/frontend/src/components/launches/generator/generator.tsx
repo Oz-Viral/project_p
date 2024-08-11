@@ -5,23 +5,23 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
 import { useRouter } from 'next/navigation';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 import {
   Step,
   StepSpace,
-} from '@gitroom/frontend/components/onboarding/onboarding';
+} from '@kursor/frontend/components/onboarding/onboarding';
 import { useModals } from '@mantine/modals';
-import { Select } from '@gitroom/react/form/select';
-import { Input } from '@gitroom/react/form/input';
+import { Select } from '@kursor/react/form/select';
+import { Input } from '@kursor/react/form/input';
 import dayjs from 'dayjs';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
-import { GeneratorDto } from '@gitroom/nestjs-libraries/dtos/generator/generator.dto';
-import { Button } from '@gitroom/react/form/button';
-import { PostSelector } from '@gitroom/frontend/components/post-url-selector/post.url.selector';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { GeneratorDto } from '@kursor/nestjs-libraries/dtos/generator/generator.dto';
+import { Button } from '@kursor/react/form/button';
+import { PostSelector } from '@kursor/frontend/components/post-url-selector/post.url.selector';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import clsx from 'clsx';
 
 const ThirdStep: FC<{ week: number; year: number }> = (props) => {

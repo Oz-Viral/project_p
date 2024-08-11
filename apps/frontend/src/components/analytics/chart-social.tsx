@@ -1,7 +1,7 @@
 'use client';
 import { FC, useEffect, useMemo, useRef } from 'react';
 import DrawChart from 'chart.js/auto';
-import { TotalList } from '@gitroom/frontend/components/analytics/stars.and.forks.interface';
+import { TotalList } from '@kursor/frontend/components/analytics/stars.and.forks.interface';
 import dayjs from 'dayjs';
 import { chunk } from 'lodash';
 

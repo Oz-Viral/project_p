@@ -4,14 +4,14 @@ import useSWR from 'swr';
 import { useCallback, useMemo, useState } from 'react';
 import { capitalize, orderBy } from 'lodash';
 import clsx from 'clsx';
-import ImageWithFallback from '@gitroom/react/helpers/image.with.fallback';
+import ImageWithFallback from '@kursor/react/helpers/image.with.fallback';
 import Image from 'next/image';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { RenderAnalytics } from '@gitroom/frontend/components/platform-analytics/render.analytics';
-import { Select } from '@gitroom/react/form/select';
-import { Button } from '@gitroom/react/form/button';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { RenderAnalytics } from '@kursor/frontend/components/platform-analytics/render.analytics';
+import { Select } from '@kursor/react/form/select';
+import { Button } from '@kursor/react/form/button';
 import { useRouter } from 'next/navigation';
-import { useToaster } from '@gitroom/react/toaster/toaster';
+import { useToaster } from '@kursor/react/toaster/toaster';
 
 const allowedIntegrations = [
   'facebook',

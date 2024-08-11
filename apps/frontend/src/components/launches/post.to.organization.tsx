@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useEffect } from 'react';
-import { CustomSelect } from '@gitroom/react/form/custom.select';
+import { CustomSelect } from '@kursor/react/form/custom.select';
 import { FormProvider, useForm } from 'react-hook-form';
 
 export interface Information {

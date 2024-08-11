@@ -1,9 +1,9 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Integration } from '@prisma/client';
 import useSWR from 'swr';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { ChartSocial } from '@gitroom/frontend/components/analytics/chart-social';
-import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { ChartSocial } from '@kursor/frontend/components/analytics/chart-social';
+import { LoadingComponent } from '@kursor/frontend/components/layout/loading';
 
 export const RenderAnalytics: FC<{ integration: Integration; date: number }> = (
   props

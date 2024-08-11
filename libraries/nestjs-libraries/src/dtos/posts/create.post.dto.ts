@@ -2,16 +2,16 @@ import {
   ArrayMinSize, IsArray, IsDateString, IsDefined, IsIn, IsOptional, IsString, MinLength, ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { DevToSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/dev.to.settings.dto';
-import {MediaDto} from "@gitroom/nestjs-libraries/dtos/media/media.dto";
-import {AllProvidersSettings} from "@gitroom/nestjs-libraries/dtos/posts/providers-settings/all.providers.settings";
-import {MediumSettingsDto} from "@gitroom/nestjs-libraries/dtos/posts/providers-settings/medium.settings.dto";
-import {HashnodeSettingsDto} from "@gitroom/nestjs-libraries/dtos/posts/providers-settings/hashnode.settings.dto";
-import {RedditSettingsDto} from "@gitroom/nestjs-libraries/dtos/posts/providers-settings/reddit.dto";
-import { YoutubeSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/youtube.settings.dto';
-import { PinterestSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/pinterest.dto';
-import { DribbbleDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/dribbble.dto';
-import { TikTokDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/tiktok.dto';
+import { DevToSettingsDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/dev.to.settings.dto';
+import {MediaDto} from "@kursor/nestjs-libraries/dtos/media/media.dto";
+import {AllProvidersSettings} from "@kursor/nestjs-libraries/dtos/posts/providers-settings/all.providers.settings";
+import {MediumSettingsDto} from "@kursor/nestjs-libraries/dtos/posts/providers-settings/medium.settings.dto";
+import {HashnodeSettingsDto} from "@kursor/nestjs-libraries/dtos/posts/providers-settings/hashnode.settings.dto";
+import {RedditSettingsDto} from "@kursor/nestjs-libraries/dtos/posts/providers-settings/reddit.dto";
+import { YoutubeSettingsDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/youtube.settings.dto';
+import { PinterestSettingsDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/pinterest.dto';
+import { DribbbleDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/dribbble.dto';
+import { TikTokDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/tiktok.dto';
 
 export class EmptySettings {}
 export class Integration {

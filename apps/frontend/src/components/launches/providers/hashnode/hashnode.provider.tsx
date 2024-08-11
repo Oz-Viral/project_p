@@ -1,17 +1,17 @@
 import { FC } from 'react';
-import { withProvider } from '@gitroom/frontend/components/launches/providers/high.order.provider';
-import { useSettings } from '@gitroom/frontend/components/launches/helpers/use.values';
-import { Input } from '@gitroom/react/form/input';
-import { HashnodePublications } from '@gitroom/frontend/components/launches/providers/hashnode/hashnode.publications';
-import { HashnodeTags } from '@gitroom/frontend/components/launches/providers/hashnode/hashnode.tags';
-import { HashnodeSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/hashnode.settings.dto';
-import { useIntegration } from '@gitroom/frontend/components/launches/helpers/use.integration';
-import { useMediaDirectory } from '@gitroom/react/helpers/use.media.directory';
+import { withProvider } from '@kursor/frontend/components/launches/providers/high.order.provider';
+import { useSettings } from '@kursor/frontend/components/launches/helpers/use.values';
+import { Input } from '@kursor/react/form/input';
+import { HashnodePublications } from '@kursor/frontend/components/launches/providers/hashnode/hashnode.publications';
+import { HashnodeTags } from '@kursor/frontend/components/launches/providers/hashnode/hashnode.tags';
+import { HashnodeSettingsDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/hashnode.settings.dto';
+import { useIntegration } from '@kursor/frontend/components/launches/helpers/use.integration';
+import { useMediaDirectory } from '@kursor/react/helpers/use.media.directory';
 import clsx from 'clsx';
 import MDEditor from '@uiw/react-md-editor';
 import { Plus_Jakarta_Sans } from 'next/font/google';
-import { MediaComponent } from '@gitroom/frontend/components/media/media.component';
-import {Canonical} from "@gitroom/react/form/canonical";
+import { MediaComponent } from '@kursor/frontend/components/media/media.component';
+import {Canonical} from "@kursor/react/form/canonical";
 
 const font = Plus_Jakarta_Sans({
   subsets: ['latin'],
