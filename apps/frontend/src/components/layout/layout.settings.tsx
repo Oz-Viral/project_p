@@ -30,6 +30,7 @@ import { CopilotKit } from '@copilotkit/react-core';
 import { Impersonate } from '@kursor/frontend/components/layout/impersonate';
 import clsx from 'clsx';
 import { BillingComponent } from '@kursor/frontend/components/billing/billing.component';
+import LOGOComponent from './logo';
 
 dayjs.extend(utc);
 dayjs.extend(weekOfYear);
@@ -71,17 +72,15 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
             <div className="min-h-[100vh] w-full max-w-[1440px] mx-auto bg-primary px-[12px] text-white flex flex-col">
               {user?.admin && <Impersonate />}
               <div className="px-[23px] flex h-[80px] items-center justify-between z-[200] sticky top-0 bg-primary">
-                <Link
-                  href="/"
-                  className="text-2xl flex items-center gap-[10px]"
-                >
-                  <div className="min-w-[55px]">
-                    <Image
+                <Link href="/" className="text-2xl flex items-center gap-[4px]">
+                  <div className="min-w-[32px]">
+                    {/* <Image
                       src={isGeneral() ? '/postiz.svg' : '/logo.svg'}
                       width={55}
                       height={53}
                       alt="Logo"
-                    />
+                    /> */}
+                    <LOGOComponent className="fill-seventh transform -rotate-45" />
                   </div>
                   <div
                     className={clsx(
