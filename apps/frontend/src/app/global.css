@@ -1,11 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "./polonto.css";
+@import './polonto.css';
 
 body,
 html {
-  background-color: #000;
+  /* background-color: #000; */
 }
 .box {
   position: relative;
@@ -380,7 +380,7 @@ html {
   -webkit-text-fill-color: white !important;
 }
 div div .set-font-family {
-  font-family: "Helvetica Neue", Helvetica !important;
+  font-family: 'Helvetica Neue', Helvetica !important;
   font-stretch: 100% !important;
   font-style: normal !important;
   font-weight: 400 !important;
