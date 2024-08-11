@@ -1,8 +1,8 @@
-import { PrismaRepository } from '@gitroom/nestjs-libraries/database/prisma/prisma.service';
+import { PrismaRepository } from '@kursor/nestjs-libraries/database/prisma/prisma.service';
 import { Role, SubscriptionTier } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
-import { AuthService } from '@gitroom/helpers/auth/auth.service';
-import { CreateOrgUserDto } from '@gitroom/nestjs-libraries/dtos/auth/create.org.user.dto';
+import { AuthService } from '@kursor/helpers/auth/auth.service';
+import { CreateOrgUserDto } from '@kursor/nestjs-libraries/dtos/auth/create.org.user.dto';
 
 @Injectable()
 export class OrganizationRepository {

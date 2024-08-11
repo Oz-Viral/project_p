@@ -1,21 +1,21 @@
 'use client';
 
 import React, { FC, useCallback, useContext, useMemo } from 'react';
-import { MarketplaceProvider } from '@gitroom/frontend/components/marketplace/marketplace.provider';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
-import { Button } from '@gitroom/react/form/button';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { MarketplaceProvider } from '@kursor/frontend/components/marketplace/marketplace.provider';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
+import { Button } from '@kursor/react/form/button';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import useSWR from 'swr';
 import { capitalize } from 'lodash';
 import removeMd from 'remove-markdown';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 import { useModals } from '@mantine/modals';
 import { Post as PrismaPost } from '@prisma/client';
 import dynamic from 'next/dynamic';
-import { IntegrationContext } from '@gitroom/frontend/components/launches/helpers/use.integration';
+import { IntegrationContext } from '@kursor/frontend/components/launches/helpers/use.integration';
 import dayjs from 'dayjs';
 const PreviewPopupDynamic = dynamic(() =>
-  import('@gitroom/frontend/components/marketplace/preview.popup.dynamic').then(
+  import('@kursor/frontend/components/marketplace/preview.popup.dynamic').then(
     (mod) => mod.PreviewPopupDynamic
   )
 );

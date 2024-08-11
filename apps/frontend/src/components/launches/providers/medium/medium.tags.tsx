@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { useSettings } from '@gitroom/frontend/components/launches/helpers/use.values';
+import { useSettings } from '@kursor/frontend/components/launches/helpers/use.values';
 import { ReactTags } from 'react-tag-autocomplete';
-import interClass from '@gitroom/react/helpers/inter.font';
+import interClass from '@kursor/react/helpers/inter.font';
 
 export const MediumTags: FC<{
   name: string;

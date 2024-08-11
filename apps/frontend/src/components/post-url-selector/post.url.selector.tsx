@@ -2,7 +2,7 @@
 
 import { EventEmitter } from 'events';
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { TopTitle } from '@gitroom/frontend/components/launches/helpers/top.title.component';
+import { TopTitle } from '@kursor/frontend/components/launches/helpers/top.title.component';
 import {
   executeCommand,
   ExecuteState,
@@ -12,7 +12,7 @@ import {
 } from '@uiw/react-md-editor';
 import dayjs from 'dayjs';
 import useSWR from 'swr';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import removeMd from 'remove-markdown';
 import clsx from 'clsx';
 

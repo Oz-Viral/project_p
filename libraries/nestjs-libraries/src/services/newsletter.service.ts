@@ -7,7 +7,7 @@ export class NewsletterService {
       email,
       reactivate_existing: false,
       send_welcome_email: true,
-      utm_source: 'gitroom_platform',
+      utm_source: 'kursor_platform',
     };
 
     await fetch(

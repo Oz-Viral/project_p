@@ -2,7 +2,7 @@ import { HttpStatusCode } from 'axios';
 
 export const dynamic = 'force-dynamic';
 
-import { internalFetch } from '@gitroom/helpers/utils/internal.fetch';
+import { internalFetch } from '@kursor/helpers/utils/internal.fetch';
 import { redirect } from 'next/navigation';
 
 export default async function Page({

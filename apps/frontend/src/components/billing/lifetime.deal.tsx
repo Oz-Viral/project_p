@@ -1,15 +1,15 @@
 'use client';
 
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
 import { useCallback, useMemo, useState } from 'react';
-import { pricing } from '@gitroom/nestjs-libraries/database/prisma/subscriptions/pricing';
-import { Input } from '@gitroom/react/form/input';
-import { Button } from '@gitroom/react/form/button';
+import { pricing } from '@kursor/nestjs-libraries/database/prisma/subscriptions/pricing';
+import { Input } from '@kursor/react/form/input';
+import { Button } from '@kursor/react/form/button';
 import { useSWRConfig } from 'swr';
-import { useToaster } from '@gitroom/react/toaster/toaster';
+import { useToaster } from '@kursor/react/toaster/toaster';
 import { useRouter } from 'next/navigation';
-import { useFireEvents } from '@gitroom/helpers/utils/use.fire.events';
+import { useFireEvents } from '@kursor/helpers/utils/use.fire.events';
 
 export const LifetimeDeal = () => {
   const fetch = useFetch();

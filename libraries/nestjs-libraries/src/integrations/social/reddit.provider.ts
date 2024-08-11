@@ -3,12 +3,12 @@ import {
   PostDetails,
   PostResponse,
   SocialProvider,
-} from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
-import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
-import { RedditSettingsDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/reddit.dto';
-import { timer } from '@gitroom/helpers/utils/timer';
+} from '@kursor/nestjs-libraries/integrations/social/social.integrations.interface';
+import { makeId } from '@kursor/nestjs-libraries/services/make.is';
+import { RedditSettingsDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/reddit.dto';
+import { timer } from '@kursor/helpers/utils/timer';
 import { groupBy } from 'lodash';
-import { SocialAbstract } from '@gitroom/nestjs-libraries/integrations/social.abstract';
+import { SocialAbstract } from '@kursor/nestjs-libraries/integrations/social.abstract';
 
 export class RedditProvider extends SocialAbstract implements SocialProvider {
   identifier = 'reddit';

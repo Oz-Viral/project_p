@@ -9,30 +9,30 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { Button } from '@gitroom/react/form/button';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
+import { Button } from '@kursor/react/form/button';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 import MDEditor, { commands } from '@uiw/react-md-editor';
-import { useHideTopEditor } from '@gitroom/frontend/components/launches/helpers/use.hide.top.editor';
-import { useValues } from '@gitroom/frontend/components/launches/helpers/use.values';
+import { useHideTopEditor } from '@kursor/frontend/components/launches/helpers/use.hide.top.editor';
+import { useValues } from '@kursor/frontend/components/launches/helpers/use.values';
 import { FormProvider } from 'react-hook-form';
-import { useMoveToIntegrationListener } from '@gitroom/frontend/components/launches/helpers/use.move.to.integration';
-import { useExistingData } from '@gitroom/frontend/components/launches/helpers/use.existing.data';
+import { useMoveToIntegrationListener } from '@kursor/frontend/components/launches/helpers/use.move.to.integration';
+import { useExistingData } from '@kursor/frontend/components/launches/helpers/use.existing.data';
 import {
   IntegrationContext,
   useIntegration,
-} from '@gitroom/frontend/components/launches/helpers/use.integration';
-import { MultiMediaComponent } from '@gitroom/frontend/components/media/media.component';
+} from '@kursor/frontend/components/launches/helpers/use.integration';
+import { MultiMediaComponent } from '@kursor/frontend/components/media/media.component';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
-import { newImage } from '@gitroom/frontend/components/launches/helpers/new.image.component';
-import { postSelector } from '@gitroom/frontend/components/post-url-selector/post.url.selector';
-import { UpDownArrow } from '@gitroom/frontend/components/launches/up.down.arrow';
+import { newImage } from '@kursor/frontend/components/launches/helpers/new.image.component';
+import { postSelector } from '@kursor/frontend/components/post-url-selector/post.url.selector';
+import { UpDownArrow } from '@kursor/frontend/components/launches/up.down.arrow';
 import { arrayMoveImmutable } from 'array-move';
-import { linkedinCompany } from '@gitroom/frontend/components/launches/helpers/linkedin.component';
-import { Editor } from '@gitroom/frontend/components/launches/editor';
+import { linkedinCompany } from '@kursor/frontend/components/launches/helpers/linkedin.component';
+import { Editor } from '@kursor/frontend/components/launches/editor';
 import { useCopilotAction, useCopilotReadable } from '@copilotkit/react-core';
-import { AddPostButton } from '@gitroom/frontend/components/launches/add.post.button';
-import { GeneralPreviewComponent } from '@gitroom/frontend/components/launches/general.preview.component';
+import { AddPostButton } from '@kursor/frontend/components/launches/add.post.button';
+import { GeneralPreviewComponent } from '@kursor/frontend/components/launches/general.preview.component';
 import { capitalize } from 'lodash';
 
 // Simple component to change back to settings on after changing tab

@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useCallback } from 'react';
-import { Button } from '@gitroom/react/form/button';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
+import { Button } from '@kursor/react/form/button';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 
 export const Submitted: FC<{
   children: ReactNode;

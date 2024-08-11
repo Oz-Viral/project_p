@@ -1,7 +1,7 @@
 import {Injectable} from "@nestjs/common";
-import {MediaRepository} from "@gitroom/nestjs-libraries/database/prisma/media/media.repository";
-import { OpenaiService } from '@gitroom/nestjs-libraries/openai/openai.service';
-import { SubscriptionService } from '@gitroom/nestjs-libraries/database/prisma/subscriptions/subscription.service';
+import {MediaRepository} from "@kursor/nestjs-libraries/database/prisma/media/media.repository";
+import { OpenaiService } from '@kursor/nestjs-libraries/openai/openai.service';
+import { SubscriptionService } from '@kursor/nestjs-libraries/database/prisma/subscriptions/subscription.service';
 import { Organization } from '@prisma/client';
 
 @Injectable()

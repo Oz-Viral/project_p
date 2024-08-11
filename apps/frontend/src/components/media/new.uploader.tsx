@@ -4,7 +4,7 @@ import Uppy, { UploadResult } from '@uppy/core';
 // @ts-ignore
 import AwsS3Multipart from '@uppy/aws-s3-multipart';
 // @ts-ignore
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 
 import sha256 from 'sha256';
 import { FileInput, ProgressBar } from '@uppy/react';

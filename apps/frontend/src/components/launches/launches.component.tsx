@@ -1,24 +1,24 @@
 'use client';
 
-import { AddProviderButton } from '@gitroom/frontend/components/launches/add.provider.component';
+import { AddProviderButton } from '@kursor/frontend/components/launches/add.provider.component';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { orderBy } from 'lodash';
-import { Calendar } from '@gitroom/frontend/components/launches/calendar';
-import { CalendarWeekProvider } from '@gitroom/frontend/components/launches/calendar.context';
-import { Filters } from '@gitroom/frontend/components/launches/filters';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { Calendar } from '@kursor/frontend/components/launches/calendar';
+import { CalendarWeekProvider } from '@kursor/frontend/components/launches/calendar.context';
+import { Filters } from '@kursor/frontend/components/launches/filters';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import useSWR from 'swr';
-import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
+import { LoadingComponent } from '@kursor/frontend/components/layout/loading';
 import clsx from 'clsx';
 import { useUser } from '../layout/user.context';
-import { Menu } from '@gitroom/frontend/components/launches/menu/menu';
-import { GeneratorComponent } from '@gitroom/frontend/components/launches/generator/generator';
+import { Menu } from '@kursor/frontend/components/launches/menu/menu';
+import { GeneratorComponent } from '@kursor/frontend/components/launches/generator/generator';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Integration } from '@prisma/client';
-import ImageWithFallback from '@gitroom/react/helpers/image.with.fallback';
-import { useToaster } from '@gitroom/react/toaster/toaster';
-import { useFireEvents } from '@gitroom/helpers/utils/use.fire.events';
+import ImageWithFallback from '@kursor/react/helpers/image.with.fallback';
+import { useToaster } from '@kursor/react/toaster/toaster';
+import { useFireEvents } from '@kursor/helpers/utils/use.fire.events';
 
 export const LaunchesComponent = () => {
   const fetch = useFetch();

@@ -1,11 +1,11 @@
 'use client';
 
-import { StarsAndForks } from '@gitroom/frontend/components/analytics/stars.and.forks';
+import { StarsAndForks } from '@kursor/frontend/components/analytics/stars.and.forks';
 import { FC, useCallback } from 'react';
-import { StarsTableComponent } from '@gitroom/frontend/components/analytics/stars.table.component';
+import { StarsTableComponent } from '@kursor/frontend/components/analytics/stars.table.component';
 import useSWR from 'swr';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { LoadingComponent } from '@kursor/frontend/components/layout/loading';
 
 export const AnalyticsComponent: FC = () => {
   const fetch = useFetch();

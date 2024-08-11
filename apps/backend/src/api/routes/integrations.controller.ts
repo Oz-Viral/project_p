@@ -8,24 +8,24 @@ import {
   Query,
   UseFilters,
 } from '@nestjs/common';
-import { ioRedis } from '@gitroom/nestjs-libraries/redis/redis.service';
-import { ConnectIntegrationDto } from '@gitroom/nestjs-libraries/dtos/integrations/connect.integration.dto';
-import { IntegrationManager } from '@gitroom/nestjs-libraries/integrations/integration.manager';
-import { IntegrationService } from '@gitroom/nestjs-libraries/database/prisma/integrations/integration.service';
-import { GetOrgFromRequest } from '@gitroom/nestjs-libraries/user/org.from.request';
+import { ioRedis } from '@kursor/nestjs-libraries/redis/redis.service';
+import { ConnectIntegrationDto } from '@kursor/nestjs-libraries/dtos/integrations/connect.integration.dto';
+import { IntegrationManager } from '@kursor/nestjs-libraries/integrations/integration.manager';
+import { IntegrationService } from '@kursor/nestjs-libraries/database/prisma/integrations/integration.service';
+import { GetOrgFromRequest } from '@kursor/nestjs-libraries/user/org.from.request';
 import { Organization, User } from '@prisma/client';
-import { ApiKeyDto } from '@gitroom/nestjs-libraries/dtos/integrations/api.key.dto';
-import { IntegrationFunctionDto } from '@gitroom/nestjs-libraries/dtos/integrations/integration.function.dto';
+import { ApiKeyDto } from '@kursor/nestjs-libraries/dtos/integrations/api.key.dto';
+import { IntegrationFunctionDto } from '@kursor/nestjs-libraries/dtos/integrations/integration.function.dto';
 import {
   AuthorizationActions,
   Sections,
-} from '@gitroom/backend/services/auth/permissions/permissions.service';
-import { CheckPolicies } from '@gitroom/backend/services/auth/permissions/permissions.ability';
-import { pricing } from '@gitroom/nestjs-libraries/database/prisma/subscriptions/pricing';
+} from '@kursor/backend/services/auth/permissions/permissions.service';
+import { CheckPolicies } from '@kursor/backend/services/auth/permissions/permissions.ability';
+import { pricing } from '@kursor/nestjs-libraries/database/prisma/subscriptions/pricing';
 import { ApiTags } from '@nestjs/swagger';
-import { GetUserFromRequest } from '@gitroom/nestjs-libraries/user/user.from.request';
-import { NotEnoughScopesFilter } from '@gitroom/nestjs-libraries/integrations/integration.missing.scopes';
-import { PostsService } from '@gitroom/nestjs-libraries/database/prisma/posts/posts.service';
+import { GetUserFromRequest } from '@kursor/nestjs-libraries/user/user.from.request';
+import { NotEnoughScopesFilter } from '@kursor/nestjs-libraries/integrations/integration.missing.scopes';
+import { PostsService } from '@kursor/nestjs-libraries/database/prisma/posts/posts.service';
 
 @ApiTags('Integrations')
 @Controller('/integrations')

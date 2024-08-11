@@ -1,9 +1,9 @@
 'use client';
 
 import { ReactNode, useCallback } from 'react';
-import { FetchWrapperComponent } from '@gitroom/helpers/utils/custom.fetch';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { FetchWrapperComponent } from '@kursor/helpers/utils/custom.fetch';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 export default function LayoutContext(params: { children: ReactNode }) {
   if (params?.children) {

@@ -1,6 +1,6 @@
-import { useIntegration } from '@gitroom/frontend/components/launches/helpers/use.integration';
+import { useIntegration } from '@kursor/frontend/components/launches/helpers/use.integration';
 import { useCallback } from 'react';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 
 export const useCustomProviderFunction = () => {
   const { integration } = useIntegration();

@@ -11,7 +11,7 @@ import { BULLMQ_MODULE_OPTIONS } from '../constants/bull-mq.constants';
 import { QueueEventsFactory } from '../factories/queue-events.factory';
 import { QueueFactory } from '../factories/queue.factory';
 import { IBullMqEvent } from '../interfaces/bull-mq-event.interface';
-import {IBullMqModuleOptions} from "@gitroom/nestjs-libraries/bull-mq-transport/interfaces/bull-mq-module-options.interface";
+import {IBullMqModuleOptions} from "@kursor/nestjs-libraries/bull-mq-transport/interfaces/bull-mq-module-options.interface";
 
 @Injectable()
 export class BullMqClient extends ClientProxy {

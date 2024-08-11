@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import useSWR from 'swr';
-import { GithubComponent } from '@gitroom/frontend/components/settings/github.component';
+import { GithubComponent } from '@kursor/frontend/components/settings/github.component';
 
 export const GithubOnboarding: FC = () => {
   const fetch = useFetch();

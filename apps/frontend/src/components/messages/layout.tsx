@@ -3,11 +3,11 @@
 import { FC, ReactNode, useCallback, useMemo } from 'react';
 import clsx from 'clsx';
 import useSWR from 'swr';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import { useParams, useRouter } from 'next/navigation';
-import { MarketplaceProvider, Root2 } from '@gitroom/frontend/components/marketplace/marketplace.provider';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
-import { Button } from '@gitroom/react/form/button';
+import { MarketplaceProvider, Root2 } from '@kursor/frontend/components/marketplace/marketplace.provider';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
+import { Button } from '@kursor/react/form/button';
 
 const Card: FC<{ message: Root2 }> = (props) => {
   const { message } = props;

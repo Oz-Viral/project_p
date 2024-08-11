@@ -1,23 +1,23 @@
 'use client';
 
 import { ChangeEvent, FC, useCallback, useEffect, useState } from 'react';
-import { Button } from '@gitroom/react/form/button';
+import { Button } from '@kursor/react/form/button';
 import useSWR from 'swr';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import { Media } from '@prisma/client';
-import { useMediaDirectory } from '@gitroom/react/helpers/use.media.directory';
-import { useSettings } from '@gitroom/frontend/components/launches/helpers/use.values';
+import { useMediaDirectory } from '@kursor/react/helpers/use.media.directory';
+import { useSettings } from '@kursor/frontend/components/launches/helpers/use.values';
 import EventEmitter from 'events';
-import { TopTitle } from '@gitroom/frontend/components/launches/helpers/top.title.component';
+import { TopTitle } from '@kursor/frontend/components/launches/helpers/top.title.component';
 import clsx from 'clsx';
-import { VideoFrame } from '@gitroom/react/helpers/video.frame';
-import { useToaster } from '@gitroom/react/toaster/toaster';
-import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
-import { MultipartFileUploader } from '@gitroom/frontend/components/media/new.uploader';
+import { VideoFrame } from '@kursor/react/helpers/video.frame';
+import { useToaster } from '@kursor/react/toaster/toaster';
+import { LoadingComponent } from '@kursor/frontend/components/layout/loading';
+import { MultipartFileUploader } from '@kursor/frontend/components/media/new.uploader';
 import dynamic from 'next/dynamic';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
 const Polonto = dynamic(
-  () => import('@gitroom/frontend/components/launches/polonto')
+  () => import('@kursor/frontend/components/launches/polonto')
 );
 const showModalEmitter = new EventEmitter();
 

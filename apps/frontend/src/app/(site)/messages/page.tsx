@@ -1,11 +1,11 @@
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 export const dynamic = 'force-dynamic';
 
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-  title: `${isGeneral() ? 'Postiz' : 'Gitroom'} Messages`,
+  title: `Kursor Messages`,
   description: '',
 }
 

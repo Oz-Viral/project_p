@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import { Integrations } from '@gitroom/frontend/components/launches/calendar.context';
+import { Integrations } from '@kursor/frontend/components/launches/calendar.context';
 import dayjs from 'dayjs';
 
 export const IntegrationContext = createContext<{

@@ -1,12 +1,12 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
-import { Integrations } from '@gitroom/frontend/components/launches/calendar.context';
-import { useMoveToIntegrationListener } from '@gitroom/frontend/components/launches/helpers/use.move.to.integration';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
+import { Integrations } from '@kursor/frontend/components/launches/calendar.context';
+import { useMoveToIntegrationListener } from '@kursor/frontend/components/launches/helpers/use.move.to.integration';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useCopilotAction, useCopilotReadable } from '@copilotkit/react-core';
-import { useStateCallback } from '@gitroom/react/helpers/use.state.callback';
-import { timer } from '@gitroom/helpers/utils/timer';
+import { useStateCallback } from '@kursor/react/helpers/use.state.callback';
+import { timer } from '@kursor/helpers/utils/timer';
 import dayjs from 'dayjs';
 
 export const PickPlatforms: FC<{

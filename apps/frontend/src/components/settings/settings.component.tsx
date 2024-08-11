@@ -1,14 +1,14 @@
 'use client';
 
-import { GithubComponent } from '@gitroom/frontend/components/settings/github.component';
+import { GithubComponent } from '@kursor/frontend/components/settings/github.component';
 import { useCallback, useEffect } from 'react';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
-import { TeamsComponent } from '@gitroom/frontend/components/settings/teams.component';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
+import { TeamsComponent } from '@kursor/frontend/components/settings/teams.component';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import useSWR from 'swr';
-import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
+import { LoadingComponent } from '@kursor/frontend/components/layout/loading';
 import { useRouter } from 'next/navigation';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 const general = isGeneral();
 
@@ -67,7 +67,7 @@ export const SettingsComponent = () => {
           {/*  <div>*/}
           {/*    <Checkbox disableForm={true} checked={true} name="Send Email" />*/}
           {/*  </div>*/}
-          {/*  <div>Show news with everybody in Gitroom</div>*/}
+          {/*  <div>Show news with everybody in Kursor</div>*/}
           {/*</div>*/}
         </div>
       )}

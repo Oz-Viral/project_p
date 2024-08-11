@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { XProvider } from '@gitroom/nestjs-libraries/integrations/social/x.provider';
-import { SocialProvider } from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
-import { LinkedinProvider } from '@gitroom/nestjs-libraries/integrations/social/linkedin.provider';
-import { RedditProvider } from '@gitroom/nestjs-libraries/integrations/social/reddit.provider';
-import { DevToProvider } from '@gitroom/nestjs-libraries/integrations/article/dev.to.provider';
-import { HashnodeProvider } from '@gitroom/nestjs-libraries/integrations/article/hashnode.provider';
-import { MediumProvider } from '@gitroom/nestjs-libraries/integrations/article/medium.provider';
-import { ArticleProvider } from '@gitroom/nestjs-libraries/integrations/article/article.integrations.interface';
-import { FacebookProvider } from '@gitroom/nestjs-libraries/integrations/social/facebook.provider';
-import { InstagramProvider } from '@gitroom/nestjs-libraries/integrations/social/instagram.provider';
-import { YoutubeProvider } from '@gitroom/nestjs-libraries/integrations/social/youtube.provider';
-import { TiktokProvider } from '@gitroom/nestjs-libraries/integrations/social/tiktok.provider';
-import { PinterestProvider } from '@gitroom/nestjs-libraries/integrations/social/pinterest.provider';
-import { DribbbleProvider } from '@gitroom/nestjs-libraries/integrations/social/dribbble.provider';
-import { LinkedinPageProvider } from '@gitroom/nestjs-libraries/integrations/social/linkedin.page.provider';
-import { ThreadsProvider } from '@gitroom/nestjs-libraries/integrations/social/threads.provider';
+import { XProvider } from '@kursor/nestjs-libraries/integrations/social/x.provider';
+import { SocialProvider } from '@kursor/nestjs-libraries/integrations/social/social.integrations.interface';
+import { LinkedinProvider } from '@kursor/nestjs-libraries/integrations/social/linkedin.provider';
+import { RedditProvider } from '@kursor/nestjs-libraries/integrations/social/reddit.provider';
+import { DevToProvider } from '@kursor/nestjs-libraries/integrations/article/dev.to.provider';
+import { HashnodeProvider } from '@kursor/nestjs-libraries/integrations/article/hashnode.provider';
+import { MediumProvider } from '@kursor/nestjs-libraries/integrations/article/medium.provider';
+import { ArticleProvider } from '@kursor/nestjs-libraries/integrations/article/article.integrations.interface';
+import { FacebookProvider } from '@kursor/nestjs-libraries/integrations/social/facebook.provider';
+import { InstagramProvider } from '@kursor/nestjs-libraries/integrations/social/instagram.provider';
+import { YoutubeProvider } from '@kursor/nestjs-libraries/integrations/social/youtube.provider';
+import { TiktokProvider } from '@kursor/nestjs-libraries/integrations/social/tiktok.provider';
+import { PinterestProvider } from '@kursor/nestjs-libraries/integrations/social/pinterest.provider';
+import { DribbbleProvider } from '@kursor/nestjs-libraries/integrations/social/dribbble.provider';
+import { LinkedinPageProvider } from '@kursor/nestjs-libraries/integrations/social/linkedin.page.provider';
+import { ThreadsProvider } from '@kursor/nestjs-libraries/integrations/social/threads.provider';
 
 const socialIntegrationList = [
   ...(process.env.IS_GENERAL !== 'true' ? [new XProvider()] : []),

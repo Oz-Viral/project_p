@@ -2,7 +2,7 @@
 
 import {usePathname} from "next/navigation";
 import {useMemo} from "react";
-import {menuItems} from "@gitroom/frontend/components/layout/top.menu";
+import {menuItems} from "@kursor/frontend/components/layout/top.menu";
 
 export const Title = () => {
     const path = usePathname();

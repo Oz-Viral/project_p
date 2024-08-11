@@ -2,7 +2,7 @@ import { FC, useCallback, useState } from 'react';
 import dayjs from 'dayjs';
 import { Calendar, TimeInput } from '@mantine/dates';
 import { useClickOutside } from '@mantine/hooks';
-import { Button } from '@gitroom/react/form/button';
+import { Button } from '@kursor/react/form/button';
 
 export const DatePicker: FC<{
   date: dayjs.Dayjs;

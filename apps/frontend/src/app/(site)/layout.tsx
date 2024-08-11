@@ -1,4 +1,4 @@
-import {LayoutSettings} from "@gitroom/frontend/components/layout/layout.settings";
+import {LayoutSettings} from "@kursor/frontend/components/layout/layout.settings";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
     /*

@@ -6,16 +6,16 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import useSWR from 'swr';
 import { orderBy } from 'lodash';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { Menu } from '@gitroom/frontend/components/launches/menu/menu';
-import { ApiModal } from '@gitroom/frontend/components/launches/add.provider.component';
+import { Menu } from '@kursor/frontend/components/launches/menu/menu';
+import { ApiModal } from '@kursor/frontend/components/launches/add.provider.component';
 import { useRouter } from 'next/navigation';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 export const ConnectChannels: FC = () => {
   const fetch = useFetch();

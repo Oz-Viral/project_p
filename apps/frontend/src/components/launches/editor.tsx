@@ -6,7 +6,7 @@ import { useCopilotAction, useCopilotReadable } from '@copilotkit/react-core';
 import dayjs from 'dayjs';
 import { CopilotTextarea } from '@copilotkit/react-textarea';
 import clsx from 'clsx';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
 
 export const Editor = forwardRef<
   RefMDEditor,

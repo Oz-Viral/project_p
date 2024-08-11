@@ -1,11 +1,12 @@
-import { Input } from '@gitroom/react/form/input';
-import { ChangeEventHandler, useCallback, useMemo, useState } from 'react';
+
 import useSWR from 'swr';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
-import { Select } from '@gitroom/react/form/select';
-import { pricing } from '@gitroom/nestjs-libraries/database/prisma/subscriptions/pricing';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
+import { Select } from '@kursor/react/form/select';
+import { pricing } from '@kursor/nestjs-libraries/database/prisma/subscriptions/pricing';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
+import { Input } from '@kursor/react/form/input';
+import { ChangeEventHandler, useCallback, useMemo, useState } from 'react';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
 
 export const Subscription = () => {
   const fetch = useFetch();

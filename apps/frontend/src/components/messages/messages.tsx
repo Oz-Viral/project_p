@@ -33,8 +33,8 @@ export interface Message {
   deletedAt: any;
 }
 
-import { Textarea } from '@gitroom/react/form/textarea';
-import interClass from '@gitroom/react/helpers/inter.font';
+import { Textarea } from '@kursor/react/form/textarea';
+import interClass from '@kursor/react/helpers/inter.font';
 import clsx from 'clsx';
 import useSWR from 'swr';
 import {
@@ -48,17 +48,17 @@ import {
   useState,
 } from 'react';
 import { useParams } from 'next/navigation';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import { reverse } from 'lodash';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
-import { AddMessageDto } from '@gitroom/nestjs-libraries/dtos/messages/add.message';
-import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
-import { OrderTopActions } from '@gitroom/frontend/components/marketplace/order.top.actions';
-import { MarketplaceProvider } from '@gitroom/frontend/components/marketplace/marketplace.provider';
-import { SpecialMessage } from '@gitroom/frontend/components/marketplace/special.message';
-import { usePageVisibility } from '@gitroom/react/helpers/use.is.visible';
+import { AddMessageDto } from '@kursor/nestjs-libraries/dtos/messages/add.message';
+import { makeId } from '@kursor/nestjs-libraries/services/make.is';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
+import { OrderTopActions } from '@kursor/frontend/components/marketplace/order.top.actions';
+import { MarketplaceProvider } from '@kursor/frontend/components/marketplace/marketplace.provider';
+import { SpecialMessage } from '@kursor/frontend/components/marketplace/special.message';
+import { usePageVisibility } from '@kursor/react/helpers/use.is.visible';
 
 export const Message: FC<{
   message: Message;

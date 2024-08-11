@@ -1,10 +1,10 @@
-import { PrismaRepository } from '@gitroom/nestjs-libraries/database/prisma/prisma.service';
+import { PrismaRepository } from '@kursor/nestjs-libraries/database/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import dayjs from 'dayjs';
 import * as console from 'node:console';
 import { Integration } from '@prisma/client';
-import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
-import { simpleUpload } from '@gitroom/nestjs-libraries/upload/r2.uploader';
+import { makeId } from '@kursor/nestjs-libraries/services/make.is';
+import { simpleUpload } from '@kursor/nestjs-libraries/upload/r2.uploader';
 import axios from 'axios';
 
 @Injectable()

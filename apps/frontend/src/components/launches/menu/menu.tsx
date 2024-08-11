@@ -1,9 +1,9 @@
 import { FC, useCallback, useState } from 'react';
 import { useClickOutside } from '@mantine/hooks';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
-import { useToaster } from '@gitroom/react/toaster/toaster';
-import interClass from '@gitroom/react/helpers/inter.font';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
+import { useToaster } from '@kursor/react/toaster/toaster';
+import interClass from '@kursor/react/helpers/inter.font';
 
 export const Menu: FC<{
   canEnable: boolean;

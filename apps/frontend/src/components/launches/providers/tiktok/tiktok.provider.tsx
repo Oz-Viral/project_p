@@ -1,16 +1,16 @@
 import { FC } from 'react';
-import { withProvider } from '@gitroom/frontend/components/launches/providers/high.order.provider';
-import { useIntegration } from '@gitroom/frontend/components/launches/helpers/use.integration';
-import { useFormatting } from '@gitroom/frontend/components/launches/helpers/use.formatting';
-import { useMediaDirectory } from '@gitroom/react/helpers/use.media.directory';
+import { withProvider } from '@kursor/frontend/components/launches/providers/high.order.provider';
+import { useIntegration } from '@kursor/frontend/components/launches/helpers/use.integration';
+import { useFormatting } from '@kursor/frontend/components/launches/helpers/use.formatting';
+import { useMediaDirectory } from '@kursor/react/helpers/use.media.directory';
 import {
   afterLinkedinCompanyPreventRemove,
   linkedinCompanyPreventRemove,
-} from '@gitroom/helpers/utils/linkedin.company.prevent.remove';
-import { VideoOrImage } from '@gitroom/react/helpers/video.or.image';
-import { TikTokDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/tiktok.dto';
-import { useSettings } from '@gitroom/frontend/components/launches/helpers/use.values';
-import { Select } from '@gitroom/react/form/select';
+} from '@kursor/helpers/utils/linkedin.company.prevent.remove';
+import { VideoOrImage } from '@kursor/react/helpers/video.or.image';
+import { TikTokDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/tiktok.dto';
+import { useSettings } from '@kursor/frontend/components/launches/helpers/use.values';
+import { Select } from '@kursor/react/form/select';
 import Image from 'next/image';
 
 const privacyLevel = [
@@ -178,7 +178,7 @@ const TikTokPreview: FC = (props) => {
         <div className="flex flex-col leading-[16px]">
           <div className="text-[14px] font-[600]">{integration?.name}</div>
           <div className="text-[12px] font-[400] text-black/60">
-            CEO @ Gitroom
+            CEO @ Kursor
           </div>
           <div className="text-[12px] font-[400] text-black/60">1m</div>
         </div>
@@ -225,7 +225,7 @@ const TikTokPreview: FC = (props) => {
           <div className="flex-1 flex flex-col leading-[16px] bg-[#F2F2F2] w-full pt-[8px] pr-[64px] pl-[12px] pb-[8px] rounded-[8px]">
             <div className="text-[14px] font-[600]">{integration?.name}</div>
             <div className="text-[12px] font-[400] text-black/60">
-              CEO @ Gitroom
+              CEO @ Kursor
             </div>
             <div className="text-[14px] mt-[8px] font-[400] text-black/90">
               {p.text}

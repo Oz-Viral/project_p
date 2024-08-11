@@ -4,24 +4,24 @@ import React, { FC, useCallback, useMemo } from 'react';
 import {
   Integrations,
   useCalendar,
-} from '@gitroom/frontend/components/launches/calendar.context';
+} from '@kursor/frontend/components/launches/calendar.context';
 import dayjs from 'dayjs';
 import { openModal, useModals } from '@mantine/modals';
-import { AddEditModal } from '@gitroom/frontend/components/launches/add.edit.model';
+import { AddEditModal } from '@kursor/frontend/components/launches/add.edit.model';
 import clsx from 'clsx';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { ExistingDataContextProvider } from '@gitroom/frontend/components/launches/helpers/use.existing.data';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { ExistingDataContextProvider } from '@kursor/frontend/components/launches/helpers/use.existing.data';
 import { useDrag, useDrop } from 'react-dnd';
-import { DNDProvider } from '@gitroom/frontend/components/launches/helpers/dnd.provider';
+import { DNDProvider } from '@kursor/frontend/components/launches/helpers/dnd.provider';
 import { Integration, Post, State } from '@prisma/client';
-import { useAddProvider } from '@gitroom/frontend/components/launches/add.provider.component';
-import { CommentComponent } from '@gitroom/frontend/components/launches/comments/comment.component';
+import { useAddProvider } from '@kursor/frontend/components/launches/add.provider.component';
+import { CommentComponent } from '@kursor/frontend/components/launches/comments/comment.component';
 import { useSWRConfig } from 'swr';
 import { useIntersectionObserver } from '@uidotdev/usehooks';
-import { useToaster } from '@gitroom/react/toaster/toaster';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
-import { IntegrationContext } from '@gitroom/frontend/components/launches/helpers/use.integration';
-import { PreviewPopup } from '@gitroom/frontend/components/marketplace/special.message';
+import { useToaster } from '@kursor/react/toaster/toaster';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
+import { IntegrationContext } from '@kursor/frontend/components/launches/helpers/use.integration';
+import { PreviewPopup } from '@kursor/frontend/components/marketplace/special.message';
 
 export const days = [
   '',

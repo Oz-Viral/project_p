@@ -1,18 +1,16 @@
 import { FC, useCallback, useState } from 'react';
 import clsx from 'clsx';
-import interClass from '@gitroom/react/helpers/inter.font';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import interClass from '@kursor/react/helpers/inter.font';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 const list = [
   {
-    title: `Can I trust ${isGeneral() ? 'Postiz' : 'Gitroom'}?`,
-    description: `${isGeneral() ? 'Postiz' : 'Gitroom'} is proudly open-source! We believe in an ethical and transparent culture, meaning Postiz will live forever. You can check the entire code / or use it for your personal use. You can check the open-source repository click here.`,
+    title: `Can I trust Kursor?`,
+    description: `Kursor is proudly open-source! We believe in an ethical and transparent culture, meaning Postiz will live forever. You can check the entire code / or use it for your personal use. You can check the open-source repository click here.`,
   },
   {
     title: 'What are channels?',
-    description: `${
-      isGeneral() ? 'Postiz' : 'Gitroom'
-    } allows you to schedule your posts between different channels.
+    description: `Kursor allows you to schedule your posts between different channels.
 A channel is a publishing platform where you can schedule your posts.
 For example, you can schedule your posts on Twitter, Linkedin, DEV and Hashnode`,
   },

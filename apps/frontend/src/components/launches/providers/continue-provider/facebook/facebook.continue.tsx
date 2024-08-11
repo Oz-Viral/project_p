@@ -1,10 +1,10 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { useCustomProviderFunction } from '@gitroom/frontend/components/launches/helpers/use.custom.provider.function';
+import { useCustomProviderFunction } from '@kursor/frontend/components/launches/helpers/use.custom.provider.function';
 import useSWR from 'swr';
 import clsx from 'clsx';
-import { Button } from '@gitroom/react/form/button';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
-import { useIntegration } from '@gitroom/frontend/components/launches/helpers/use.integration';
+import { Button } from '@kursor/react/form/button';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
+import { useIntegration } from '@kursor/frontend/components/launches/helpers/use.integration';
 
 export const FacebookContinue: FC<{
   closeModal: () => void;

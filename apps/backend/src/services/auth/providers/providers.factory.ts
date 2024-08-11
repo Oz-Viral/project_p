@@ -1,7 +1,7 @@
 import { Provider } from '@prisma/client';
-import { GithubProvider } from '@gitroom/backend/services/auth/providers/github.provider';
-import { ProvidersInterface } from '@gitroom/backend/services/auth/providers.interface';
-import { GoogleProvider } from '@gitroom/backend/services/auth/providers/google.provider';
+import { GithubProvider } from '@kursor/backend/services/auth/providers/github.provider';
+import { ProvidersInterface } from '@kursor/backend/services/auth/providers.interface';
+import { GoogleProvider } from '@kursor/backend/services/auth/providers/google.provider';
 
 export class ProvidersFactory {
   static loadProvider(provider: Provider): ProvidersInterface {

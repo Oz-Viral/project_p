@@ -1,15 +1,15 @@
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 export const dynamic = 'force-dynamic';
 
-import { SettingsComponent } from '@gitroom/frontend/components/settings/settings.component';
-import { internalFetch } from '@gitroom/helpers/utils/internal.fetch';
+import { SettingsComponent } from '@kursor/frontend/components/settings/settings.component';
+import { internalFetch } from '@kursor/helpers/utils/internal.fetch';
 import { redirect } from 'next/navigation';
 import { RedirectType } from 'next/dist/client/components/redirect';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: `${isGeneral() ? 'Postiz' : 'Gitroom'} Settings`,
+  title: `Kursor Settings`,
   description: '',
 };
 export default async function Index({

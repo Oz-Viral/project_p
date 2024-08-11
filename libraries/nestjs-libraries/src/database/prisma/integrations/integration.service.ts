@@ -1,15 +1,15 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { IntegrationRepository } from '@gitroom/nestjs-libraries/database/prisma/integrations/integration.repository';
-import { IntegrationManager } from '@gitroom/nestjs-libraries/integrations/integration.manager';
-import { InstagramProvider } from '@gitroom/nestjs-libraries/integrations/social/instagram.provider';
-import { FacebookProvider } from '@gitroom/nestjs-libraries/integrations/social/facebook.provider';
-import { SocialProvider } from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
+import { IntegrationRepository } from '@kursor/nestjs-libraries/database/prisma/integrations/integration.repository';
+import { IntegrationManager } from '@kursor/nestjs-libraries/integrations/integration.manager';
+import { InstagramProvider } from '@kursor/nestjs-libraries/integrations/social/instagram.provider';
+import { FacebookProvider } from '@kursor/nestjs-libraries/integrations/social/facebook.provider';
+import { SocialProvider } from '@kursor/nestjs-libraries/integrations/social/social.integrations.interface';
 import { Integration } from '@prisma/client';
-import { NotificationService } from '@gitroom/nestjs-libraries/database/prisma/notifications/notification.service';
-import { LinkedinPageProvider } from '@gitroom/nestjs-libraries/integrations/social/linkedin.page.provider';
-import { simpleUpload } from '@gitroom/nestjs-libraries/upload/r2.uploader';
+import { NotificationService } from '@kursor/nestjs-libraries/database/prisma/notifications/notification.service';
+import { LinkedinPageProvider } from '@kursor/nestjs-libraries/integrations/social/linkedin.page.provider';
+import { simpleUpload } from '@kursor/nestjs-libraries/upload/r2.uploader';
 import axios from 'axios';
-import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
+import { makeId } from '@kursor/nestjs-libraries/services/make.is';
 
 @Injectable()
 export class IntegrationService {

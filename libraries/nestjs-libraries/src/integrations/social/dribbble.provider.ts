@@ -4,12 +4,12 @@ import {
   PostDetails,
   PostResponse,
   SocialProvider,
-} from '@gitroom/nestjs-libraries/integrations/social/social.integrations.interface';
-import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
+} from '@kursor/nestjs-libraries/integrations/social/social.integrations.interface';
+import { makeId } from '@kursor/nestjs-libraries/services/make.is';
 import axios from 'axios';
 import FormData from 'form-data';
-import { SocialAbstract } from '@gitroom/nestjs-libraries/integrations/social.abstract';
-import { DribbbleDto } from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/dribbble.dto';
+import { SocialAbstract } from '@kursor/nestjs-libraries/integrations/social.abstract';
+import { DribbbleDto } from '@kursor/nestjs-libraries/dtos/posts/providers-settings/dribbble.dto';
 import mime from 'mime-types';
 
 export class DribbbleProvider extends SocialAbstract implements SocialProvider {

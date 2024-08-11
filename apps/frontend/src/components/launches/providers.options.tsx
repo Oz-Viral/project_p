@@ -1,10 +1,10 @@
 import {FC, useEffect, useState} from "react";
-import {Integrations} from "@gitroom/frontend/components/launches/calendar.context";
-import {PickPlatforms} from "@gitroom/frontend/components/launches/helpers/pick.platform.component";
-import {IntegrationContext} from "@gitroom/frontend/components/launches/helpers/use.integration";
-import {ShowAllProviders} from "@gitroom/frontend/components/launches/providers/show.all.providers";
+import {Integrations} from "@kursor/frontend/components/launches/calendar.context";
+import {PickPlatforms} from "@kursor/frontend/components/launches/helpers/pick.platform.component";
+import {IntegrationContext} from "@kursor/frontend/components/launches/helpers/use.integration";
+import {ShowAllProviders} from "@kursor/frontend/components/launches/providers/show.all.providers";
 import dayjs from "dayjs";
-import { useStateCallback } from '@gitroom/react/helpers/use.state.callback';
+import { useStateCallback } from '@kursor/react/helpers/use.state.callback';
 
 export const ProvidersOptions: FC<{
   integrations: Integrations[];

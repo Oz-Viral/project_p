@@ -4,7 +4,7 @@ import DrawChart from 'chart.js/auto';
 import {
   ForksList,
   StarsList,
-} from '@gitroom/frontend/components/analytics/stars.and.forks.interface';
+} from '@kursor/frontend/components/analytics/stars.and.forks.interface';
 import dayjs from 'dayjs';
 
 export const Chart: FC<{ list: StarsList[] | ForksList[] }> = (props) => {

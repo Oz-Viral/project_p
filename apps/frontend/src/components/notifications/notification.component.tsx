@@ -1,11 +1,11 @@
 'use client';
 
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import useSWR from 'swr';
 import { FC, useCallback, useState } from 'react';
 import clsx from 'clsx';
 import { useClickAway } from '@uidotdev/usehooks';
-import interClass from '@gitroom/react/helpers/inter.font';
+import interClass from '@kursor/react/helpers/inter.font';
 import ReactLoading from 'react-loading';
 
 function replaceLinks(text: string) {

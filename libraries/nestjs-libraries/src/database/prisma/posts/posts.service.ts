@@ -1,22 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { PostsRepository } from '@gitroom/nestjs-libraries/database/prisma/posts/posts.repository';
-import { CreatePostDto } from '@gitroom/nestjs-libraries/dtos/posts/create.post.dto';
-import { BullMqClient } from '@gitroom/nestjs-libraries/bull-mq-transport/client/bull-mq.client';
+import { PostsRepository } from '@kursor/nestjs-libraries/database/prisma/posts/posts.repository';
+import { CreatePostDto } from '@kursor/nestjs-libraries/dtos/posts/create.post.dto';
+import { BullMqClient } from '@kursor/nestjs-libraries/bull-mq-transport/client/bull-mq.client';
 import dayjs from 'dayjs';
-import { IntegrationManager } from '@gitroom/nestjs-libraries/integrations/integration.manager';
+import { IntegrationManager } from '@kursor/nestjs-libraries/integrations/integration.manager';
 import { Integration, Post, Media, From } from '@prisma/client';
-import { GetPostsDto } from '@gitroom/nestjs-libraries/dtos/posts/get.posts.dto';
-import { NotificationService } from '@gitroom/nestjs-libraries/database/prisma/notifications/notification.service';
+import { GetPostsDto } from '@kursor/nestjs-libraries/dtos/posts/get.posts.dto';
+import { NotificationService } from '@kursor/nestjs-libraries/database/prisma/notifications/notification.service';
 import { capitalize, chunk, shuffle } from 'lodash';
-import { MessagesService } from '@gitroom/nestjs-libraries/database/prisma/marketplace/messages.service';
-import { StripeService } from '@gitroom/nestjs-libraries/services/stripe.service';
-import { GeneratorDto } from '@gitroom/nestjs-libraries/dtos/generator/generator.dto';
-import { ExtractContentService } from '@gitroom/nestjs-libraries/openai/extract.content.service';
-import { OpenaiService } from '@gitroom/nestjs-libraries/openai/openai.service';
-import { CreateGeneratedPostsDto } from '@gitroom/nestjs-libraries/dtos/generator/create.generated.posts.dto';
-import { IntegrationService } from '@gitroom/nestjs-libraries/database/prisma/integrations/integration.service';
-import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
-import { RefreshToken } from '@gitroom/nestjs-libraries/integrations/social.abstract';
+import { MessagesService } from '@kursor/nestjs-libraries/database/prisma/marketplace/messages.service';
+import { StripeService } from '@kursor/nestjs-libraries/services/stripe.service';
+import { GeneratorDto } from '@kursor/nestjs-libraries/dtos/generator/generator.dto';
+import { ExtractContentService } from '@kursor/nestjs-libraries/openai/extract.content.service';
+import { OpenaiService } from '@kursor/nestjs-libraries/openai/openai.service';
+import { CreateGeneratedPostsDto } from '@kursor/nestjs-libraries/dtos/generator/create.generated.posts.dto';
+import { IntegrationService } from '@kursor/nestjs-libraries/database/prisma/integrations/integration.service';
+import { makeId } from '@kursor/nestjs-libraries/services/make.is';
+import { RefreshToken } from '@kursor/nestjs-libraries/integrations/social.abstract';
 
 type PostWithConditionals = Post & {
   integration?: Integration;

@@ -3,8 +3,8 @@ import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { mkdirSync } from 'fs';
 import { extname } from 'path';
-import CloudflareStorage from '@gitroom/nestjs-libraries/upload/cloudflare.storage';
-import { CustomFileValidationPipe } from '@gitroom/nestjs-libraries/upload/custom.upload.validation';
+import CloudflareStorage from '@kursor/nestjs-libraries/upload/cloudflare.storage';
+import { CustomFileValidationPipe } from '@kursor/nestjs-libraries/upload/custom.upload.validation';
 
 const storage =
   process.env.CLOUDFLARE_ACCOUNT_ID &&

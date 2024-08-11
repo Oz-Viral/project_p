@@ -1,20 +1,20 @@
 import { FC, useCallback } from 'react';
-import { withProvider } from '@gitroom/frontend/components/launches/providers/high.order.provider';
-import { useIntegration } from '@gitroom/frontend/components/launches/helpers/use.integration';
-import { useFormatting } from '@gitroom/frontend/components/launches/helpers/use.formatting';
-import { Subreddit } from '@gitroom/frontend/components/launches/providers/reddit/subreddit';
-import { useSettings } from '@gitroom/frontend/components/launches/helpers/use.values';
+import { withProvider } from '@kursor/frontend/components/launches/providers/high.order.provider';
+import { useIntegration } from '@kursor/frontend/components/launches/helpers/use.integration';
+import { useFormatting } from '@kursor/frontend/components/launches/helpers/use.formatting';
+import { Subreddit } from '@kursor/frontend/components/launches/providers/reddit/subreddit';
+import { useSettings } from '@kursor/frontend/components/launches/helpers/use.values';
 import { useFieldArray, useWatch } from 'react-hook-form';
-import { Button } from '@gitroom/react/form/button';
+import { Button } from '@kursor/react/form/button';
 import {
   RedditSettingsDto,
   RedditSettingsValueDto,
-} from '@gitroom/nestjs-libraries/dtos/posts/providers-settings/reddit.dto';
+} from '@kursor/nestjs-libraries/dtos/posts/providers-settings/reddit.dto';
 import clsx from 'clsx';
-import { useMediaDirectory } from '@gitroom/react/helpers/use.media.directory';
-import { deleteDialog } from '@gitroom/react/helpers/delete.dialog';
+import { useMediaDirectory } from '@kursor/react/helpers/use.media.directory';
+import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 import MDEditor from '@uiw/react-md-editor';
-import interClass from '@gitroom/react/helpers/inter.font';
+import interClass from '@kursor/react/helpers/inter.font';
 import Image from 'next/image';
 
 const RenderRedditComponent: FC<{

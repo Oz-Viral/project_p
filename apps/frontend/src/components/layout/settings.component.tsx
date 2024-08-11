@@ -1,20 +1,20 @@
 import { useModals } from '@mantine/modals';
 import React, { FC, Ref, useCallback, useEffect, useMemo } from 'react';
-import { Input } from '@gitroom/react/form/input';
-import { Button } from '@gitroom/react/form/button';
-import { Textarea } from '@gitroom/react/form/textarea';
+import { Input } from '@kursor/react/form/input';
+import { Button } from '@kursor/react/form/button';
+import { Textarea } from '@kursor/react/form/textarea';
 import { FormProvider, useForm } from 'react-hook-form';
-import { showMediaBox } from '@gitroom/frontend/components/media/media.component';
-import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
+import { showMediaBox } from '@kursor/frontend/components/media/media.component';
+import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
-import { UserDetailDto } from '@gitroom/nestjs-libraries/dtos/users/user.details.dto';
-import { useToaster } from '@gitroom/react/toaster/toaster';
+import { UserDetailDto } from '@kursor/nestjs-libraries/dtos/users/user.details.dto';
+import { useToaster } from '@kursor/react/toaster/toaster';
 import { useSWRConfig } from 'swr';
 import clsx from 'clsx';
-import { TeamsComponent } from '@gitroom/frontend/components/settings/teams.component';
-import { isGeneral } from '@gitroom/react/helpers/is.general';
-import { useUser } from '@gitroom/frontend/components/layout/user.context';
-import { LogoutComponent } from '@gitroom/frontend/components/layout/logout.component';
+import { TeamsComponent } from '@kursor/frontend/components/settings/teams.component';
+import { isGeneral } from '@kursor/react/helpers/is.general';
+import { useUser } from '@kursor/frontend/components/layout/user.context';
+import { LogoutComponent } from '@kursor/frontend/components/layout/logout.component';
 import { useSearchParams } from 'next/navigation';
 
 export const SettingsPopup: FC<{ getRef?: Ref<any> }> = (props) => {

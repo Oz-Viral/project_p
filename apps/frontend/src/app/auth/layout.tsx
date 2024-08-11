@@ -1,4 +1,4 @@
-import { isGeneral } from '@gitroom/react/helpers/is.general';
+import { isGeneral } from '@kursor/react/helpers/is.general';
 
 export const dynamic = 'force-dynamic';
 
@@ -30,7 +30,7 @@ export default async function AuthLayout({
                 {isGeneral() ? (
                   <img src="/postiz-text.svg" className="w-[80px]" />
                 ) : (
-                  <div className="text-[40px]">Gitroom</div>
+                  <div className="text-[40px]">Kursor</div>
                 )}
               </div>
             </div>
