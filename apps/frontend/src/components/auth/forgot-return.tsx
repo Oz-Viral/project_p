@@ -35,10 +35,12 @@ export function ForgotReturn({ token }: { token: string }) {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
-    const {reset} = await (await fetchData('/auth/forgot-return', {
-      method: 'POST',
-      body: JSON.stringify({ ...data }),
-    })).json();
+    const { reset } = await (
+      await fetchData('/auth/forgot-return', {
+        method: 'POST',
+        body: JSON.stringify({ ...data }),
+      })
+    ).json();
 
     setState(true);
 
@@ -57,13 +59,13 @@ export function ForgotReturn({ token }: { token: string }) {
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div>
-          <h1 className="text-3xl font-bold text-left mb-4 cursor-pointer">
+          <h1 className="mb-4 cursor-pointer text-left text-3xl font-bold">
             Forgot Password
           </h1>
         </div>
         {!state ? (
           <>
-            <div className="space-y-4 text-white">
+            <div className="space-y-4">
               <Input
                 label="New Password"
                 {...form.register('password')}
@@ -77,14 +79,14 @@ export function ForgotReturn({ token }: { token: string }) {
                 placeholder="Repeat Password"
               />
             </div>
-            <div className="text-center mt-6">
-              <div className="w-full flex">
+            <div className="mt-6 text-center">
+              <div className="flex w-full">
                 <Button type="submit" className="flex-1" loading={loading}>
                   Change Password
                 </Button>
               </div>
               <p className="mt-4 text-sm">
-                <Link href="/auth/login" className="underline cursor-pointer">
+                <Link href="/auth/login" className="cursor-pointer underline">
                   {' '}
                   Go back to login
                 </Link>
@@ -93,11 +95,11 @@ export function ForgotReturn({ token }: { token: string }) {
           </>
         ) : (
           <>
-            <div className="text-left mt-6">
+            <div className="mt-6 text-left">
               We successfully reset your password. You can now login with your
             </div>
             <p className="mt-4 text-sm">
-              <Link href="/auth/login" className="underline cursor-pointer">
+              <Link href="/auth/login" className="cursor-pointer underline">
                 {' '}
                 Go back to login
               </Link>

@@ -56,22 +56,22 @@ export function Login() {
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div>
-          <h1 className="text-3xl font-bold text-left mb-4 cursor-pointer">
+          <h1 className="mb-4 cursor-pointer text-left text-3xl font-bold">
             Sign In
           </h1>
         </div>
 
         {!isGeneral() ? <GithubProvider /> : <GoogleProvider />}
-        <div className="h-[20px] mb-[24px] mt-[24px] relative">
-          <div className="absolute w-full h-[1px] bg-[#28344F] top-[50%] -translate-y-[50%]" />
+        <div className="relative mb-[24px] mt-[24px] h-[20px]">
+          <div className="absolute top-[50%] h-[1px] w-full -translate-y-[50%] bg-[#28344F]" />
           <div
-            className={`absolute z-[1] ${interClass} justify-center items-center w-full left-0 top-0 flex`}
+            className={`absolute z-[1] ${interClass} left-0 top-0 flex w-full items-center justify-center`}
           >
             <div className="bg-[#0a0a0a] px-[16px]">OR</div>
           </div>
         </div>
 
-        <div className="text-white">
+        <div>
           <Input
             label="Email"
             {...form.register('email')}
@@ -86,21 +86,21 @@ export function Login() {
             placeholder="Password"
           />
         </div>
-        <div className="text-center mt-6">
-          <div className="w-full flex">
+        <div className="mt-6 text-center">
+          <div className="flex w-full">
             <Button type="submit" className="flex-1" loading={loading}>
               Sign in
             </Button>
           </div>
           <p className="mt-4 text-sm">
             Don{"'"}t Have An Account?{' '}
-            <Link href="/auth" className="underline cursor-pointer">
+            <Link href="/auth" className="cursor-pointer underline">
               {' '}
               Sign Up
             </Link>
           </p>
           <p className="mt-4 text-sm text-red-600">
-            <Link href="/auth/forgot" className="underline cursor-pointer">
+            <Link href="/auth/forgot" className="cursor-pointer underline">
               Forgot password
             </Link>
           </p>

@@ -70,10 +70,10 @@ export const Calendar = () => {
   return (
     <DNDProvider>
       <div className="select-none">
-        <div className="grid grid-cols-8 text-center border-tableBorder border-r">
+        <div className="border-tableBorder grid grid-cols-8 border-r text-center">
           {days.map((day, index) => (
             <div
-              className="border-tableBorder gap-[4px] border-l border-b h-[36px] border-t flex items-center justify-center bg-input text-[14px] sticky top-0 z-[100]"
+              className="border-tableBorder bg-input sticky top-0 z-[100] flex h-[36px] items-center justify-center gap-[4px] border-b border-l border-t text-[14px]"
               key={day}
             >
               <div>{day} </div>
@@ -87,13 +87,13 @@ export const Calendar = () => {
               <>
                 {index === 0 ? (
                   <div
-                    className="border-tableBorder border-l border-b h-[216px]"
+                    className="border-tableBorder h-[216px] border-b border-l"
                     key={day + hour}
                   >
                     {['00', '10', '20', '30', '40', '50'].map((num) => (
                       <div
                         key={day + hour + num}
-                        className="h-[calc(216px/6)] text-[12px] flex justify-center items-center"
+                        className="flex h-[calc(216px/6)] items-center justify-center text-[12px]"
                       >
                         {hour.split(':')[0] + ':' + num}
                       </div>
@@ -101,7 +101,7 @@ export const Calendar = () => {
                   </div>
                 ) : (
                   <div
-                    className="group relative border-tableBorder border-l border-b h-[216px] flex flex-col overflow-hidden"
+                    className="border-tableBorder group relative flex h-[216px] flex-col overflow-hidden border-b border-l"
                     key={day + hour}
                   >
                     <CommentBox
@@ -117,7 +117,7 @@ export const Calendar = () => {
                               .isoWeekday(index + 1)
                               .hour(+hour.split(':')[0] - 1)
                               .minute(0)
-                              .format('YYYY-MM-DD HH:mm')
+                              .format('YYYY-MM-DD HH:mm'),
                         )?.total || 0
                       }
                       date={dayjs()
@@ -136,7 +136,7 @@ export const Calendar = () => {
                   </div>
                 )}
               </>
-            ))
+            )),
           )}
         </div>
       </div>
@@ -172,18 +172,18 @@ const CalendarColumn: FC<{ day: number; hour: string }> = (props) => {
   });
 
   return (
-    <div className="w-full h-full" ref={ref}>
+    <div className="h-full w-full" ref={ref}>
       {!entry?.isIntersecting ? (
         <div
           className={clsx(
-            'h-full flex justify-center items-center text-[12px]',
-            isBeforeNow && 'bg-secondary'
+            'flex h-full items-center justify-center text-[12px]',
+            isBeforeNow && 'bg-secondary',
           )}
         >
           {!isBeforeNow && (
             <div
               className={clsx(
-                'w-[20px] h-[20px] bg-forth rounded-full flex justify-center items-center hover:bg-seventh'
+                'bg-forth hover:bg-seventh flex h-[20px] w-[20px] items-center justify-center rounded-full',
               )}
             >
               +
@@ -265,7 +265,7 @@ const CalendarColumnRender: FC<{ day: number; hour: string }> = (props) => {
 
       toaster.show(
         "Can't change date, remove post from publication",
-        'warning'
+        'warning',
       );
     },
     collect: (monitor) => ({
@@ -280,11 +280,11 @@ const CalendarColumnRender: FC<{ day: number; hour: string }> = (props) => {
           `/integrations/${post.integration.id}?order=${post.submittedForOrderId}`,
           {
             method: 'GET',
-          }
+          },
         )
       ).json();
     },
-    []
+    [],
   );
 
   const previewPublication = useCallback(
@@ -317,7 +317,7 @@ const CalendarColumnRender: FC<{ day: number; hour: string }> = (props) => {
         ),
       });
     },
-    []
+    [],
   );
 
   const editPost = useCallback(
@@ -350,7 +350,7 @@ const CalendarColumnRender: FC<{ day: number; hour: string }> = (props) => {
         title: ``,
       });
     },
-    [integrations]
+    [integrations],
   );
 
   const addModal = useCallback(() => {
@@ -376,8 +376,8 @@ const CalendarColumnRender: FC<{ day: number; hour: string }> = (props) => {
   const addProvider = useAddProvider();
 
   return (
-    <div className="relative w-full h-full">
-      <div className="absolute left-0 top-0 w-full h-full">
+    <div className="relative h-full w-full">
+      <div className="absolute left-0 top-0 h-full w-full">
         <div
           {...(canBeTrending
             ? {
@@ -387,10 +387,10 @@ const CalendarColumnRender: FC<{ day: number; hour: string }> = (props) => {
             : {})}
           ref={drop}
           className={clsx(
-            'h-[calc(216px/6)] gap-[2.5px] text-[12px] pointer w-full overflow-hidden justify-center overflow-x-auto flex scrollbar scrollbar-thumb-tableBorder scrollbar-track-secondary',
+            'pointer scrollbar scrollbar-thumb-tableBorder scrollbar-track-secondary flex h-[calc(216px/6)] w-full justify-center gap-[2.5px] overflow-hidden overflow-x-auto text-[12px]',
             isBeforeNow && 'bg-secondary',
             canDrop && 'bg-white/80',
-            canBeTrending && 'bg-[#eaff00]'
+            canBeTrending && 'bg-[#eaff00]',
           )}
         >
           {postList.map((post) => (
@@ -398,10 +398,10 @@ const CalendarColumnRender: FC<{ day: number; hour: string }> = (props) => {
               key={post.id}
               className={clsx(
                 postList.length > 1 && 'w-[33px] basis-[28px]',
-                'h-full text-white relative  flex justify-center items-center flex-grow-0 flex-shrink-0'
+                'relative flex h-full flex-shrink-0 flex-grow-0 items-center justify-center text-white',
               )}
             >
-              <div className="relative flex gap-[5px] items-center">
+              <div className="relative flex items-center gap-[5px]">
                 <CalendarItem
                   date={getDate}
                   state={post.state}
@@ -415,8 +415,8 @@ const CalendarColumnRender: FC<{ day: number; hour: string }> = (props) => {
           {!isBeforeNow && (
             <div
               className={clsx(
-                !postList.length ? 'justify-center flex-1' : 'ml-[2px]',
-                'flex items-center cursor-pointer gap-[2.5px]'
+                !postList.length ? 'flex-1 justify-center' : 'ml-[2px]',
+                'flex cursor-pointer items-center gap-[2.5px]',
               )}
             >
               <div
@@ -426,7 +426,7 @@ const CalendarColumnRender: FC<{ day: number; hour: string }> = (props) => {
                 }
                 onClick={integrations.length ? addModal : addProvider}
                 className={clsx(
-                  'w-[20px] h-[20px] bg-forth rounded-full flex justify-center items-center hover:bg-seventh'
+                  'bg-forth hover:bg-seventh flex h-[20px] w-[20px] items-center justify-center rounded-full text-white',
                 )}
               >
                 +
@@ -455,7 +455,7 @@ const CalendarItem: FC<{
         opacity: monitor.isDragging() ? 0 : 1,
       }),
     }),
-    []
+    [],
   );
   return (
     <div
@@ -466,16 +466,16 @@ const CalendarItem: FC<{
       style={{ opacity }}
       data-tooltip-content={`${state === 'DRAFT' ? 'Draft: ' : ''}${
         integrations.find(
-          (p) => p.identifier === post.integration?.providerIdentifier
+          (p) => p.identifier === post.integration?.providerIdentifier,
         )?.name
       }: ${post.content.slice(0, 100)}`}
     >
       <img
-        className="w-[20px] h-[20px] rounded-full"
+        className="h-[20px] w-[20px] rounded-full"
         src={post.integration.picture!}
       />
       <img
-        className="w-[12px] h-[12px] rounded-full absolute z-10 bottom-[0] right-0 border border-fifth"
+        className="border-fifth absolute bottom-[0] right-0 z-10 h-[12px] w-[12px] rounded-full border"
         src={`/icons/platforms/${post.integration?.providerIdentifier}.png`}
       />
     </div>
@@ -483,7 +483,7 @@ const CalendarItem: FC<{
 };
 
 export const CommentBox: FC<{ totalComments: number; date: dayjs.Dayjs }> = (
-  props
+  props,
 ) => {
   const { totalComments, date } = props;
   const { mutate } = useSWRConfig();
@@ -506,7 +506,7 @@ export const CommentBox: FC<{ totalComments: number; date: dayjs.Dayjs }> = (
     <div
       className={
         totalComments === 0
-          ? 'transition-opacity opacity-0 group-hover:opacity-100'
+          ? 'opacity-0 transition-opacity group-hover:opacity-100'
           : ''
       }
     >
@@ -515,18 +515,18 @@ export const CommentBox: FC<{ totalComments: number; date: dayjs.Dayjs }> = (
         data-tooltip-id="tooltip"
         data-tooltip-content="Add / View comments"
         className={clsx(
-          'group absolute right-0 bottom-0 w-[20px] h-[20px] z-[10] hover:opacity-95 cursor-pointer hover:right-[3px] hover:bottom-[3px] transition-all duration-300 ease-in-out',
-          totalComments === 0 ? 'opacity-50' : 'opacity-95'
+          'group absolute bottom-0 right-0 z-[10] h-[20px] w-[20px] cursor-pointer transition-all duration-300 ease-in-out hover:bottom-[3px] hover:right-[3px] hover:opacity-95',
+          totalComments === 0 ? 'opacity-50' : 'opacity-95',
         )}
       >
         <div
           className={clsx(
-            'relative w-full h-full group-hover:opacity-100',
-            totalComments === 0 && 'opacity-0'
+            'relative h-full w-full group-hover:opacity-100',
+            totalComments === 0 && 'opacity-0',
           )}
         >
           {totalComments > 0 && (
-            <div className="absolute right-0 bottom-[10px] w-[10px] h-[10px] text-[8px] bg-red-500 z-[20] rounded-full flex justify-center items-center text-white">
+            <div className="absolute bottom-[10px] right-0 z-[20] flex h-[10px] w-[10px] items-center justify-center rounded-full bg-red-500 text-[8px] text-white">
               {totalComments}
             </div>
           )}
@@ -541,7 +541,7 @@ export const CommentBox: FC<{ totalComments: number; date: dayjs.Dayjs }> = (
             ></path>
           </svg>
         </div>
-        <div className="absolute right-0 bottom-0 w-[0] h-[0] shadow-yellow bg-[rgba(0,0,0,0)]"></div>
+        <div className="shadow-yellow absolute bottom-0 right-0 h-[0] w-[0] bg-[rgba(0,0,0,0)]"></div>
       </div>
     </div>
   );

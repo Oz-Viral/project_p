@@ -25,11 +25,16 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body className={chakra.className}>
-        {/* <ThemeProvider> */}
-        <PlausibleProvider domain="kursor.com">
-          <LayoutContext>{children}</LayoutContext>
-        </PlausibleProvider>
-        {/* </ThemeProvider> */}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <PlausibleProvider domain="kursor.com">
+            <LayoutContext>{children}</LayoutContext>
+          </PlausibleProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

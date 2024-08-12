@@ -31,6 +31,7 @@ import { Impersonate } from '@kursor/frontend/components/layout/impersonate';
 import clsx from 'clsx';
 import { BillingComponent } from '@kursor/frontend/components/billing/billing.component';
 import LOGOComponent from './logo';
+import { ThemeSelector } from './theme.selector';
 
 dayjs.extend(utc);
 dayjs.extend(weekOfYear);
@@ -69,10 +70,10 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
             {(user.tier !== 'FREE' || !isGeneral()) && <Onboarding />}
             <Support />
             <ContinueProvider />
-            <div className="min-h-[100vh] w-full max-w-[1440px] mx-auto bg-primary px-[12px] text-white flex flex-col">
+            <div className="dark:bg-background mx-auto flex min-h-[100vh] w-full max-w-[1440px] flex-col px-[12px]">
               {user?.admin && <Impersonate />}
-              <div className="px-[23px] flex h-[80px] items-center justify-between z-[200] sticky top-0 bg-primary">
-                <Link href="/" className="text-2xl flex items-center gap-[4px]">
+              <div className="dark:bg-background sticky top-0 z-[200] flex h-[80px] items-center justify-between px-[23px]">
+                <Link href="/" className="flex items-center gap-[4px] text-2xl">
                   <div className="min-w-[32px]">
                     {/* <Image
                       src={isGeneral() ? '/postiz.svg' : '/logo.svg'}
@@ -80,11 +81,11 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
                       height={53}
                       alt="Logo"
                     /> */}
-                    <LOGOComponent className="fill-seventh transform -rotate-45" />
+                    <LOGOComponent className="fill-seventh -rotate-45 transform" />
                   </div>
                   <div
                     className={clsx(
-                      !isGeneral() ? 'mt-[12px]' : 'min-w-[80px]'
+                      !isGeneral() ? 'mt-[12px]' : 'min-w-[80px]',
                     )}
                   >
                     Kursor
@@ -95,25 +96,26 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
                 ) : (
                   <div />
                 )}
-                <div className="flex items-center gap-[8px]">
+                <div className="flex items-center gap-2">
+                  <ThemeSelector />
                   <SettingsComponent />
                   <NotificationComponent />
                   <OrganizationSelector />
                 </div>
               </div>
-              <div className="flex-1 flex">
-                <div className="flex-1 rounded-3xl px-[23px] py-[17px] flex flex-col">
+              <div className="flex flex-1">
+                <div className="flex flex-1 flex-col rounded-3xl px-[23px] py-[17px]">
                   {user.tier === 'FREE' && isGeneral() ? (
                     <>
-                      <div className="text-center mb-[20px] text-xl">
+                      <div className="mb-[20px] text-center text-xl">
                         <h1 className="text-3xl">
                           Join 1000+ Entrepreneurs Who Use Postiz
                           <br />
                           To Manage All Your Social Media Channels
                         </h1>
                         <br />
-                        <div className="table mx-auto">
-                          <div className="flex gap-[5px] items-center">
+                        <div className="mx-auto table">
+                          <div className="flex items-center gap-[5px]">
                             <div>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +132,7 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
                             </div>
                             <div>100% no-risk trial</div>
                           </div>
-                          <div className="flex gap-[5px] items-center">
+                          <div className="flex items-center gap-[5px]">
                             <div>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +149,7 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
                             </div>
                             <div>Pay nothing for the first 7 days</div>
                           </div>
-                          <div className="flex gap-[5px] items-center">
+                          <div className="flex items-center gap-[5px]">
                             <div>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

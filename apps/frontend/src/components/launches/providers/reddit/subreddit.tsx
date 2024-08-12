@@ -24,10 +24,10 @@ export const RenderOptions: FC<{
           {p === 'self'
             ? 'Post'
             : p === 'link'
-            ? 'Link'
-            : p === 'media'
-            ? 'Media'
-            : ''}
+              ? 'Link'
+              : p === 'media'
+                ? 'Media'
+                : ''}
         </>
       ),
       id: p,
@@ -100,7 +100,7 @@ export const Subreddit: FC<{
         },
       });
     },
-    [value]
+    [value],
   );
 
   const setType = useCallback(
@@ -115,7 +115,7 @@ export const Subreddit: FC<{
         },
       });
     },
-    [value]
+    [value],
   );
 
   const setMedia = useCallback(
@@ -130,7 +130,7 @@ export const Subreddit: FC<{
         },
       });
     },
-    [value]
+    [value],
   );
 
   const setURL = useCallback(
@@ -145,7 +145,7 @@ export const Subreddit: FC<{
         },
       });
     },
-    [value]
+    [value],
   );
 
   const setFlair = useCallback(
@@ -160,7 +160,7 @@ export const Subreddit: FC<{
         },
       });
     },
-    [value]
+    [value],
   );
 
   const search = useDebouncedCallback(
@@ -176,11 +176,11 @@ export const Subreddit: FC<{
       // @ts-ignore
       setResults(results);
     }, []),
-    500
+    500,
   );
 
   return (
-    <div className="bg-primary p-[20px]">
+    <div className="dark:bg-background p-[20px]">
       {value?.subreddit ? (
         <>
           <Input
@@ -234,7 +234,7 @@ export const Subreddit: FC<{
           )}
           {value.type === 'media' && (
             <div className="flex flex-col">
-              <div className="w-full h-[10px] bg-[#131B2C] rounded-tr-[8px] rounded-tl-[8px]" />
+              <div className="h-[10px] w-full rounded-tl-[8px] rounded-tr-[8px] bg-[#131B2C]" />
               <div className="flex flex-col text-nowrap">
                 <MultiMediaComponent
                   description=""
@@ -265,12 +265,12 @@ export const Subreddit: FC<{
             }}
           />
           {!!results.length && !loading && (
-            <div className="z-[400] w-full absolute bg-input -mt-[20px] outline-none border-fifth border cursor-pointer">
+            <div className="bg-input border-fifth absolute z-[400] -mt-[20px] w-full cursor-pointer border outline-none">
               {results.map((r: { id: string; name: string }) => (
                 <div
                   onClick={setResult(r)}
                   key={r.id}
-                  className="px-[16px] py-[5px] hover:bg-secondary"
+                  className="hover:bg-secondary px-[16px] py-[5px]"
                 >
                   {r.name}
                 </div>

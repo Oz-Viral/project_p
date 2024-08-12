@@ -1,31 +1,41 @@
 'use client';
 import { useCalendar } from '@kursor/frontend/components/launches/calendar.context';
 import dayjs from 'dayjs';
-import {useCallback} from "react";
+import { useCallback } from 'react';
 
 export const Filters = () => {
   const week = useCalendar();
   const betweenDates =
-    dayjs().year(week.currentYear).isoWeek(week.currentWeek).startOf('isoWeek').format('DD/MM/YYYY') +
+    dayjs()
+      .year(week.currentYear)
+      .isoWeek(week.currentWeek)
+      .startOf('isoWeek')
+      .format('DD/MM/YYYY') +
     ' - ' +
-    dayjs().year(week.currentYear).isoWeek(week.currentWeek).endOf('isoWeek').format('DD/MM/YYYY');
+    dayjs()
+      .year(week.currentYear)
+      .isoWeek(week.currentWeek)
+      .endOf('isoWeek')
+      .format('DD/MM/YYYY');
 
   const nextWeek = useCallback(() => {
-      week.setFilters({
-          currentWeek: week.currentWeek === 52 ? 1 : week.currentWeek + 1,
-          currentYear: week.currentWeek === 52 ? week.currentYear + 1 : week.currentYear,
-      });
+    week.setFilters({
+      currentWeek: week.currentWeek === 52 ? 1 : week.currentWeek + 1,
+      currentYear:
+        week.currentWeek === 52 ? week.currentYear + 1 : week.currentYear,
+    });
   }, [week.currentWeek, week.currentYear]);
 
   const previousWeek = useCallback(() => {
-        week.setFilters({
-            currentWeek: week.currentWeek === 1 ? 52 : week.currentWeek - 1,
-            currentYear: week.currentWeek === 1 ? week.currentYear - 1 : week.currentYear,
-        });
+    week.setFilters({
+      currentWeek: week.currentWeek === 1 ? 52 : week.currentWeek - 1,
+      currentYear:
+        week.currentWeek === 1 ? week.currentYear - 1 : week.currentYear,
+    });
   }, [week.currentWeek, week.currentYear]);
 
   return (
-    <div className="h-[20px] text-white flex gap-[8px] items-center select-none">
+    <div className="flex h-[20px] select-none items-center gap-[8px]">
       <div onClick={previousWeek}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

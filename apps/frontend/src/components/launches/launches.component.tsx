@@ -52,7 +52,7 @@ export const LaunchesComponent = () => {
     return orderBy(
       integrations,
       ['type', 'disabled', 'identifier'],
-      ['desc', 'asc', 'asc']
+      ['desc', 'asc', 'asc'],
     );
   }, [integrations]);
 
@@ -70,10 +70,10 @@ export const LaunchesComponent = () => {
   const continueIntegration = useCallback(
     (integration: any) => async () => {
       router.push(
-        `/launches?added=${integration.identifier}&continue=${integration.id}`
+        `/launches?added=${integration.identifier}&continue=${integration.id}`,
       );
     },
-    []
+    [],
   );
 
   const refreshChannel = useCallback(
@@ -83,18 +83,18 @@ export const LaunchesComponent = () => {
           `/integrations/social/${integration.identifier}?refresh=${integration.internalId}`,
           {
             method: 'GET',
-          }
+          },
         )
       ).json();
 
       window.location.href = url;
     },
-    []
+    [],
   );
 
   useEffect(() => {
     if (typeof window === 'undefined') {
-      return ;
+      return;
     }
     if (search.get('scope') === 'missing') {
       toast.show('You have to approve all the channel permissions', 'warning');
@@ -115,11 +115,11 @@ export const LaunchesComponent = () => {
   return (
     <CalendarWeekProvider integrations={sortedIntegrations}>
       <div className="flex flex-1 flex-col">
-        <div className="flex flex-1 relative">
-          <div className="absolute w-full h-full grid grid-cols-[220px_minmax(0,1fr)] gap-[30px] overflow-hidden overflow-y-scroll scrollbar scrollbar-thumb-tableBorder scrollbar-track-secondary">
-              <div className="w-[220px] bg-third p-[16px] flex flex-col gap-[24px] min-h-[100%]">
+        <div className="relative flex flex-1">
+          <div className="scrollbar scrollbar-thumb-tableBorder scrollbar-track-secondary absolute grid h-full w-full grid-cols-[220px_minmax(0,1fr)] gap-[30px] overflow-hidden overflow-y-scroll">
+            <div className="flex min-h-[100%] w-[220px] flex-col gap-[24px] p-[16px]">
               <h2 className="text-[20px]">Channels</h2>
-              <div className="gap-[16px] flex flex-col">
+              <div className="flex flex-col gap-[16px]">
                 {sortedIntegrations.length === 0 && (
                   <div className="text-[12px]">No channels</div>
                 )}
@@ -131,28 +131,28 @@ export const LaunchesComponent = () => {
                         'Channel disconnected, click to reconnect.',
                     })}
                     key={integration.id}
-                    className="flex gap-[8px] items-center"
+                    className="flex items-center gap-[8px]"
                   >
                     <div
                       className={clsx(
-                        'relative w-[34px] h-[34px] rounded-full flex justify-center items-center bg-fifth',
-                        integration.disabled && 'opacity-50'
+                        'bg-fifth relative flex h-[34px] w-[34px] items-center justify-center rounded-full',
+                        integration.disabled && 'opacity-50',
                       )}
                     >
                       {(integration.inBetweenSteps ||
                         integration.refreshNeeded) && (
                         <div
-                          className="absolute left-0 top-0 w-[39px] h-[46px] cursor-pointer"
+                          className="absolute left-0 top-0 h-[46px] w-[39px] cursor-pointer"
                           onClick={
                             integration.refreshNeeded
                               ? refreshChannel(integration)
                               : continueIntegration(integration)
                           }
                         >
-                          <div className="bg-red-500 w-[15px] h-[15px] rounded-full -left-[5px] -top-[5px] absolute z-[200] text-[10px] flex justify-center items-center">
+                          <div className="absolute -left-[5px] -top-[5px] z-[200] flex h-[15px] w-[15px] items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
                             !
                           </div>
-                          <div className="bg-black/60 w-[39px] h-[46px] left-0 top-0 absolute rounded-full z-[199]" />
+                          <div className="absolute left-0 top-0 z-[199] h-[46px] w-[39px] rounded-full bg-transparent dark:bg-black/60" />
                         </div>
                       )}
                       <ImageWithFallback
@@ -166,13 +166,13 @@ export const LaunchesComponent = () => {
                       {integration.identifier === 'youtube' ? (
                         <img
                           src="/icons/platforms/youtube.svg"
-                          className="absolute z-10 -bottom-[5px] -right-[5px]"
+                          className="absolute -bottom-[5px] -right-[5px] z-10"
                           width={20}
                         />
                       ) : (
                         <Image
                           src={`/icons/platforms/${integration.identifier}.png`}
-                          className="rounded-full absolute z-10 -bottom-[5px] -right-[5px] border border-fifth"
+                          className="border-fifth absolute -bottom-[5px] -right-[5px] z-10 rounded-full border"
                           alt={integration.identifier}
                           width={20}
                           height={20}
@@ -189,8 +189,8 @@ export const LaunchesComponent = () => {
                           }
                         : {})}
                       className={clsx(
-                        'flex-1 whitespace-nowrap text-ellipsis overflow-hidden',
-                        integration.disabled && 'opacity-50'
+                        'flex-1 overflow-hidden text-ellipsis whitespace-nowrap',
+                        integration.disabled && 'opacity-50',
                       )}
                     >
                       {integration.name}
@@ -210,7 +210,7 @@ export const LaunchesComponent = () => {
               <AddProviderButton update={() => update(true)} />
               {/*{sortedIntegrations?.length > 0 && user?.tier?.ai && <GeneratorComponent />}*/}
             </div>
-            <div className="flex-1 flex flex-col gap-[14px]">
+            <div className="flex flex-1 flex-col gap-[14px]">
               <Filters />
               <Calendar />
             </div>

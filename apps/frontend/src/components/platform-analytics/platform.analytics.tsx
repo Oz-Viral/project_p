@@ -43,7 +43,7 @@ export const PlatformAnalytics = () => {
     return orderBy(
       data,
       ['type', 'disabled', 'identifier'],
-      ['desc', 'asc', 'asc']
+      ['desc', 'asc', 'asc'],
     );
   }, [data]);
 
@@ -90,7 +90,7 @@ export const PlatformAnalytics = () => {
 
     if (
       ['facebook', 'linkedin-page', 'pinterest', 'youtube'].indexOf(
-        currentIntegration.identifier
+        currentIntegration.identifier,
       ) !== -1
     ) {
       arr.push({
@@ -119,7 +119,7 @@ export const PlatformAnalytics = () => {
 
   if (!sortedIntegrations.length && !isLoading) {
     return (
-      <div className="flex flex-col items-center mt-[100px] gap-[27px] text-center">
+      <div className="mt-[100px] flex flex-col items-center gap-[27px] text-center">
         <div>
           <img src="/peoplemarketplace.svg" />
         </div>
@@ -139,17 +139,20 @@ export const PlatformAnalytics = () => {
   }
 
   return (
-    <div className="flex gap-[30px] flex-1">
-      <div className="p-[16px] bg-[#080B14] overflow-hidden flex w-[220px]">
-        <div className="flex gap-[16px] flex-col overflow-hidden">
-          <div className="text-[20px] mb-[8px]">Channels</div>
+    <div className="flex flex-1 gap-[30px]">
+      <div className="flex w-[220px] overflow-hidden p-[16px]">
+        <div className="flex flex-col gap-[16px] overflow-hidden">
+          <div className="mb-[8px] text-[20px]">Channels</div>
           {sortedIntegrations.map((integration, index) => (
             <div
               key={integration.id}
               onClick={() => {
                 if (integration.refreshNeeded) {
-                  toaster.show('Please refresh the integration from the calendar', 'warning');
-                  return ;
+                  toaster.show(
+                    'Please refresh the integration from the calendar',
+                    'warning',
+                  );
+                  return;
                 }
                 setRefresh(true);
                 setTimeout(() => {
@@ -158,23 +161,23 @@ export const PlatformAnalytics = () => {
                 setCurrent(index);
               }}
               className={clsx(
-                'flex gap-[8px] items-center',
+                'flex items-center gap-[8px]',
                 currentIntegration.id !== integration.id &&
-                  'opacity-20 hover:opacity-100 cursor-pointer'
+                  'cursor-pointer opacity-20 hover:opacity-100',
               )}
             >
               <div
                 className={clsx(
-                  'relative w-[34px] h-[34px] rounded-full flex justify-center items-center bg-fifth',
-                  integration.disabled && 'opacity-50'
+                  'relative flex h-[34px] w-[34px] items-center justify-center rounded-full',
+                  integration.disabled && 'opacity-50',
                 )}
               >
                 {(integration.inBetweenSteps || integration.refreshNeeded) && (
-                  <div className="absolute left-0 top-0 w-[39px] h-[46px] cursor-pointer">
-                    <div className="bg-red-500 w-[15px] h-[15px] rounded-full left-0 -top-[5px] absolute z-[200] text-[10px] flex justify-center items-center">
+                  <div className="absolute left-0 top-0 h-[46px] w-[39px] cursor-pointer">
+                    <div className="absolute -top-[5px] left-0 z-[200] flex h-[15px] w-[15px] items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
                       !
                     </div>
-                    <div className="bg-black/60 w-[39px] h-[46px] left-0 top-0 absolute rounded-full z-[199]" />
+                    <div className="absolute left-0 top-0 z-[199] h-[46px] w-[39px] rounded-full !bg-transparent dark:bg-black/60" />
                   </div>
                 )}
                 <ImageWithFallback
@@ -187,7 +190,7 @@ export const PlatformAnalytics = () => {
                 />
                 <Image
                   src={`/icons/platforms/${integration.identifier}.png`}
-                  className="rounded-full absolute z-10 -bottom-[5px] -right-[5px] border border-fifth"
+                  className="border-fifth absolute -bottom-[5px] -right-[5px] z-10 rounded-full border"
                   alt={integration.identifier}
                   width={20}
                   height={20}
@@ -195,8 +198,8 @@ export const PlatformAnalytics = () => {
               </div>
               <div
                 className={clsx(
-                  'flex-1 whitespace-nowrap text-ellipsis overflow-hidden',
-                  integration.disabled && 'opacity-50'
+                  'flex-1 overflow-hidden text-ellipsis whitespace-nowrap',
+                  integration.disabled && 'opacity-50',
                 )}
               >
                 {integration.name}
@@ -206,10 +209,10 @@ export const PlatformAnalytics = () => {
         </div>
       </div>
       {!!options.length && (
-        <div className="flex-1 flex flex-col gap-[14px]">
+        <div className="flex flex-1 flex-col gap-[14px]">
           <div className="max-w-[200px]">
             <Select
-              className="bg-[#0A0B14] !border-0"
+              className="!border-0 bg-[#0A0B14]"
               label=""
               name="date"
               disableForm={true}

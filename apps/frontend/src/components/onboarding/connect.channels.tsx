@@ -37,7 +37,7 @@ export const ConnectChannels: FC = () => {
 
       window.open(url, 'Social Connect', 'width=700,height=700');
     },
-    []
+    [],
   );
 
   const load = useCallback(async (path: string) => {
@@ -63,7 +63,7 @@ export const ConnectChannels: FC = () => {
     return orderBy(
       integrations,
       ['type', 'disabled', 'identifier'],
-      ['desc', 'asc', 'asc']
+      ['desc', 'asc', 'asc'],
     );
   }, [integrations]);
 
@@ -100,7 +100,7 @@ export const ConnectChannels: FC = () => {
       url.searchParams.append('continue', integration.id);
       router.push(url.toString());
     },
-    []
+    [],
   );
 
   const finishUpdate = useCallback(() => {
@@ -113,7 +113,7 @@ export const ConnectChannels: FC = () => {
   return (
     <>
       {!!identifier && (
-        <div className="absolute w-full h-full bg-black/80 left-0 top-0 z-[200] p-[30px] flex items-center justify-center">
+        <div className="absolute left-0 top-0 z-[200] flex h-full w-full items-center justify-center bg-black/80 p-[30px]">
           <div className="w-[400px]">
             <ApiModal
               close={() => setIdentifier(undefined)}
@@ -125,33 +125,33 @@ export const ConnectChannels: FC = () => {
         </div>
       )}
       <div className="flex flex-col">
-        <div className="flex gap-[4px] flex-col">
+        <div className="flex flex-col gap-[4px]">
           <div className="text-[20px]">Connect Channels</div>
           <div className="text-[14px] text-[#AAA]">
             Connect your social media and publishing websites channels to
             schedule posts later
           </div>
         </div>
-        <div className="flex border border-[#182034] rounded-[4px] mt-[16px]">
-          <div className="flex-1 flex flex-col p-[16px] gap-[10px]">
+        <div className="mt-[16px] flex rounded-[4px] border border-[#182034]">
+          <div className="flex flex-1 flex-col gap-[10px] p-[16px]">
             <div className="text-[18px]">Social</div>
             <div className="grid grid-cols-3 gap-[16px]">
               {data?.social.map((social: any) => (
                 <div
                   key={social.identifier}
                   onClick={getSocialLink(social.identifier)}
-                  className="h-[96px] bg-input flex flex-col justify-center items-center gap-[10px] cursor-pointer"
+                  className="bg-input flex h-[96px] cursor-pointer flex-col items-center justify-center gap-[10px]"
                 >
                   <div>
                     <Image
                       alt={social.identifier}
                       src={`/icons/platforms/${social.identifier}.png`}
-                      className="rounded-full w-[32px] h-[32px]"
+                      className="h-[32px] w-[32px] rounded-full"
                       width={32}
                       height={32}
                     />
                   </div>
-                  <div className="text-[#64748B] text-[10px] tracking-[1.2px] uppercase">
+                  <div className="text-[10px] uppercase tracking-[1.2px] text-[#64748B]">
                     {social.name}
                   </div>
                 </div>
@@ -159,22 +159,22 @@ export const ConnectChannels: FC = () => {
             </div>
           </div>
           {!isGeneral() && (
-            <div className="flex-1 flex flex-col p-[16px] gap-[10px]">
+            <div className="flex flex-1 flex-col gap-[10px] p-[16px]">
               <div className="text-[18px]">Publishing Platforms</div>
               <div className="grid grid-cols-3 gap-[16px]">
                 {data?.article.map((article: any) => (
                   <div
                     onClick={() => setIdentifier(article)}
                     key={article.identifier}
-                    className="h-[96px] bg-input flex flex-col justify-center items-center gap-[10px] cursor-pointer"
+                    className="bg-input flex h-[96px] cursor-pointer flex-col items-center justify-center gap-[10px]"
                   >
                     <div>
                       <img
                         src={`/icons/platforms/${article.identifier}.png`}
-                        className="rounded-full w-[32px] h-[32px]"
+                        className="h-[32px] w-[32px] rounded-full"
                       />
                     </div>
-                    <div className="text-[#64748B] text-[10px] tracking-[1.2px] uppercase">
+                    <div className="text-[10px] uppercase tracking-[1.2px] text-[#64748B]">
                       {article.name}
                     </div>
                   </div>
@@ -183,28 +183,28 @@ export const ConnectChannels: FC = () => {
             </div>
           )}
         </div>
-        <div className="my-[24px] border border-[#182034] rounded-[4px] p-[16px]">
-          <div className="gap-[16px] flex flex-col">
+        <div className="my-[24px] rounded-[4px] border border-[#182034] p-[16px]">
+          <div className="flex flex-col gap-[16px]">
             {sortedIntegrations.length === 0 && (
               <div className="text-[12px]">No channels</div>
             )}
             {sortedIntegrations.map((integration) => (
-              <div key={integration.id} className="flex gap-[8px] items-center">
+              <div key={integration.id} className="flex items-center gap-[8px]">
                 <div
                   className={clsx(
-                    'relative w-[34px] h-[34px] rounded-full flex justify-center items-center bg-fifth',
-                    integration.disabled && 'opacity-50'
+                    'bg-fifth relative flex h-[34px] w-[34px] items-center justify-center rounded-full',
+                    integration.disabled && 'opacity-50',
                   )}
                 >
                   {integration.inBetweenSteps && (
                     <div
-                      className="absolute left-0 top-0 w-[39px] h-[46px] cursor-pointer"
+                      className="absolute left-0 top-0 h-[46px] w-[39px] cursor-pointer"
                       onClick={continueIntegration(integration)}
                     >
-                      <div className="bg-red-500 w-[15px] h-[15px] rounded-full -left-[5px] -top-[5px] absolute z-[200] text-[10px] flex justify-center items-center">
+                      <div className="absolute -left-[5px] -top-[5px] z-[200] flex h-[15px] w-[15px] items-center justify-center rounded-full bg-red-500 text-[10px] text-white">
                         !
                       </div>
-                      <div className="bg-black/60 w-[39px] h-[46px] left-0 top-0 absolute rounded-full z-[199]" />
+                      <div className="absolute left-0 top-0 z-[199] h-[46px] w-[39px] rounded-full !bg-transparent dark:bg-black/60" />
                     </div>
                   )}
                   <Image
@@ -216,7 +216,7 @@ export const ConnectChannels: FC = () => {
                   />
                   <Image
                     src={`/icons/platforms/${integration.identifier}.png`}
-                    className="rounded-full absolute z-10 -bottom-[5px] -right-[5px] border border-fifth"
+                    className="border-fifth absolute -bottom-[5px] -right-[5px] z-10 rounded-full border"
                     alt={integration.identifier}
                     width={20}
                     height={20}
@@ -233,7 +233,7 @@ export const ConnectChannels: FC = () => {
                     : {})}
                   className={clsx(
                     'flex-1',
-                    integration.disabled && 'opacity-50'
+                    integration.disabled && 'opacity-50',
                   )}
                 >
                   {integration.name}

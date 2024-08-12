@@ -27,7 +27,7 @@ export const Menu: FC<{
     if (
       !(await deleteDialog(
         'Are you sure you want to disable this channel?',
-        'Disable Channel'
+        'Disable Channel',
       ))
     ) {
       return;
@@ -46,7 +46,7 @@ export const Menu: FC<{
     if (
       !(await deleteDialog(
         'Are you sure you want to delete this channel?',
-        'Delete Channel'
+        'Delete Channel',
       ))
     ) {
       return;
@@ -59,7 +59,7 @@ export const Menu: FC<{
     if (deleteIntegration.status === 406) {
       toast.show(
         'You have to delete all the posts associated with this channel before deleting it',
-        'warning'
+        'warning',
       );
       return;
     }
@@ -82,7 +82,7 @@ export const Menu: FC<{
 
   return (
     <div
-      className="cursor-pointer relative select-none"
+      className="relative cursor-pointer select-none"
       onClick={changeShow}
       ref={ref}
     >
@@ -101,11 +101,11 @@ export const Menu: FC<{
       {show && (
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`absolute top-[100%] left-0 p-[8px] px-[20px] bg-fifth flex flex-col gap-[16px] z-[100] rounded-[8px] border border-tableBorder ${interClass} text-nowrap`}
+          className={`bg-background border-tableBorder absolute left-0 top-[100%] z-[100] flex flex-col gap-[16px] rounded-[8px] border p-[8px] px-[20px] ${interClass} text-nowrap`}
         >
           {canEnable && (
             <div
-              className="flex gap-[12px] items-center"
+              className="flex items-center gap-[12px]"
               onClick={enableChannel}
             >
               <div>
@@ -128,7 +128,7 @@ export const Menu: FC<{
 
           {canDisable && (
             <div
-              className="flex gap-[12px] items-center"
+              className="flex items-center gap-[12px]"
               onClick={disableChannel}
             >
               <div>
@@ -149,7 +149,7 @@ export const Menu: FC<{
             </div>
           )}
 
-          <div className="flex gap-[12px] items-center" onClick={deleteChannel}>
+          <div className="flex items-center gap-[12px]" onClick={deleteChannel}>
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -39,18 +39,18 @@ export const UpDown: FC<{ name: string; param: string }> = (props) => {
         newState === 'none' ? `` : `?key=${param}&state=${newState}`;
       router.replace(`/analytics${query}`);
     },
-    [state, param]
+    [state, param],
   );
 
   const changeState = useCallback(() => {
     changeStateUrl(
-      state === 'none' ? 'desc' : state === 'desc' ? 'asc' : 'none'
+      state === 'none' ? 'desc' : state === 'desc' ? 'asc' : 'none',
     );
   }, [state, param]);
 
   return (
     <div
-      className="flex gap-[5px] items-center select-none"
+      className="flex select-none items-center gap-[5px]"
       onClick={changeState}
     >
       <div>{name}</div>
@@ -120,7 +120,7 @@ export const StarsTableComponent = () => {
 
       return data;
     },
-    [page, key, state]
+    [page, key, state],
   );
 
   const {
@@ -152,16 +152,16 @@ export const StarsTableComponent = () => {
       const keyAndState = key && state ? `&key=${key}&state=${state}` : '';
       router.replace(`/analytics?page=${newPage}${keyAndState}`);
     },
-    [page, key, state]
+    [page, key, state],
   );
 
   return (
-    <div className="flex flex-1 flex-col gap-[15px] min-h-[426px]">
-      <div className="text-white flex gap-[8px] items-center select-none">
+    <div className="flex min-h-[426px] flex-1 flex-col gap-[15px]">
+      <div className="flex select-none items-center gap-[8px]">
         <div
           onClick={changePage('decrease')}
           className={clsx(
-            (page === 1 || loading) && 'opacity-50 pointer-events-none'
+            (page === 1 || loading) && 'pointer-events-none opacity-50',
           )}
         >
           <svg
@@ -183,7 +183,7 @@ export const StarsTableComponent = () => {
           className={clsx(
             !isLoadingStars &&
               (loading || stars?.stars?.length < 10) &&
-              'opacity-50 pointer-events-none'
+              'pointer-events-none opacity-50',
           )}
         >
           <svg
@@ -205,7 +205,7 @@ export const StarsTableComponent = () => {
           )}
         </div>
       </div>
-      <div className="flex-1 bg-secondary">
+      <div className="bg-secondary flex-1">
         {stars?.stars?.length ? (
           <table className={`table1 ${interClass}`}>
             <thead>
@@ -253,7 +253,7 @@ export const StarsTableComponent = () => {
             </tbody>
           </table>
         ) : (
-          <div className="py-[24px] px-[16px]">
+          <div className="px-[16px] py-[24px]">
             Load your GitHub repository from settings to see analytics
           </div>
         )}
