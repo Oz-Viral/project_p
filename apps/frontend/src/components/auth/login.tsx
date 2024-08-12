@@ -34,7 +34,7 @@ export function Login() {
     },
   });
 
-  const fetchData = useFetch();
+  const fetchData = ç();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);

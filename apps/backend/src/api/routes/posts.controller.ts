@@ -24,6 +24,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { MessagesService } from '@kursor/nestjs-libraries/database/prisma/marketplace/messages.service';
 import { GeneratorDto } from '@kursor/nestjs-libraries/dtos/generator/generator.dto';
 import { CreateGeneratedPostsDto } from '@kursor/nestjs-libraries/dtos/generator/create.generated.posts.dto';
+import { OpenaiService } from '@kursor/nestjs-libraries/openai/openai.service';
 
 @ApiTags('Posts')
 @Controller('/posts')
@@ -32,13 +33,14 @@ export class PostsController {
     private _postsService: PostsService,
     private _commentsService: CommentsService,
     private _starsService: StarsService,
-    private _messagesService: MessagesService
+    private _messagesService: MessagesService,
+    private _openaiService: OpenaiService,
   ) {}
 
   @Get('/marketplace/:id?')
   async getMarketplacePosts(
     @GetOrgFromRequest() org: Organization,
-    @Param('id') id: string
+    @Param('id') id: string,
   ) {
     return this._messagesService.getMarketplaceAvailableOffers(org.id, id);
   }
@@ -46,7 +48,7 @@ export class PostsController {
   @Get('/')
   async getPosts(
     @GetOrgFromRequest() org: Organization,
-    @Query() query: GetPostsDto
+    @Query() query: GetPostsDto,
   ) {
     const [posts, comments] = await Promise.all([
       this._postsService.getPosts(org.id, query),
@@ -54,7 +56,7 @@ export class PostsController {
         org.id,
         query.year,
         query.week,
-        query.isIsoWeek === 'true'
+        query.isIsoWeek === 'true',
       ),
     ]);
 
@@ -72,7 +74,7 @@ export class PostsController {
   @Get('/old')
   oldPosts(
     @GetOrgFromRequest() org: Organization,
-    @Query('date') date: string
+    @Query('date') date: string,
   ) {
     return this._postsService.getOldPosts(org.id, date);
   }
@@ -86,7 +88,7 @@ export class PostsController {
   @CheckPolicies([AuthorizationActions.Create, Sections.POSTS_PER_MONTH])
   createPost(
     @GetOrgFromRequest() org: Organization,
-    @Body() body: CreatePostDto
+    @Body() body: CreatePostDto,
   ) {
     console.log(JSON.stringify(body, null, 2));
     return this._postsService.createPost(org.id, body);
@@ -96,7 +98,7 @@ export class PostsController {
   @CheckPolicies([AuthorizationActions.Create, Sections.POSTS_PER_MONTH])
   generatePostsDraft(
     @GetOrgFromRequest() org: Organization,
-    @Body() body: CreateGeneratedPostsDto
+    @Body() body: CreateGeneratedPostsDto,
   ) {
     return this._postsService.generatePostsDraft(org.id, body);
   }
@@ -105,7 +107,7 @@ export class PostsController {
   @CheckPolicies([AuthorizationActions.Create, Sections.POSTS_PER_MONTH])
   generatePosts(
     @GetOrgFromRequest() org: Organization,
-    @Body() body: GeneratorDto
+    @Body() body: GeneratorDto,
   ) {
     return this._postsService.generatePosts(org.id, body);
   }
@@ -113,7 +115,7 @@ export class PostsController {
   @Delete('/:group')
   deletePost(
     @GetOrgFromRequest() org: Organization,
-    @Param('group') group: string
+    @Param('group') group: string,
   ) {
     return this._postsService.deletePost(org.id, group);
   }
@@ -122,8 +124,13 @@ export class PostsController {
   changeDate(
     @GetOrgFromRequest() org: Organization,
     @Param('id') id: string,
-    @Body('date') date: string
+    @Body('date') date: string,
   ) {
     return this._postsService.changeDate(org.id, id, date);
+  }
+
+  @Post('generate-hashtags')
+  generateHashtags(@Body('content') content: string) {
+    return this._openaiService.generateHashtags(content);
   }
 }

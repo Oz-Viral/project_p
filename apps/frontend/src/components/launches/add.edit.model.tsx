@@ -375,6 +375,29 @@ export const AddEditModal: FC<{
     });
   }, [data, postFor, selectedIntegrations]);
 
+  // content를 받아서 해시태그를 생성하는 함수
+  const generateHashTags = useCallback(
+    (content: string, index: number) => async () => {
+      const res = await fetch(`/posts/generate-hashtags`, {
+        method: 'POST',
+        body: JSON.stringify({ content }),
+      });
+
+      // console.log('');
+      // const res = '#asdasdas #asd #asss';
+
+      const { hashtags } = await res.json();
+
+      console.log(hashtags);
+
+      setValue((prev) => {
+        prev[index].content = `${content}\n\n ${hashtags}`;
+        return [...prev];
+      });
+    },
+    [],
+  );
+
   return (
     <>
       {user?.tier?.ai && (
@@ -454,8 +477,8 @@ export const AddEditModal: FC<{
                                 The post should be at least 6 characters long
                               </div>
                             )}
-                          <div className="flex">
-                            <div className="flex-1">
+                          <div className="flex justify-between">
+                            <div className="flex flex-1">
                               <MultiMediaComponent
                                 label="Attachments"
                                 description=""
@@ -463,6 +486,14 @@ export const AddEditModal: FC<{
                                 name="image"
                                 onChange={changeImage(index)}
                               />
+                              <div className="flex flex-1 gap-[8px] rounded-br-[8px] bg-[#131B2C] pl-2">
+                                <Button
+                                  className="flex gap-[4px] rounded-[3px] text-[12px] font-[500]"
+                                  onClick={generateHashTags(p.content, index)}
+                                >
+                                  해시태그 생성 (TEST)
+                                </Button>
+                              </div>
                             </div>
                             <div className="flex rounded-br-[8px] bg-[#121b2c] text-[#F97066]">
                               {value.length > 1 && (
@@ -503,7 +534,7 @@ export const AddEditModal: FC<{
                         </div>
                       </div>
                     </div>
-                    <div>
+                    <div className="flex justify-between">
                       <AddPostButton num={index} onClick={addValue(index)} />
                     </div>
                   </Fragment>

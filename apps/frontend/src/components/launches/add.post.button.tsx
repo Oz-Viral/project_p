@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useCopilotAction, useCopilotReadable } from '@copilotkit/react-core';
 
 export const AddPostButton: FC<{ onClick: () => void; num: number }> = (
-  props
+  props,
 ) => {
   const { onClick, num } = props;
 
@@ -18,7 +18,7 @@ export const AddPostButton: FC<{ onClick: () => void; num: number }> = (
   return (
     <Button
       onClick={onClick}
-      className="!h-[24px] rounded-[3px] flex gap-[4px] w-[102px] text-[12px] font-[500]"
+      className="flex !h-[24px] w-[102px] gap-[4px] rounded-[3px] text-[12px] font-[500]"
     >
       <div>
         <svg
