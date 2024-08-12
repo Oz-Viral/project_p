@@ -22,9 +22,9 @@ export const useAddProvider = (update?: () => void) => {
     modal.openModal({
       title: '',
       withCloseButton: false,
-      classNames: {
-        modal: 'bg-transparent text-white',
-      },
+      // classNames: {
+      //   modal: 'bg-transparent text-white',
+      // },
       children: <AddProviderComponent update={update} {...data} />,
       size: 'auto',
     });
@@ -35,7 +35,7 @@ export const AddProviderButton: FC<{ update?: () => void }> = (props) => {
   const { update } = props;
   const add = useAddProvider(update);
   return (
-    <button className="text-white p-[8px] rounded-md bg-forth" onClick={add}>
+    <button className="bg-forth rounded-md p-[8px] text-white" onClick={add}>
       Add Channel
     </button>
   );
@@ -69,7 +69,7 @@ export const ApiModal: FC<{
       {
         method: 'POST',
         body: JSON.stringify({ api: data.api }),
-      }
+      },
     );
 
     if (add.ok) {
@@ -89,11 +89,11 @@ export const ApiModal: FC<{
   }, []);
 
   return (
-    <div className="rounded-[4px] border border-[#172034] bg-[#0B101B] px-[16px] pb-[16px] relative">
+    <div className="relative rounded-[4px] border border-[#172034] bg-[#0B101B] px-[16px] pb-[16px]">
       <TopTitle title={`Add API key for ${name}`} />
       <button
         onClick={close}
-        className="outline-none absolute right-[20px] top-[20px] mantine-UnstyledButton-root mantine-ActionIcon-root hover:bg-tableBorder cursor-pointer mantine-Modal-close mantine-1dcetaa"
+        className="mantine-UnstyledButton-root mantine-ActionIcon-root hover:bg-tableBorder mantine-Modal-close mantine-1dcetaa absolute right-[20px] top-[20px] cursor-pointer outline-none"
         type="button"
       >
         <svg
@@ -113,7 +113,7 @@ export const ApiModal: FC<{
       </button>
       <FormProvider {...methods}>
         <form
-          className="gap-[8px] flex flex-col"
+          className="flex flex-col gap-[8px]"
           onSubmit={methods.handleSubmit(submit)}
         >
           <div className="pt-[10px]">
@@ -144,7 +144,7 @@ export const AddProviderComponent: FC<{
       ).json();
       window.location.href = url;
     },
-    []
+    [],
   );
 
   const close = useCallback(() => {
@@ -156,23 +156,23 @@ export const AddProviderComponent: FC<{
       modal.openModal({
         title: '',
         withCloseButton: false,
-        classNames: {
-          modal: 'bg-transparent text-white',
-        },
+        // classNames: {
+        //   modal: 'bg-transparent text-white',
+        // },
         children: (
           <ApiModal update={update} name={name} identifier={identifier} />
         ),
       });
     },
-    []
+    [],
   );
   return (
-    <div className="w-full flex flex-col gap-[20px] rounded-[4px] border border-[#172034] bg-[#0B101B] px-[16px] pb-[16px] relative">
+    <div className="relative flex w-full flex-col gap-[20px] rounded-[4px] border border-[#172034] px-[16px] pb-[16px]">
       <div className="flex flex-col">
         <TopTitle title="Add Channel" />
         <button
           onClick={close}
-          className="outline-none absolute right-[20px] top-[20px] mantine-UnstyledButton-root mantine-ActionIcon-root hover:bg-tableBorder cursor-pointer mantine-Modal-close mantine-1dcetaa"
+          className="mantine-UnstyledButton-root mantine-ActionIcon-root hover:bg-tableBorder mantine-Modal-close mantine-1dcetaa absolute right-[20px] top-[20px] cursor-pointer outline-none"
           type="button"
         >
           <svg
@@ -190,14 +190,14 @@ export const AddProviderComponent: FC<{
             ></path>
           </svg>
         </button>
-        <h2 className="pt-[16px] pb-[10px]">Social</h2>
-        <div className="grid grid-cols-3 gap-[10px] justify-items-center justify-center">
+        <h2 className="pb-[10px] pt-[16px]">Social</h2>
+        <div className="grid grid-cols-3 justify-center justify-items-center gap-[10px]">
           {social.map((item) => (
             <div
               key={item.identifier}
               onClick={getSocialLink(item.identifier)}
               className={
-                'w-[120px] h-[100px] bg-input text-white justify-center items-center flex flex-col gap-[10px] cursor-pointer'
+                'bg-input flex h-[100px] w-[120px] cursor-pointer flex-col items-center justify-center gap-[10px]'
               }
             >
               <div>
@@ -205,7 +205,7 @@ export const AddProviderComponent: FC<{
                   <img src={`/icons/platforms/youtube.svg`} />
                 ) : (
                   <img
-                    className="w-[32px] h-[32px] rounded-full"
+                    className="h-[32px] w-[32px] rounded-full"
                     src={`/icons/platforms/${item.identifier}.png`}
                   />
                 )}
@@ -223,11 +223,11 @@ export const AddProviderComponent: FC<{
               <div
                 key={item.identifier}
                 onClick={showApiButton(item.identifier, item.name)}
-                className="w-[120px] h-[100px] bg-input text-white justify-center items-center flex flex-col gap-[10px] cursor-pointer"
+                className="bg-input flex h-[100px] w-[120px] cursor-pointer flex-col items-center justify-center gap-[10px]"
               >
                 <div>
                   <img
-                    className="w-[32px] h-[32px] rounded-full"
+                    className="h-[32px] w-[32px] rounded-full"
                     src={`/icons/platforms/${item.identifier}.png`}
                   />
                 </div>

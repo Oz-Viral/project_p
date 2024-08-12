@@ -135,7 +135,7 @@ export const AddEditModal: FC<{
         return [...prev];
       });
     },
-    [value]
+    [value],
   );
 
   const changeImage = useCallback(
@@ -152,24 +152,27 @@ export const AddEditModal: FC<{
           });
         });
       },
-    []
+    [],
   );
 
   // Add another editor
   const addValue = useCallback(
     (index: number) => () => {
       setValue((prev) => {
-        return prev.reduce((acc, p, i) => {
-          acc.push(p);
-          if (i === index) {
-            acc.push({ content: '' });
-          }
+        return prev.reduce(
+          (acc, p, i) => {
+            acc.push(p);
+            if (i === index) {
+              acc.push({ content: '' });
+            }
 
-          return acc;
-        }, [] as Array<{ content: string }>);
+            return acc;
+          },
+          [] as Array<{ content: string }>,
+        );
       });
     },
-    []
+    [],
   );
 
   const changePosition = useCallback(
@@ -184,7 +187,7 @@ export const AddEditModal: FC<{
         });
       }
     },
-    []
+    [],
   );
 
   // Delete post
@@ -193,7 +196,7 @@ export const AddEditModal: FC<{
       if (
         !(await deleteDialog(
           'Are you sure you want to delete this post?',
-          'Yes, delete it!'
+          'Yes, delete it!',
         ))
       ) {
         return;
@@ -203,7 +206,7 @@ export const AddEditModal: FC<{
         return [...prev];
       });
     },
-    [value]
+    [value],
   );
 
   // override the close modal to ask the user if he is sure to close
@@ -211,7 +214,7 @@ export const AddEditModal: FC<{
     if (
       await deleteDialog(
         'Are you sure you want to close this modal? (all data will be lost)',
-        'Yes, close it!'
+        'Yes, close it!',
       )
     ) {
       modal.closeAll();
@@ -228,7 +231,7 @@ export const AddEditModal: FC<{
 
       return schedule('now')();
     }) as MouseEventHandler<HTMLDivElement>,
-    []
+    [],
   );
 
   // function to send to the server and save
@@ -238,7 +241,7 @@ export const AddEditModal: FC<{
         if (
           !(await deleteDialog(
             'Are you sure you want to delete this post?',
-            'Yes, delete it!'
+            'Yes, delete it!',
           ))
         ) {
           return;
@@ -267,7 +270,7 @@ export const AddEditModal: FC<{
       for (const key of allKeys) {
         if (key.checkValidity) {
           const check = await key.checkValidity(
-            key?.value.map((p: any) => p.image || [])
+            key?.value.map((p: any) => p.image || []),
           );
           if (typeof check === 'string') {
             toaster.show(check, 'warning');
@@ -277,12 +280,13 @@ export const AddEditModal: FC<{
 
         if (
           key.value.some(
-            (p) => p.content.length > (key.maximumCharacters || 1000000)
+            (p) => p.content.length > (key.maximumCharacters || 1000000),
           )
         ) {
           if (
             !(await deleteDialog(
-              `${key?.integration?.name} post is too long, it will be cropped, do you want to continue?`, 'Yes, continue'
+              `${key?.integration?.name} post is too long, it will be cropped, do you want to continue?`,
+              'Yes, continue',
             ))
           ) {
             await key.trigger();
@@ -328,7 +332,7 @@ export const AddEditModal: FC<{
       toaster.show(
         !existingData.integration
           ? 'Added successfully'
-          : 'Updated successfully'
+          : 'Updated successfully',
       );
       modal.closeAll();
     },
@@ -339,7 +343,7 @@ export const AddEditModal: FC<{
       integrations,
       existingData,
       selectedIntegrations,
-    ]
+    ],
   );
 
   const getPostsMarketplace = useCallback(async () => {
@@ -350,7 +354,7 @@ export const AddEditModal: FC<{
 
   const { data } = useSWR(
     `/posts/marketplace/${existingData?.posts?.[0]?.id}`,
-    getPostsMarketplace
+    getPostsMarketplace,
   );
 
   const canSendForPublication = useMemo(() => {
@@ -360,7 +364,7 @@ export const AddEditModal: FC<{
 
     return selectedIntegrations.every((integration) => {
       const find = postFor.missing.find(
-        (p) => p.integration.integration.id === integration.id
+        (p) => p.integration.integration.id === integration.id,
       );
 
       if (!find) {
@@ -387,13 +391,13 @@ export const AddEditModal: FC<{
       <div className={clsx('flex gap-[20px] bg-black')}>
         <div
           className={clsx(
-            'flex flex-col gap-[16px] transition-all duration-700 whitespace-nowrap',
+            'flex flex-col gap-[16px] whitespace-nowrap transition-all duration-700',
             !expend.expend
-              ? 'flex-1 w-1 animate-overflow'
-              : 'w-0 overflow-hidden'
+              ? 'animate-overflow w-1 flex-1'
+              : 'w-0 overflow-hidden',
           )}
         >
-          <div className="relative flex gap-[20px] flex-col flex-1 rounded-[4px] border border-[#172034] bg-[#0B101B] p-[16px] pt-0">
+          <div className="relative flex flex-1 flex-col gap-[20px] rounded-[4px] border border-[#172034] bg-[#0B101B] p-[16px] pt-0">
             <TopTitle title={existingData?.group ? 'Edit Post' : 'Create Post'}>
               <div className="flex items-center">
                 <PostToOrganization
@@ -425,17 +429,19 @@ export const AddEditModal: FC<{
                   <Fragment key={`edit_${index}`}>
                     <div>
                       <div className="flex gap-[4px]">
-                        <div className="flex-1 editor text-white">
+                        <div className="editor flex-1">
                           <Editor
                             order={index}
                             height={value.length > 1 ? 150 : 250}
-                            commands={[
-                              // ...commands
-                              //   .getCommands()
-                              //   .filter((f) => f.name === 'image'),
-                              // newImage,
-                              // postSelector(dateState),
-                            ]}
+                            commands={
+                              [
+                                // ...commands
+                                //   .getCommands()
+                                //   .filter((f) => f.name === 'image'),
+                                // newImage,
+                                // postSelector(dateState),
+                              ]
+                            }
                             value={p.content}
                             preview="edit"
                             // @ts-ignore
@@ -444,7 +450,7 @@ export const AddEditModal: FC<{
 
                           {showError &&
                             (!p.content || p.content.length < 6) && (
-                              <div className="my-[5px] text-[#F97066] text-[12px] font-[500]">
+                              <div className="my-[5px] text-[12px] font-[500] text-[#F97066]">
                                 The post should be at least 6 characters long
                               </div>
                             )}
@@ -458,10 +464,10 @@ export const AddEditModal: FC<{
                                 onChange={changeImage(index)}
                               />
                             </div>
-                            <div className="flex bg-[#121b2c] rounded-br-[8px] text-[#F97066]">
+                            <div className="flex rounded-br-[8px] bg-[#121b2c] text-[#F97066]">
                               {value.length > 1 && (
                                 <div
-                                  className="flex cursor-pointer gap-[4px] justify-center items-center flex-1"
+                                  className="flex flex-1 cursor-pointer items-center justify-center gap-[4px]"
                                   onClick={deletePost(index)}
                                 >
                                   <div>
@@ -478,7 +484,7 @@ export const AddEditModal: FC<{
                                       />
                                     </svg>
                                   </div>
-                                  <div className="text-[12px] font-[500] pr-[10px]">
+                                  <div className="pr-[10px] text-[12px] font-[500]">
                                     Delete Post
                                   </div>
                                 </div>
@@ -505,11 +511,11 @@ export const AddEditModal: FC<{
               </>
             ) : null}
           </div>
-          <div className="relative h-[68px] flex flex-col rounded-[4px] border border-[#172034] bg-[#0B101B]">
-            <div className="flex flex-1 gap-[10px] relative">
-              <div className="absolute w-full h-full flex gap-[10px] justify-end items-center right-[16px]">
+          <div className="relative flex h-[68px] flex-col rounded-[4px] border border-[#172034] bg-[#0B101B]">
+            <div className="relative flex flex-1 gap-[10px]">
+              <div className="absolute right-[16px] flex h-full w-full items-center justify-end gap-[10px]">
                 <Button
-                  className="bg-transparent text-inputText"
+                  className="text-inputText bg-transparent"
                   onClick={askClose}
                 >
                   Cancel
@@ -539,24 +545,24 @@ export const AddEditModal: FC<{
 
                   <Button
                     onClick={schedule('schedule')}
-                    className="rounded-[4px] relative group"
+                    className="group relative rounded-[4px]"
                     disabled={
                       selectedIntegrations.length === 0 ||
                       !canSendForPublication
                     }
                   >
-                    <div className="flex justify-center items-center gap-[5px] h-full">
-                      <div className="h-full flex items-center">
+                    <div className="flex h-full items-center justify-center gap-[5px]">
+                      <div className="flex h-full items-center">
                         {!canSendForPublication
                           ? 'Not matching order'
                           : postFor
-                          ? 'Submit for order'
-                          : !existingData.integration
-                          ? 'Add to calendar'
-                          : 'Update'}
+                            ? 'Submit for order'
+                            : !existingData.integration
+                              ? 'Add to calendar'
+                              : 'Update'}
                       </div>
                       {!postFor && (
-                        <div className="h-full flex items-center">
+                        <div className="flex h-full items-center">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="18"
@@ -571,7 +577,7 @@ export const AddEditModal: FC<{
                           </svg>
                           <div
                             onClick={postNow}
-                            className="hidden group-hover:flex hover:flex flex-col justify-center absolute left-0 top-[100%] w-full h-[40px] bg-[#B91C1C] border border-tableBorder"
+                            className="border-tableBorder absolute left-0 top-[100%] hidden h-[40px] w-full flex-col justify-center border bg-[#B91C1C] hover:flex group-hover:flex"
                           >
                             Post now
                           </div>
@@ -586,10 +592,10 @@ export const AddEditModal: FC<{
         </div>
         <div
           className={clsx(
-            'flex gap-[20px] flex-col rounded-[4px] border-[#172034] bg-[#0B101B] flex-1 transition-all duration-700',
+            'flex flex-1 flex-col gap-[20px] rounded-[4px] border-[#172034] bg-[#0B101B] transition-all duration-700',
             !selectedIntegrations.length
               ? 'flex-grow-0 overflow-hidden'
-              : 'flex-grow-1 border animate-overflow'
+              : 'flex-grow-1 animate-overflow border',
           )}
         >
           <div className="mx-[16px]">
@@ -601,7 +607,7 @@ export const AddEditModal: FC<{
             />
           </div>
           {!!selectedIntegrations.length && (
-            <div className="flex-1 flex flex-col p-[16px] pt-0">
+            <div className="flex flex-1 flex-col p-[16px] pt-0">
               <ProvidersOptions
                 integrations={selectedIntegrations}
                 editorValue={value}

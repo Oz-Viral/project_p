@@ -17,7 +17,7 @@ import { MultipartFileUploader } from '@kursor/frontend/components/media/new.upl
 import dynamic from 'next/dynamic';
 import { useUser } from '@kursor/frontend/components/layout/user.context';
 const Polonto = dynamic(
-  () => import('@kursor/frontend/components/launches/polonto')
+  () => import('@kursor/frontend/components/launches/polonto'),
 );
 const showModalEmitter = new EventEmitter();
 
@@ -43,14 +43,14 @@ export const ShowMediaBoxModal: FC = () => {
   if (!showModal) return null;
 
   return (
-    <div className="text-white">
+    <div>
       <MediaBox setMedia={callBack!} closeModal={closeModal} />
     </div>
   );
 };
 
 export const showMediaBox = (
-  callback: (params: { id: string; path: string }) => void
+  callback: (params: { id: string; path: string }) => void,
 ) => {
   showModalEmitter.emit('show-modal', callback);
 };
@@ -79,7 +79,7 @@ export const MediaBox: FC<{
       setMedia(media);
       closeModal();
     },
-    []
+    [],
   );
 
   const { data, mutate } = useSWR('get-media', loadMedia);
@@ -94,15 +94,15 @@ export const MediaBox: FC<{
   }, [data]);
 
   return (
-    <div className="fixed left-0 top-0 bg-black/80 z-[300] w-full min-h-full p-[60px] animate-fade">
-      <div className="w-full h-full bg-[#0B101B] border-tableBorder border-2 rounded-xl pb-[20px] px-[20px] relative">
+    <div className="animate-fade fixed left-0 top-0 z-[300] min-h-full w-full bg-black/80 p-[60px]">
+      <div className="border-tableBorder relative h-full w-full rounded-xl border-2 bg-[#0B101B] px-[20px] pb-[20px]">
         <div className="flex">
           <div className="flex-1">
             <TopTitle title="Media Library" />
           </div>
           <button
             onClick={closeModal}
-            className="outline-none absolute right-[20px] top-[20px] mantine-UnstyledButton-root mantine-ActionIcon-root bg-black hover:bg-tableBorder cursor-pointer mantine-Modal-close mantine-1dcetaa"
+            className="mantine-UnstyledButton-root mantine-ActionIcon-root hover:bg-tableBorder mantine-Modal-close mantine-1dcetaa absolute right-[20px] top-[20px] cursor-pointer bg-black outline-none"
             type="button"
           >
             <svg
@@ -123,18 +123,18 @@ export const MediaBox: FC<{
 
           {!!mediaList.length && (
             <button
-              className="flex absolute right-[40px] top-[7px] pointer hover:bg-third rounded-lg transition-all group px-2.5 py-2.5 text-sm font-semibold bg-transparent text-gray-800 hover:bg-gray-100 focus:text-primary-500"
+              className="pointer hover:bg-third focus:text-primary-500 group absolute right-[40px] top-[7px] flex rounded-lg bg-transparent px-2.5 py-2.5 text-sm font-semibold text-gray-800 transition-all hover:bg-gray-100"
               type="button"
             >
-              <div className="relative flex gap-2 items-center justify-center">
+              <div className="relative flex items-center justify-center gap-2">
                 <MultipartFileUploader
                   onUploadSuccess={mutate}
                   allowedFileTypes={
                     type === 'video'
                       ? 'video/mp4'
                       : type === 'image'
-                      ? 'image/*'
-                      : 'image/*,video/mp4'
+                        ? 'image/*'
+                        : 'image/*,video/mp4'
                   }
                 />
               </div>
@@ -143,23 +143,23 @@ export const MediaBox: FC<{
         </div>
         <div
           className={clsx(
-            'flex flex-wrap gap-[10px] mt-[35px] pt-[20px]',
-            !!mediaList.length && 'justify-center items-center text-white'
+            'mt-[35px] flex flex-wrap gap-[10px] pt-[20px]',
+            !!mediaList.length && 'items-center justify-center text-white',
           )}
         >
           {!mediaList.length && (
             <div className="flex flex-col text-center">
               <div>You don{"'"}t have any assets yet.</div>
               <div>Click the button below to upload one</div>
-              <div className="mt-[10px] justify-center items-center flex flex-col-reverse gap-[10px]">
+              <div className="mt-[10px] flex flex-col-reverse items-center justify-center gap-[10px]">
                 <MultipartFileUploader
                   onUploadSuccess={mutate}
                   allowedFileTypes={
                     type === 'video'
                       ? 'video/mp4'
                       : type === 'image'
-                      ? 'image/*'
-                      : 'image/*,video/mp4'
+                        ? 'image/*'
+                        : 'image/*,video/mp4'
                   }
                 />
               </div>
@@ -177,22 +177,22 @@ export const MediaBox: FC<{
             .map((media) => (
               <div
                 key={media.id}
-                className="w-[120px] h-[120px] flex border-tableBorder border-2 cursor-pointer"
+                className="border-tableBorder flex h-[120px] w-[120px] cursor-pointer border-2"
                 onClick={setNewMedia(media)}
               >
                 {media.path.indexOf('mp4') > -1 ? (
                   <VideoFrame url={mediaDirectory.set(media.path)} />
                 ) : (
                   <img
-                    className="w-full h-full object-cover"
+                    className="h-full w-full object-cover"
                     src={mediaDirectory.set(media.path)}
                   />
                 )}
               </div>
             ))}
           {loading && (
-            <div className="w-[200px] h-[200px] flex border-tableBorder border-2 cursor-pointer relative">
-              <div className="absolute left-0 top-0 w-full h-full -mt-[50px] flex justify-center items-center">
+            <div className="border-tableBorder relative flex h-[200px] w-[200px] cursor-pointer border-2">
+              <div className="absolute left-0 top-0 -mt-[50px] flex h-full w-full items-center justify-center">
                 <LoadingComponent />
               </div>
             </div>
@@ -233,7 +233,7 @@ export const MultiMediaComponent: FC<{
       setCurrentMedia(newMedia);
       onChange({ target: { name, value: newMedia } });
     },
-    [currentMedia]
+    [currentMedia],
   );
 
   const showModal = useCallback(() => {
@@ -250,7 +250,7 @@ export const MultiMediaComponent: FC<{
       setCurrentMedia(newMedia);
       onChange({ target: { name, value: newMedia } });
     },
-    [currentMedia]
+    [currentMedia],
   );
 
   const designMedia = useCallback(() => {
@@ -259,16 +259,16 @@ export const MultiMediaComponent: FC<{
 
   return (
     <>
-      <div className="flex flex-col gap-[8px] bg-[#131B2C] rounded-bl-[8px]">
+      <div className="flex flex-col gap-[8px] rounded-bl-[8px] bg-[#131B2C]">
         {modal && <MediaBox setMedia={changeMedia} closeModal={showModal} />}
-        {mediaModal && !!user?.tier?.ai &&  (
+        {mediaModal && !!user?.tier?.ai && (
           <Polonto setMedia={changeMedia} closeModal={closeDesignModal} />
         )}
         <div className="flex gap-[10px]">
           <div className="flex">
             <Button
               onClick={showModal}
-              className="ml-[10px] rounded-[4px] mb-[10px] gap-[8px] justify-center items-center w-[127px] flex border border-dashed border-[#506490] bg-[#131B2C]"
+              className="mb-[10px] ml-[10px] flex w-[127px] items-center justify-center gap-[8px] rounded-[4px] border border-dashed border-[#506490] bg-[#131B2C]"
             >
               <div>
                 <svg
@@ -289,7 +289,7 @@ export const MultiMediaComponent: FC<{
 
             <Button
               onClick={designMedia}
-              className="ml-[10px] rounded-[4px] mb-[10px] gap-[8px] justify-center items-center w-[127px] flex border border-dashed border-[#506490] !bg-[#832ad5]"
+              className="mb-[10px] ml-[10px] flex w-[127px] items-center justify-center gap-[8px] rounded-[4px] border border-dashed border-[#506490] !bg-[#832ad5]"
             >
               <div>
                 <svg
@@ -312,7 +312,7 @@ export const MultiMediaComponent: FC<{
           {!!currentMedia &&
             currentMedia.map((media, index) => (
               <>
-                <div className="cursor-pointer w-[40px] h-[40px] border-2 border-tableBorder relative flex">
+                <div className="border-tableBorder relative flex h-[40px] w-[40px] cursor-pointer border-2">
                   <div
                     onClick={() => window.open(mediaDirectory.set(media.path))}
                   >
@@ -320,14 +320,14 @@ export const MultiMediaComponent: FC<{
                       <VideoFrame url={mediaDirectory.set(media.path)} />
                     ) : (
                       <img
-                        className="w-full h-full object-cover"
+                        className="h-full w-full object-cover"
                         src={mediaDirectory.set(media.path)}
                       />
                     )}
                   </div>
                   <div
                     onClick={clearMedia(index)}
-                    className="rounded-full w-[15px] h-[15px] bg-red-800 text-white flex justify-center items-center absolute -right-[4px] -top-[4px]"
+                    className="absolute -right-[4px] -top-[4px] flex h-[15px] w-[15px] items-center justify-center rounded-full bg-red-800 text-white"
                   >
                     x
                   </div>
@@ -353,7 +353,8 @@ export const MediaComponent: FC<{
   width?: number;
   height?: number;
 }> = (props) => {
-  const { name, type, label, description, onChange, value, width, height } = props;
+  const { name, type, label, description, onChange, value, width, height } =
+    props;
   const { getValues } = useSettings();
   const user = useUser();
   useEffect(() => {
@@ -405,9 +406,9 @@ export const MediaComponent: FC<{
       <div className="text-[14px]">{label}</div>
       <div className="text-[12px]">{description}</div>
       {!!currentMedia && (
-        <div className="my-[20px] cursor-pointer w-[200px] h-[200px] border-2 border-tableBorder">
+        <div className="border-tableBorder my-[20px] h-[200px] w-[200px] cursor-pointer border-2">
           <img
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
             src={mediaDirectory.set(currentMedia.path)}
             onClick={() => window.open(mediaDirectory.set(currentMedia.path))}
           />

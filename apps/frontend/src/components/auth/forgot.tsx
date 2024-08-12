@@ -42,13 +42,13 @@ export function Forgot() {
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div>
-          <h1 className="text-3xl font-bold text-left mb-4 cursor-pointer">
+          <h1 className="mb-4 cursor-pointer text-left text-3xl font-bold">
             Forgot Password
           </h1>
         </div>
         {!state ? (
           <>
-            <div className="space-y-4 text-white">
+            <div className="space-y-4">
               <Input
                 label="Email"
                 {...form.register('email')}
@@ -56,14 +56,14 @@ export function Forgot() {
                 placeholder="Email Address"
               />
             </div>
-            <div className="text-center mt-6">
-              <div className="w-full flex">
+            <div className="mt-6 text-center">
+              <div className="flex w-full">
                 <Button type="submit" className="flex-1" loading={loading}>
                   Send Password Reset Email
                 </Button>
               </div>
               <p className="mt-4 text-sm">
-                <Link href="/auth/login" className="underline cursor-pointer">
+                <Link href="/auth/login" className="cursor-pointer underline">
                   {' '}
                   Go back to login
                 </Link>
@@ -72,11 +72,11 @@ export function Forgot() {
           </>
         ) : (
           <>
-            <div className="text-left mt-6">
+            <div className="mt-6 text-left">
               We have send you an email with a link to reset your password.
             </div>
             <p className="mt-4 text-sm">
-              <Link href="/auth/login" className="underline cursor-pointer">
+              <Link href="/auth/login" className="cursor-pointer underline">
                 {' '}
                 Go back to login
               </Link>

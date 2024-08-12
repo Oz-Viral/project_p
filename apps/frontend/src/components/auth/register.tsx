@@ -131,22 +131,23 @@ export function RegisterAfter({
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div>
-          <h1 className="text-3xl font-bold text-left mb-4 cursor-pointer">
+          <h1 className="mb-4 cursor-pointer text-left text-3xl font-bold">
             Sign Up
           </h1>
         </div>
-        {!isAfterProvider && (!isGeneral() ? <GithubProvider /> : <GoogleProvider />)}
+        {!isAfterProvider &&
+          (!isGeneral() ? <GithubProvider /> : <GoogleProvider />)}
         {!isAfterProvider && (
-          <div className="h-[20px] mb-[24px] mt-[24px] relative">
-            <div className="absolute w-full h-[1px] bg-[#28344F] top-[50%] -translate-y-[50%]" />
+          <div className="relative mb-[24px] mt-[24px] h-[20px]">
+            <div className="absolute top-[50%] h-[1px] w-full -translate-y-[50%] bg-[#28344F]" />
             <div
-              className={`absolute z-[1] ${interClass} justify-center items-center w-full left-0 top-0 flex`}
+              className={`absolute z-[1] ${interClass} left-0 top-0 flex w-full items-center justify-center`}
             >
               <div className="bg-[#0a0a0a] px-[16px]">OR</div>
             </div>
           </div>
         )}
-        <div className="text-white">
+        <div>
           {!isAfterProvider && (
             <>
               <Input
@@ -174,10 +175,7 @@ export function RegisterAfter({
         </div>
         <div className={clsx('text-[12px]', interClass)}>
           By registering you agree to our{' '}
-          <a
-            href={`${rootDomain}/terms`}
-            className="underline hover:font-bold"
-          >
+          <a href={`${rootDomain}/terms`} className="underline hover:font-bold">
             Terms of Service
           </a>{' '}
           and{' '}
@@ -188,15 +186,15 @@ export function RegisterAfter({
             Privacy Policy
           </a>
         </div>
-        <div className="text-center mt-6">
-          <div className="w-full flex">
+        <div className="mt-6 text-center">
+          <div className="flex w-full">
             <Button type="submit" className="flex-1" loading={loading}>
               Create Account
             </Button>
           </div>
           <p className="mt-4 text-sm">
             Already Have An Account?{' '}
-            <Link href="/auth/login" className="underline  cursor-pointer">
+            <Link href="/auth/login" className="cursor-pointer underline">
               {' '}
               Sign In
             </Link>

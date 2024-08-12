@@ -40,23 +40,23 @@ const RenderRedditComponent: FC<{
       );
     case 'link':
       return (
-        <div className="h-[375px] bg-primary rounded-[16px] flex justify-center items-center">
+        <div className="dark:bg-background flex h-[375px] items-center justify-center rounded-[16px]">
           Link
         </div>
       );
     case 'media':
       return (
-        <div className="h-[375px] bg-primary rounded-[16px] flex justify-center items-center">
+        <div className="dark:bg-background flex h-[375px] items-center justify-center rounded-[16px]">
           {!!images?.length &&
             images.map((image, index) => (
               <a
                 key={`image_${index}`}
                 href={showMedia.set(image.path)}
-                className="flex-1 h-full"
+                className="h-full flex-1"
                 target="_blank"
               >
                 <img
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                   src={showMedia.set(image.path)}
                 />
               </a>
@@ -87,19 +87,19 @@ const RedditPreview: FC = (props) => {
   }
 
   return (
-    <div className="flex flex-col gap-[40px] w-full">
+    <div className="flex w-full flex-col gap-[40px]">
       {settings
         .filter(({ value }) => value?.subreddit)
         .map(({ value }, index) => (
           <div
             key={index}
             className={clsx(
-              `bg-[#0B1416] w-full p-[10px] flex flex-col ${interClass} border-tableBorder border`
+              `flex w-full flex-col bg-[#0B1416] p-[10px] ${interClass} border-tableBorder border`,
             )}
           >
             <div className="flex flex-col">
               <div className="flex flex-row gap-[8px]">
-                <div className="w-[40px] h-[40px] bg-white rounded-full" />
+                <div className="h-[40px] w-[40px] rounded-full bg-white" />
                 <div className="flex flex-col">
                   <div className="text-[12px] font-[700]">
                     {value.subreddit}
@@ -107,34 +107,34 @@ const RedditPreview: FC = (props) => {
                   <div className="text-[12px]">{integration?.name}</div>
                 </div>
               </div>
-              <div className="font-[600] text-[24px] mb-[16px]">
+              <div className="mb-[16px] text-[24px] font-[600]">
                 {value.title}
               </div>
               <RenderRedditComponent type={value.type} images={value.media} />
               <div
                 className={clsx(
-                  restOfPosts.length && 'mt-[40px] flex flex-col gap-[20px]'
+                  restOfPosts.length && 'mt-[40px] flex flex-col gap-[20px]',
                 )}
               >
                 {restOfPosts.map((p, index) => (
                   <div className="flex gap-[8px]" key={index}>
-                    <div className="w-[32px] h-[32px] relative">
+                    <div className="relative h-[32px] w-[32px]">
                       <Image
                         width={48}
                         height={48}
                         src={integration?.picture!}
                         alt="x"
-                        className="rounded-full w-full h-full relative z-[2]"
+                        className="relative z-[2] h-full w-full rounded-full"
                       />
                       <Image
                         width={24}
                         height={24}
                         src={`/icons/platforms/${integration?.identifier!}.png`}
                         alt="x"
-                        className="rounded-full absolute -right-[5px] -bottom-[5px] z-[2]"
+                        className="absolute -bottom-[5px] -right-[5px] z-[2] rounded-full"
                       />
                     </div>
-                    <div className="flex-1 flex flex-col leading-[16px] w-full pr-[64px] pb-[8px] rounded-[8px]">
+                    <div className="flex w-full flex-1 flex-col rounded-[8px] pb-[8px] pr-[64px] leading-[16px]">
                       <div className="text-[14px] font-[600]">
                         {integration?.name}
                       </div>
@@ -174,17 +174,17 @@ const RedditSettings: FC = () => {
         return;
       remove(index);
     },
-    [fields, remove]
+    [fields, remove],
   );
 
   return (
     <>
-      <div className="flex flex-col gap-[20px] mb-[20px]">
+      <div className="mb-[20px] flex flex-col gap-[20px]">
         {fields.map((field, index) => (
-          <div key={field.id} className="flex flex-col relative">
+          <div key={field.id} className="relative flex flex-col">
             <div
               onClick={deleteField(index)}
-              className="absolute -left-[10px] justify-center items-center flex -top-[10px] w-[20px] h-[20px] bg-red-600 rounded-full text-white"
+              className="absolute -left-[10px] -top-[10px] flex h-[20px] w-[20px] items-center justify-center rounded-full bg-red-600 text-white"
             >
               x
             </div>
@@ -194,7 +194,7 @@ const RedditSettings: FC = () => {
       </div>
       <Button onClick={addField}>Add Subreddit</Button>
       {fields.length === 0 && (
-        <div className="text-red-500 text-[12px] mt-[10px]">
+        <div className="mt-[10px] text-[12px] text-red-500">
           Please add at least one Subreddit
         </div>
       )}
@@ -202,4 +202,10 @@ const RedditSettings: FC = () => {
   );
 };
 
-export default withProvider(RedditSettings, RedditPreview, RedditSettingsDto, undefined, 10000);
+export default withProvider(
+  RedditSettings,
+  RedditPreview,
+  RedditSettingsDto,
+  undefined,
+  10000,
+);
