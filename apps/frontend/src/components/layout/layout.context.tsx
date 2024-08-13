@@ -4,16 +4,23 @@ import { ReactNode, useCallback } from 'react';
 import { FetchWrapperComponent } from '@kursor/helpers/utils/custom.fetch';
 import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 import { isGeneral } from '@kursor/react/helpers/is.general';
+import useDictionary from '../../hooks/stores/useDictionary';
 
-export default function LayoutContext(params: { children: ReactNode }) {
+export default function LayoutContext(params: {
+  dict: any;
+  children: ReactNode;
+}) {
   if (params?.children) {
     // eslint-disable-next-line react/no-children-prop
-    return <LayoutContextInner children={params.children} />;
+    return <LayoutContextInner dict={params.dict} children={params.children} />;
   }
 
   return <></>;
 }
-function LayoutContextInner(params: { children: ReactNode }) {
+function LayoutContextInner(params: { dict: any; children: ReactNode }) {
+  const { setDictionary } = useDictionary();
+
+  setDictionary(params.dict);
   const afterRequest = useCallback(
     async (url: string, options: RequestInit, response: Response) => {
       if (response?.headers?.get('onboarding')) {
@@ -33,11 +40,9 @@ function LayoutContextInner(params: { children: ReactNode }) {
       if (response.status === 402) {
         if (
           await deleteDialog(
-            (
-              await response.json()
-            ).message,
+            (await response.json()).message,
             'Move to billing',
-            'Payment Required'
+            'Payment Required',
           )
         ) {
           window.open('/billing', '_blank');
@@ -47,7 +52,7 @@ function LayoutContextInner(params: { children: ReactNode }) {
 
       return true;
     },
-    []
+    [],
   );
 
   return (
