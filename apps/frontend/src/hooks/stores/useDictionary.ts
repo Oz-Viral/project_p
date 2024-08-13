@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { dictionary } from '../../dictionaries/ko';
 
 interface DictionaryState {
   dictionary: any;
@@ -6,7 +7,7 @@ interface DictionaryState {
 }
 
 const useDictionary = create<DictionaryState>((set, get) => ({
-  dictionary: undefined,
+  dictionary,
   setDictionary: (dictionary: any) => {
     if (!get().dictionary) set({ dictionary });
   },
