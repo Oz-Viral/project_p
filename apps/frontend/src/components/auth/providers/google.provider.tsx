@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import interClass from '@kursor/react/helpers/inter.font';
+import useDictionary from '../../../hooks/stores/useDictionary';
+import { Button } from '@kursor/react/form/button';
 
 export const GoogleProvider = () => {
   const fetch = useFetch();
@@ -9,10 +11,12 @@ export const GoogleProvider = () => {
     window.location.href = link;
   }, []);
 
+  const { dictionary } = useDictionary();
+
   return (
-    <div
+    <Button
       onClick={gotoLogin}
-      className={`cursor-pointer bg-white h-[44px] rounded-[4px] flex justify-center items-center text-[#121A2D] ${interClass} gap-[4px]`}
+      className={`flex h-[44px] w-full cursor-pointer items-center justify-center rounded-md bg-white ${interClass} gap-[4px]`}
     >
       <div>
         <svg
@@ -39,7 +43,7 @@ export const GoogleProvider = () => {
           />
         </svg>
       </div>
-      <div>Sign in with Google</div>
-    </div>
+      <div className="ml-2">{dictionary.auth.signWithGoogle}</div>
+    </Button>
   );
 };

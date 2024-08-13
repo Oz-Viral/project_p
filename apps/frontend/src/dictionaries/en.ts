@@ -7,5 +7,6 @@ export const dictionary = {
     email: '이메일',
     password: '비밀번호',
     forgotPassword: '비밀번호를 잊으셨나요?',
+    signWithGoogle: '구글 계정으로 로그인',
   },
 };
