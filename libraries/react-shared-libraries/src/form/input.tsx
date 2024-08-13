@@ -1,7 +1,12 @@
 'use client';
 
 import {
-  DetailedHTMLProps, FC, InputHTMLAttributes, ReactNode, useEffect, useMemo
+  DetailedHTMLProps,
+  FC,
+  InputHTMLAttributes,
+  ReactNode,
+  useEffect,
+  useMemo,
 } from 'react';
 import { clsx } from 'clsx';
 import { useFormContext, useWatch } from 'react-hook-form';
@@ -44,25 +49,25 @@ export const Input: FC<
 
   return (
     <div className="flex flex-col gap-[6px]">
-      {!!label && (<div className={`${interClass} text-[14px]`}>{label}</div>)}
+      {!!label && <div className={`${interClass} text-[14px]`}>{label}</div>}
       <div
         className={clsx(
-          'bg-input h-[44px] border-fifth border rounded-[4px] text-inputText placeholder-inputText flex items-center justify-center',
-          className
+          'border-fifth text-inputText placeholder-inputText flex h-[44px] items-center justify-center rounded-[4px] border',
+          className,
         )}
       >
         {icon && <div className="pl-[16px]">{icon}</div>}
         <input
           className={clsx(
-            'h-full bg-transparent outline-none flex-1',
-            icon ? 'pl-[8px] pr-[16px]' : 'px-[16px]'
+            'h-full flex-1 outline-none',
+            icon ? 'pl-[8px] pr-[16px]' : 'px-[16px]',
           )}
           {...(disableForm ? {} : form.register(props.name))}
           {...rest}
         />
       </div>
       {!removeError && (
-        <div className="text-red-400 text-[12px]">{err || <>&nbsp;</>}</div>
+        <div className="text-[12px] text-red-400">{err || <>&nbsp;</>}</div>
       )}
     </div>
   );

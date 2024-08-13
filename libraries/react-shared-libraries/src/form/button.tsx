@@ -30,11 +30,9 @@ export const Button: FC<
       type={props.type || 'button'}
       ref={ref}
       className={clsx(
-        (props.disabled || loading) && 'opacity-50 pointer-events-none',
-        `${
-          props.secondary ? 'bg-third' : 'bg-forth'
-        } px-[24px] h-[40px] cursor-pointer items-center justify-center flex relative`,
-        props?.className
+        (props.disabled || loading) && 'pointer-events-none opacity-50',
+        `relative flex h-[40px] cursor-pointer items-center justify-center border px-[24px]`,
+        props?.className,
       )}
     >
       {loading && (
@@ -50,8 +48,8 @@ export const Button: FC<
       <div
         className={clsx(
           innerClassName,
-          'flex-1 items-center justify-center flex',
-          loading && 'invisible'
+          'flex flex-1 items-center justify-center',
+          loading && 'invisible',
         )}
       >
         {children}
