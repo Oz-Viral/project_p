@@ -131,7 +131,8 @@
     "utf-8-validate": "^5.0.10",
     "uuid": "^10.0.0",
     "yargs": "^17.7.2",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@mintlify/scraping": "^3.0.90",

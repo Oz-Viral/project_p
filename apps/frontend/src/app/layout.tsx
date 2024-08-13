@@ -11,10 +11,14 @@ import { Chakra_Petch } from 'next/font/google';
 import { isGeneral } from '@kursor/react/helpers/is.general';
 import PlausibleProvider from 'next-plausible';
 import { ThemeProvider } from 'next-themes';
+import { getDictionary } from '../utils/dictionaries';
 
 const chakra = Chakra_Petch({ weight: '400', subsets: ['latin'] });
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
+  const lang = 'ko';
+  const dictionary = await getDictionary(lang);
+
   return (
     <html suppressHydrationWarning className={interClass}>
       <head>
@@ -32,7 +36,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           disableTransitionOnChange
         >
           <PlausibleProvider domain="kursor.com">
-            <LayoutContext>{children}</LayoutContext>
+            <LayoutContext dict={dictionary}>{children}</LayoutContext>
           </PlausibleProvider>
         </ThemeProvider>
       </body>

@@ -12,9 +12,5 @@ export const metadata: Metadata = {
 };
 
 export default async function Index() {
-  return (
-    <>
-      {isGeneral() ? <PlatformAnalytics /> : <AnalyticsComponent />}
-    </>
-  );
+  return <>{isGeneral() ? <PlatformAnalytics /> : <AnalyticsComponent />}</>;
 }

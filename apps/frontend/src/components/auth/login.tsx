@@ -12,6 +12,7 @@ import { GithubProvider } from '@kursor/frontend/components/auth/providers/githu
 import interClass from '@kursor/react/helpers/inter.font';
 import { isGeneral } from '@kursor/react/helpers/is.general';
 import { GoogleProvider } from '@kursor/frontend/components/auth/providers/google.provider';
+import useDictionary from '../../hooks/stores/useDictionary';
 
 type Inputs = {
   email: string;
@@ -22,6 +23,7 @@ type Inputs = {
 
 export function Login() {
   const [loading, setLoading] = useState(false);
+  const { dictionary } = useDictionary();
   const resolver = useMemo(() => {
     return classValidatorResolver(LoginUserDto);
   }, []);
@@ -34,7 +36,7 @@ export function Login() {
     },
   });
 
-  const fetchData = ç();
+  const fetchData = useFetch();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
@@ -57,7 +59,7 @@ export function Login() {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div>
           <h1 className="mb-4 cursor-pointer text-left text-3xl font-bold">
-            Sign In
+            {dictionary.auth.signIn}
           </h1>
         </div>
 
