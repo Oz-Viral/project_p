@@ -69,7 +69,7 @@ export function Login() {
           <div
             className={`absolute z-[1] ${interClass} left-0 top-0 flex w-full items-center justify-center`}
           >
-            <div className="bg-[#0a0a0a] px-[16px]">OR</div>
+            <div className="px-[16px]">OR</div>
           </div>
         </div>
 

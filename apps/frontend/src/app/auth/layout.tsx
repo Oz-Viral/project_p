@@ -13,11 +13,11 @@ export default async function AuthLayout({
 }) {
   return (
     <>
-      <div className="absolute left-0 top-0 z-[0] h-[100vh] w-[100vw] overflow-hidden bg-loginBg bg-contain bg-no-repeat bg-left-top" />
-      <div className="relative z-[1] pr-[100px] flex justify-end items-center h-[100vh] w-[100vw] overflow-hidden">
-        <div className="w-[557px] flex h-[614px] bg-loginBox bg-contain">
-          <div className="w-full relative">
-            <div className="custom:fixed custom:text-left custom:left-[20px] custom:justify-start custom:top-[20px] absolute -top-[100px] text-white justify-center items-center w-full flex gap-[10px]">
+      <div className="bg-loginBg absolute left-0 top-0 z-[0] h-[100vh] w-[100vw] overflow-hidden bg-contain bg-left-top bg-no-repeat" />
+      <div className="relative z-[1] flex h-[100vh] w-[100vw] items-center justify-end overflow-hidden pr-[100px]">
+        <div className="bg-loginBox flex h-[614px] w-[557px] bg-contain">
+          <div className="relative w-full">
+            <div className="custom:fixed custom:text-left custom:left-[20px] custom:justify-start custom:top-[20px] absolute -top-[100px] flex w-full items-center justify-center gap-[10px]">
               <Image
                 src={isGeneral() ? '/postiz.svg' : '/logo.svg'}
                 width={55}
@@ -35,19 +35,19 @@ export default async function AuthLayout({
               </div>
             </div>
           </div>
-          <div className="p-[32px] absolute w-[557px] h-[614px] text-white">
+          <div className="absolute h-[614px] w-[557px] p-[32px]">
             {children}
           </div>
           <div className="flex flex-1 flex-col">
-            <div className="flex-1 flex justify-end">
-              <div className="absolute top-0 bg-gradient-to-t from-[#354258] w-[1px] translate-x-[22px] h-full" />
+            <div className="flex flex-1 justify-end">
+              <div className="absolute top-0 h-full w-[1px] translate-x-[22px] bg-gradient-to-t from-[#354258]" />
             </div>
             <div>
-              <div className="absolute right-0 bg-gradient-to-l from-[#354258] h-[1px] translate-y-[22px] w-full" />
+              <div className="absolute right-0 h-[1px] w-full translate-y-[22px] bg-gradient-to-l from-[#354258]" />
             </div>
           </div>
-          <div className="absolute top-0 bg-gradient-to-t from-[#354258] w-[1px] -translate-x-[22px] h-full" />
-          <div className="absolute right-0 bg-gradient-to-l from-[#354258] h-[1px] -translate-y-[22px] w-full" />
+          <div className="absolute top-0 h-full w-[1px] -translate-x-[22px] bg-gradient-to-t from-[#354258]" />
+          <div className="absolute right-0 h-[1px] w-full -translate-y-[22px] bg-gradient-to-l from-[#354258]" />
         </div>
       </div>
     </>
