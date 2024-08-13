@@ -1,10 +1,8 @@
 'use client';
 
-import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import Link from 'next/link';
-import { Button } from '@kursor/react/form/button';
-import { Input } from '@kursor/react/form/input';
 import { useMemo, useState } from 'react';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
 import { LoginUserDto } from '@kursor/nestjs-libraries/dtos/auth/login.user.dto';
@@ -13,6 +11,17 @@ import interClass from '@kursor/react/helpers/inter.font';
 import { isGeneral } from '@kursor/react/helpers/is.general';
 import { GoogleProvider } from '@kursor/frontend/components/auth/providers/google.provider';
 import useDictionary from '../../hooks/stores/useDictionary';
+import { Input } from '@kursor/react/components/ui/input';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@kursor/react/components/ui/form';
+import { Button } from '@kursor/react/components/ui/button';
+import { useTheme } from 'next-themes';
 
 type Inputs = {
   email: string;
@@ -24,6 +33,7 @@ type Inputs = {
 export function Login() {
   const [loading, setLoading] = useState(false);
   const { dictionary } = useDictionary();
+
   const resolver = useMemo(() => {
     return classValidatorResolver(LoginUserDto);
   }, []);
@@ -55,7 +65,7 @@ export function Login() {
   };
 
   return (
-    <FormProvider {...form}>
+    <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div>
           <h1 className="mb-4 cursor-pointer text-left text-3xl font-bold">
@@ -63,51 +73,89 @@ export function Login() {
           </h1>
         </div>
 
-        {!isGeneral() ? <GithubProvider /> : <GoogleProvider />}
-        <div className="relative mb-[24px] mt-[24px] h-[20px]">
+        <GoogleProvider />
+        {/* <div className="relative mb-[24px] mt-[24px] h-[20px]">
           <div className="absolute top-[50%] h-[1px] w-full -translate-y-[50%] bg-[#28344F]" />
           <div
             className={`absolute z-[1] ${interClass} left-0 top-0 flex w-full items-center justify-center`}
           >
             <div className="px-[16px]">OR</div>
           </div>
+        </div> */}
+        <div className="w-full">
+          <div className="my-6 flex items-center gap-3">
+            <div className="bg-gray h-px w-full" />
+            <p className="text-gray text-base"> OR </p>
+            <div className="bg-gray h-px w-full" />
+          </div>
         </div>
 
         <div>
-          <Input
-            label="Email"
-            {...form.register('email')}
-            type="email"
-            placeholder="Email Address"
+          <FormField
+            name="email"
+            render={({ field }) => (
+              <FormItem className="mb-4">
+                {/* className="text-gray-500 dark:text-gray-200" */}
+                <FormLabel>{dictionary.auth.email}</FormLabel>
+                <FormControl>
+                  <Input
+                    className="dark:placeholder-zinc-400"
+                    // placeholder="Your email address"
+                    type="text"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        form.handleSubmit(onSubmit);
+                      }
+                    }}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-          <Input
-            label="Password"
-            {...form.register('password')}
-            autoComplete="off"
-            type="password"
-            placeholder="Password"
+          <FormField
+            name="password"
+            render={({ field }) => (
+              <FormItem className="mb-4">
+                <FormLabel>{dictionary.auth.password}</FormLabel>
+                <FormControl>
+                  <Input
+                    className="dark:placeholder-zinc-400"
+                    // placeholder="Your password"
+                    type="password"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        form.handleSubmit(onSubmit);
+                      }
+                    }}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
         </div>
         <div className="mt-6 text-center">
           <div className="flex w-full">
             <Button type="submit" className="flex-1" loading={loading}>
-              Sign in
+              {dictionary.auth.signIn}
             </Button>
           </div>
           <p className="mt-4 text-sm">
-            Don{"'"}t Have An Account?{' '}
-            <Link href="/auth" className="cursor-pointer underline">
-              {' '}
-              Sign Up
+            {dictionary.auth.dontHaveAccount}
+            <Link href="/auth" className="ml-2 cursor-pointer underline">
+              {dictionary.auth.signUp}
             </Link>
           </p>
           <p className="mt-4 text-sm text-red-600">
             <Link href="/auth/forgot" className="cursor-pointer underline">
-              Forgot password
+              {dictionary.auth.forgotPassword}
             </Link>
           </p>
         </div>
       </form>
-    </FormProvider>
+    </Form>
   );
 }
