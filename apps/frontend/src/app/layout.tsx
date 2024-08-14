@@ -7,9 +7,9 @@ import LayoutContext from '@kursor/frontend/components/layout/layout.context';
 import { ReactNode } from 'react';
 import { isGeneral } from '@kursor/react/helpers/is.general';
 import PlausibleProvider from 'next-plausible';
-import { ThemeProvider } from 'next-themes';
 import { getDictionary } from '../utils/dictionaries';
 import localFont from 'next/font/local';
+import { ThemeProvider } from '@kursor/react/provider/theme-provider';
 
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
@@ -34,8 +34,8 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
       <body className={pretendard.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          // defaultTheme="system"
+          // enableSystem
           disableTransitionOnChange
         >
           <PlausibleProvider domain="kursor.com">

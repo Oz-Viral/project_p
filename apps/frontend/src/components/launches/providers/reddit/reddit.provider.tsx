@@ -40,13 +40,13 @@ const RenderRedditComponent: FC<{
       );
     case 'link':
       return (
-        <div className="dark:bg-background flex h-[375px] items-center justify-center rounded-[16px]">
+        <div className="flex h-[375px] items-center justify-center rounded-[16px]">
           Link
         </div>
       );
     case 'media':
       return (
-        <div className="dark:bg-background flex h-[375px] items-center justify-center rounded-[16px]">
+        <div className="flex h-[375px] items-center justify-center rounded-[16px]">
           {!!images?.length &&
             images.map((image, index) => (
               <a
