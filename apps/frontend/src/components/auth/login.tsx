@@ -21,7 +21,6 @@ import {
   FormMessage,
 } from '@kursor/react/components/ui/form';
 import { Button } from '@kursor/react/components/ui/button';
-import { useTheme } from 'next-themes';
 
 type Inputs = {
   email: string;

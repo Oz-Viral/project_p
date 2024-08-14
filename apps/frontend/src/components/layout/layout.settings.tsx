@@ -70,9 +70,9 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
             {(user.tier !== 'FREE' || !isGeneral()) && <Onboarding />}
             <Support />
             <ContinueProvider />
-            <div className="dark:bg-background mx-auto flex min-h-[100vh] w-full max-w-[1440px] flex-col px-[12px]">
+            <div className="mx-auto flex min-h-[100vh] w-full max-w-[1440px] flex-col px-[12px]">
               {user?.admin && <Impersonate />}
-              <div className="dark:bg-background sticky top-0 z-[200] flex h-[80px] items-center justify-between px-[23px]">
+              <div className="sticky top-0 z-[200] flex h-[80px] items-center justify-between px-[23px]">
                 <Link href="/" className="flex items-center gap-[4px] text-2xl">
                   <div className="min-w-[32px]">
                     {/* <Image

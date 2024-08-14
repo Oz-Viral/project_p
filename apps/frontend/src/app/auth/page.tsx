@@ -6,7 +6,7 @@ import { Register } from '@kursor/frontend/components/auth/register';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: `Kursor Register`,
+  title: `Kursor 회원가입`,
   description: '',
 };
 

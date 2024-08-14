@@ -9,8 +9,8 @@ export const StarsAndForks: FC<StarsAndForksInterface> = (props) => {
   return (
     <>
       {list.map((item) => (
-        <div className="flex gap-[24px] h-[272px]" key={item.login}>
-          <div className="flex-1 bg-secondary py-[10px] px-[16px] flex flex-col">
+        <div className="flex h-[272px] gap-[24px]" key={item.login}>
+          <div className="bg-secondary flex flex-1 flex-col px-[16px] py-[10px]">
             <div className="flex items-center gap-[14px]">
               <div className="bg-[#28344F] p-[8px]">
                 <svg
@@ -31,18 +31,18 @@ export const StarsAndForks: FC<StarsAndForksInterface> = (props) => {
                   .split('/')[1]
                   .split('')
                   .map((char, index) =>
-                    index === 0 ? char.toUpperCase() : char
+                    index === 0 ? char.toUpperCase() : char,
                   )
                   .join('')}{' '}
                 Stars
               </div>
             </div>
-            <div className="flex-1 relative">
-              <div className="absolute w-full h-full left-0 top-0">
+            <div className="relative flex-1">
+              <div className="absolute left-0 top-0 h-full w-full">
                 {item.stars.length ? (
                   <Chart list={item.stars} />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-3xl">
+                  <div className="flex h-full w-full items-center justify-center text-3xl">
                     Processing stars...
                   </div>
                 )}
@@ -53,7 +53,7 @@ export const StarsAndForks: FC<StarsAndForksInterface> = (props) => {
             </div>
           </div>
 
-          <div className="flex-1 bg-secondary py-[10px] px-[16px] flex flex-col">
+          <div className="bg-secondary flex flex-1 flex-col px-[16px] py-[10px]">
             <div className="flex items-center gap-[14px]">
               <div className="bg-[#28344F] p-[8px]">
                 <svg
@@ -74,18 +74,18 @@ export const StarsAndForks: FC<StarsAndForksInterface> = (props) => {
                   .split('/')[1]
                   .split('')
                   .map((char, index) =>
-                    index === 0 ? char.toUpperCase() : char
+                    index === 0 ? char.toUpperCase() : char,
                   )
                   .join('')}{' '}
                 Forks
               </div>
             </div>
-            <div className="flex-1 relative">
-              <div className="absolute w-full h-full left-0 top-0">
+            <div className="relative flex-1">
+              <div className="absolute left-0 top-0 h-full w-full">
                 {item.forks.length ? (
                   <Chart list={item.forks} />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-3xl">
+                  <div className="flex h-full w-full items-center justify-center text-3xl">
                     Processing stars...
                   </div>
                 )}
@@ -101,10 +101,10 @@ export const StarsAndForks: FC<StarsAndForksInterface> = (props) => {
         {[0, 1].map((p) => (
           <div
             key={p}
-            className="flex-1 bg-secondary py-[24px] px-[16px] gap-[16px] flex flex-col"
+            className="bg-secondary flex flex-1 flex-col gap-[16px] px-[16px] py-[24px]"
           >
             <div className="flex items-center gap-[14px]">
-              <div className="p-[8px] bg-[#28344F]">
+              <div className="bg-[#28344F] p-[8px]">
                 {p === 0 ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -140,8 +140,8 @@ export const StarsAndForks: FC<StarsAndForksInterface> = (props) => {
               </div>
             </div>
             <div className="flex items-center">
-              <div className="w-[2px] h-[30px] bg-[#8B90FF] mr-[16px]"></div>
-              <div className="text-[24px] flex-1">
+              <div className="mr-[16px] h-[30px] w-[2px] bg-[#8B90FF]"></div>
+              <div className="flex-1 text-[24px]">
                 <UtcToLocalDateRender
                   date={
                     p === 0 ? props.trending.last : props.trending.predictions
@@ -152,7 +152,7 @@ export const StarsAndForks: FC<StarsAndForksInterface> = (props) => {
               <div
                 className={clsx(
                   'text-[24px]',
-                  p === 0 ? 'text-[#B7C1FF]' : 'text-[#FFAC30]'
+                  p === 0 ? 'text-[#B7C1FF]' : 'text-[#FFAC30]',
                 )}
               >
                 <UtcToLocalDateRender
@@ -163,12 +163,12 @@ export const StarsAndForks: FC<StarsAndForksInterface> = (props) => {
                 />
               </div>
               <div>
-                <div className="rounded-full bg-[#576A9A] w-[5px] h-[5px] mx-[8px]" />
+                <div className="mx-[8px] h-[5px] w-[5px] rounded-full bg-[#576A9A]" />
               </div>
               <div
                 className={clsx(
                   'text-[24px]',
-                  p === 0 ? 'text-[#B7C1FF]' : 'text-[#FFAC30]'
+                  p === 0 ? 'text-[#B7C1FF]' : 'text-[#FFAC30]',
                 )}
               >
                 <UtcToLocalDateRender

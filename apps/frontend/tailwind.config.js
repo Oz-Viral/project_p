@@ -16,6 +16,7 @@ module.exports = {
     ),
     ...createGlobPatternsForDependencies(__dirname),
   ],
+  darkMode: ['class'],
   theme: {
     container: {
       center: true,
