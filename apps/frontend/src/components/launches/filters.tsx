@@ -2,8 +2,11 @@
 import { useCalendar } from '@kursor/frontend/components/launches/calendar.context';
 import dayjs from 'dayjs';
 import { useCallback } from 'react';
+import useDictionary from '@kursor/frontend/hooks/stores/useDictionary';
 
 export const Filters = () => {
+  const { dictionary } = useDictionary();
+
   const week = useCalendar();
   const betweenDates =
     dayjs()
@@ -50,7 +53,7 @@ export const Filters = () => {
           />
         </svg>
       </div>
-      <div>Week {week.currentWeek}</div>
+      <div>{dictionary.filters.week} </div>
       <div onClick={nextWeek}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

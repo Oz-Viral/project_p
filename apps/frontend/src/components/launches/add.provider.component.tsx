@@ -11,6 +11,7 @@ import { ApiKeyDto } from '@kursor/nestjs-libraries/dtos/integrations/api.key.dt
 import { useRouter } from 'next/navigation';
 import { TopTitle } from '@kursor/frontend/components/launches/helpers/top.title.component';
 import { isGeneral } from '@kursor/react/helpers/is.general';
+import useDictionary from '@kursor/frontend/hooks/stores/useDictionary';
 
 const resolver = classValidatorResolver(ApiKeyDto);
 
@@ -32,11 +33,13 @@ export const useAddProvider = (update?: () => void) => {
 };
 
 export const AddProviderButton: FC<{ update?: () => void }> = (props) => {
+  const { dictionary } = useDictionary();
+
   const { update } = props;
   const add = useAddProvider(update);
   return (
     <button className="bg-forth rounded-md p-[8px] text-white" onClick={add}>
-      Add Channel
+      {dictionary.launches.addChannel}
     </button>
   );
 };
