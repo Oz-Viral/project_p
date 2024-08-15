@@ -1,12 +1,29 @@
 export const dictionary = {
   test: 'hi',
+  // eng
   auth: {
-    signIn: '로그인',
-    signUp: '회원가입',
-    dontHaveAccount: '계정이 없으신가요?',
-    email: '이메일',
-    password: '비밀번호',
-    forgotPassword: '비밀번호를 잊으셨나요?',
-    signWithGoogle: '구글 계정으로 로그인',
+    signIn: 'Sign In',
+    signUp: ' Sign Up',
+    dontHaveAccount: "Don't have an account?",
+    email: 'Email',
+    password: 'Password',
+    forgotPassword: 'Forgot Password?',
+    signWithGoogle: 'Sign In with Google',
+  },
+  launches: {
+    channels: 'Channels',
+    noChannels: 'No channels',
+    addChannel: 'Add Channel',
+  },
+  filters: {
+    week: 'Week n',
+  },
+  common: {
+    save: 'save',
+    cancel: 'cancel',
+    upload: 'upload',
+    delete: 'delete',
+    edit: 'edit',
+    close: 'close',
   },
 };
