@@ -10,6 +10,8 @@ import PlausibleProvider from 'next-plausible';
 import { getDictionary } from '../utils/dictionaries';
 import localFont from 'next/font/local';
 import { ThemeProvider } from '@kursor/react/provider/theme-provider';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
@@ -21,9 +23,18 @@ const pretendard = localFont({
 export default async function AppLayout({ children }: { children: ReactNode }) {
   const lang = 'ko';
   const dictionary = await getDictionary(lang);
+  const locale = await getLocale();
+
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
 
   return (
-    <html suppressHydrationWarning className={pretendard.variable}>
+    <html
+      suppressHydrationWarning
+      className={pretendard.variable}
+      lang={locale}
+    >
       <head>
         <link
           rel="icon"
@@ -39,7 +50,11 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           disableTransitionOnChange
         >
           <PlausibleProvider domain="kursor.com">
-            <LayoutContext dict={dictionary}>{children}</LayoutContext>
+            <LayoutContext dict={dictionary}>
+              <NextIntlClientProvider messages={messages}>
+                {children}
+              </NextIntlClientProvider>
+            </LayoutContext>
           </PlausibleProvider>
         </ThemeProvider>
       </body>
