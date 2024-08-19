@@ -2,27 +2,28 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { SubscriptionService } from '@kursor/nestjs-libraries/database/prisma/subscriptions/subscription.service';
 import { StripeService } from '@kursor/nestjs-libraries/services/stripe.service';
 import { GetOrgFromRequest } from '@kursor/nestjs-libraries/user/org.from.request';
-import { Organization } from '@prisma/client';
+import { Organization, User } from '@prisma/client';
 import { BillingSubscribeDto } from '@kursor/nestjs-libraries/dtos/billing/billing.subscribe.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { GetUserFromRequest } from '@kursor/nestjs-libraries/user/user.from.request';
 
 @ApiTags('Billing')
 @Controller('/billing')
 export class BillingController {
   constructor(
     private _subscriptionService: SubscriptionService,
-    private _stripeService: StripeService
+    private _stripeService: StripeService,
   ) {}
 
   @Get('/check/:id')
   async checkId(
     @GetOrgFromRequest() org: Organization,
-    @Param('id') body: string
+    @Param('id') body: string,
   ) {
     return {
       exists: !!(await this._subscriptionService.checkSubscription(
         org.id,
-        body
+        body,
       )),
     };
   }
@@ -30,7 +31,7 @@ export class BillingController {
   @Post('/subscribe')
   subscribe(
     @GetOrgFromRequest() org: Organization,
-    @Body() body: BillingSubscribeDto
+    @Body() body: BillingSubscribeDto,
   ) {
     return this._stripeService.subscribe(org.id, body);
   }
@@ -38,7 +39,7 @@ export class BillingController {
   @Get('/portal')
   async modifyPayment(@GetOrgFromRequest() org: Organization) {
     const customer = await this._stripeService.getCustomerByOrganizationId(
-      org.id
+      org.id,
     );
     const { url } = await this._stripeService.createBillingPortalLink(customer);
     return {
@@ -59,7 +60,7 @@ export class BillingController {
   @Post('/prorate')
   prorate(
     @GetOrgFromRequest() org: Organization,
-    @Body() body: BillingSubscribeDto
+    @Body() body: BillingSubscribeDto,
   ) {
     return this._stripeService.prorate(org.id, body);
   }
@@ -67,8 +68,25 @@ export class BillingController {
   @Post('/lifetime')
   async lifetime(
     @GetOrgFromRequest() org: Organization,
-    @Body() body: { code: string }
+    @Body() body: { code: string },
   ) {
     return this._stripeService.lifetimeDeal(org.id, body.code);
+  }
+
+  @Post('/add-subscription')
+  async addSubscription(
+    @Body() body: { subscription: string },
+    @GetUserFromRequest() user: User,
+    @GetOrgFromRequest() org: Organization,
+  ) {
+    if (!user.isSuperAdmin) {
+      throw new Error('Unauthorized');
+    }
+
+    await this._subscriptionService.addSubscription(
+      org.id,
+      user.id,
+      body.subscription,
+    );
   }
 }
