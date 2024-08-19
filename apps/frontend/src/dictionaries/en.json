@@ -7,7 +7,14 @@
     "email": "Email",
     "password": "Password",
     "forgotPassword": "Forgot Password?",
-    "signWithGoogle": "Sign In with Google"
+    "signWithGoogle": "Sign In with Google",
+    "company": "Name / Organization Name",
+    "agreeCommentPrefix": "By registering you agree to our ",
+    "termsOfService": "Terms of Service",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy",
+    "agreeCommentSuffix": "",
+    "createAccount": "Create Account"
   },
   "launches": {
     "channels": "Channels",

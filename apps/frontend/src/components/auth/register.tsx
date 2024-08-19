@@ -1,22 +1,28 @@
 'use client';
 
-import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import Link from 'next/link';
 import { Button } from '@kursor/react/form/button';
-import { Input } from '@kursor/react/form/input';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
 import { CreateOrgUserDto } from '@kursor/nestjs-libraries/dtos/auth/create.org.user.dto';
-import { GithubProvider } from '@kursor/frontend/components/auth/providers/github.provider';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { LoadingComponent } from '@kursor/frontend/components/layout/loading';
 import interClass from '@kursor/react/helpers/inter.font';
-import { isGeneral } from '@kursor/react/helpers/is.general';
 import clsx from 'clsx';
 import { GoogleProvider } from '@kursor/frontend/components/auth/providers/google.provider';
 import { useFireEvents } from '@kursor/helpers/utils/use.fire.events';
 import { useTranslations } from 'next-intl';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@kursor/react/components/ui/form';
+import { Input } from '@kursor/react/components/ui/input';
 
 type Inputs = {
   email: string;
@@ -130,79 +136,125 @@ export function RegisterAfter({
   }, []);
 
   return (
-    <FormProvider {...form}>
+    <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div>
           <h1 className="mb-4 cursor-pointer text-left text-3xl font-bold dark:text-white">
             {t('signUp')}
           </h1>
         </div>
-        {!isAfterProvider &&
-          (!isGeneral() ? <GithubProvider /> : <GoogleProvider />)}
+        {!isAfterProvider && <GoogleProvider />}
         {!isAfterProvider && (
-          <div className="relative mb-[24px] mt-[24px] h-[20px]">
-            <div className="absolute top-[50%] h-[1px] w-full -translate-y-[50%] bg-[#28344F]" />
-            <div
-              className={`absolute z-[1] ${interClass} left-0 top-0 flex w-full items-center justify-center`}
-            >
-              <div className="px-[16px]">OR</div>
+          <div className="w-full">
+            <div className="my-6 flex items-center gap-3">
+              <div className="bg-gray h-px w-full" />
+              <p className="text-gray text-base"> OR </p>
+              <div className="bg-gray h-px w-full" />
             </div>
           </div>
         )}
         <div>
           {!isAfterProvider && (
             <>
-              <Input
-                label="Email"
-                {...form.register('email')}
-                type="email"
-                placeholder="Email Address"
+              <FormField
+                name="email"
+                render={({ field }) => (
+                  <FormItem className="mb-4">
+                    {/* className="text-gray-500 dark:text-gray-200" */}
+                    <FormLabel>{t('email')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="dark:placeholder-zinc-400"
+                        // placeholder="Your email address"
+                        type="text"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            form.handleSubmit(onSubmit);
+                          }
+                        }}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              <Input
-                label="Password"
-                {...form.register('password')}
-                autoComplete="off"
-                type="password"
-                placeholder="Password"
+              <FormField
+                name="password"
+                render={({ field }) => (
+                  <FormItem className="mb-4">
+                    <FormLabel>{t('password')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="dark:placeholder-zinc-400"
+                        // placeholder="Your password"
+                        type="password"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            form.handleSubmit(onSubmit);
+                          }
+                        }}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
             </>
           )}
-          <Input
-            label="Company"
-            {...form.register('company')}
-            autoComplete="off"
-            type="text"
-            placeholder="Company"
+          <FormField
+            name="company"
+            render={({ field }) => (
+              <FormItem className="mb-4">
+                {/* className="text-gray-500 dark:text-gray-200" */}
+                <FormLabel>{t('company')}</FormLabel>
+                <FormControl>
+                  <Input
+                    className="dark:placeholder-zinc-400"
+                    // placeholder="Your email address"
+                    type="text"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        form.handleSubmit(onSubmit);
+                      }
+                    }}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
         </div>
         <div className={clsx('text-[12px]', interClass)}>
-          By registering you agree to our{' '}
+          {t('agreeCommentPrefix')}
           <a href={`${rootDomain}/terms`} className="underline hover:font-bold">
-            Terms of Service
-          </a>{' '}
-          and{' '}
+            {t('termsOfService')}
+          </a>
+          <span className="px-1">{t('and')}</span>
           <a
             href={`${rootDomain}/privacy`}
             className="underline hover:font-bold"
           >
-            Privacy Policy
+            {t('privacyPolicy')}
           </a>
+          {t('agreeCommentSuffix')}
         </div>
         <div className="mt-6 text-center">
           <div className="flex w-full">
             <Button type="submit" className="flex-1" loading={loading}>
-              Create Account
+              {t('createAccount')}
             </Button>
           </div>
           <p className="mt-4 text-sm">
-            Already Have An Account?{' '}
-            <Link href="/auth/login" className="cursor-pointer underline">
-              {' '}
-              Sign In
+            {t('haveAccount')}
+            <Link href="/auth/login" className="ml-2 cursor-pointer underline">
+              {t('signIn')}
             </Link>
           </p>
         </div>
       </form>
-    </FormProvider>
+    </Form>
   );
 }

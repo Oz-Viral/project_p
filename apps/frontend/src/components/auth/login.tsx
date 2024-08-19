@@ -6,9 +6,6 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { classValidatorResolver } from '@hookform/resolvers/class-validator';
 import { LoginUserDto } from '@kursor/nestjs-libraries/dtos/auth/login.user.dto';
-import { GithubProvider } from '@kursor/frontend/components/auth/providers/github.provider';
-import interClass from '@kursor/react/helpers/inter.font';
-import { isGeneral } from '@kursor/react/helpers/is.general';
 import { GoogleProvider } from '@kursor/frontend/components/auth/providers/google.provider';
 import { Input } from '@kursor/react/components/ui/input';
 import {

@@ -7,7 +7,15 @@
     "email": "이메일",
     "password": "비밀번호",
     "forgotPassword": "비밀번호를 잊으셨나요?",
-    "signWithGoogle": "구글 계정으로 로그인"
+    "signWithGoogle": "구글 계정으로 로그인",
+    "company": "이름 또는 조직명",
+    "agreeCommentPrefix": "회원가입시 ",
+    "termsOfService": "이용약관",
+    "and": "과",
+    "privacyPolicy": "개인정보 보호정책",
+    "agreeCommentSuffix": "에 동의합니다.",
+    "createAccount": "계정 생성",
+    "haveAccount": "이미 계정이 있으신가요?"
   },
   "launches": {
     "channels": "채널",
