@@ -10,7 +10,6 @@ import { GithubProvider } from '@kursor/frontend/components/auth/providers/githu
 import interClass from '@kursor/react/helpers/inter.font';
 import { isGeneral } from '@kursor/react/helpers/is.general';
 import { GoogleProvider } from '@kursor/frontend/components/auth/providers/google.provider';
-import useDictionary from '../../hooks/stores/useDictionary';
 import { Input } from '@kursor/react/components/ui/input';
 import {
   Form,
@@ -21,6 +20,7 @@ import {
   FormMessage,
 } from '@kursor/react/components/ui/form';
 import { Button } from '@kursor/react/components/ui/button';
+import { useTranslations } from 'next-intl';
 
 type Inputs = {
   email: string;
@@ -31,7 +31,7 @@ type Inputs = {
 
 export function Login() {
   const [loading, setLoading] = useState(false);
-  const { dictionary } = useDictionary();
+  const t = useTranslations('auth');
 
   const resolver = useMemo(() => {
     return classValidatorResolver(LoginUserDto);
@@ -68,7 +68,7 @@ export function Login() {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div>
           <h1 className="mb-4 cursor-pointer text-left text-3xl font-bold">
-            {dictionary.auth.signIn}
+            {t('signIn')}
           </h1>
         </div>
 
@@ -95,7 +95,7 @@ export function Login() {
             render={({ field }) => (
               <FormItem className="mb-4">
                 {/* className="text-gray-500 dark:text-gray-200" */}
-                <FormLabel>{dictionary.auth.email}</FormLabel>
+                <FormLabel>{t('email')}</FormLabel>
                 <FormControl>
                   <Input
                     className="dark:placeholder-zinc-400"
@@ -117,7 +117,7 @@ export function Login() {
             name="password"
             render={({ field }) => (
               <FormItem className="mb-4">
-                <FormLabel>{dictionary.auth.password}</FormLabel>
+                <FormLabel>{t('password')}</FormLabel>
                 <FormControl>
                   <Input
                     className="dark:placeholder-zinc-400"
@@ -139,18 +139,18 @@ export function Login() {
         <div className="mt-6 text-center">
           <div className="flex w-full">
             <Button type="submit" className="flex-1" loading={loading}>
-              {dictionary.auth.signIn}
+              {t('signIn')}
             </Button>
           </div>
           <p className="mt-4 text-sm">
-            {dictionary.auth.dontHaveAccount}
+            {t('dontHaveAccount')}
             <Link href="/auth" className="ml-2 cursor-pointer underline">
-              {dictionary.auth.signUp}
+              {t('signUp')}
             </Link>
           </p>
           <p className="mt-4 text-sm text-red-600">
             <Link href="/auth/forgot" className="cursor-pointer underline">
-              {dictionary.auth.forgotPassword}
+              {t('forgotPassword')}
             </Link>
           </p>
         </div>

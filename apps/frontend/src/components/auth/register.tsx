@@ -16,7 +16,7 @@ import { isGeneral } from '@kursor/react/helpers/is.general';
 import clsx from 'clsx';
 import { GoogleProvider } from '@kursor/frontend/components/auth/providers/google.provider';
 import { useFireEvents } from '@kursor/helpers/utils/use.fire.events';
-import useDictionary from '../../hooks/stores/useDictionary';
+import { useTranslations } from 'next-intl';
 
 type Inputs = {
   email: string;
@@ -77,7 +77,7 @@ export function RegisterAfter({
   const getQuery = useSearchParams();
   const router = useRouter();
   const fireEvents = useFireEvents();
-  const { dictionary } = useDictionary();
+  const t = useTranslations('auth');
 
   const isAfterProvider = useMemo(() => {
     return !!token && !!provider;
@@ -134,7 +134,7 @@ export function RegisterAfter({
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div>
           <h1 className="mb-4 cursor-pointer text-left text-3xl font-bold dark:text-white">
-            {dictionary.auth.signUp}
+            {t('signUp')}
           </h1>
         </div>
         {!isAfterProvider &&
