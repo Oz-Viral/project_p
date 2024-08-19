@@ -7,7 +7,6 @@ import LayoutContext from '@kursor/frontend/components/layout/layout.context';
 import { ReactNode } from 'react';
 import { isGeneral } from '@kursor/react/helpers/is.general';
 import PlausibleProvider from 'next-plausible';
-import { getDictionary } from '../utils/dictionaries';
 import localFont from 'next/font/local';
 import { ThemeProvider } from '@kursor/react/provider/theme-provider';
 import { NextIntlClientProvider } from 'next-intl';
@@ -21,8 +20,6 @@ const pretendard = localFont({
 });
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
-  const lang = 'ko';
-  const dictionary = await getDictionary(lang);
   const locale = await getLocale();
 
   // Providing all messages to the client
