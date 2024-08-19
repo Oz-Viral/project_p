@@ -50,7 +50,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           disableTransitionOnChange
         >
           <PlausibleProvider domain="kursor.com">
-            <LayoutContext dict={dictionary}>
+            <LayoutContext>
               <NextIntlClientProvider messages={messages}>
                 {children}
               </NextIntlClientProvider>

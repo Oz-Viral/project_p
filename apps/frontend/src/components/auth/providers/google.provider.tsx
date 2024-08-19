@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import interClass from '@kursor/react/helpers/inter.font';
-import useDictionary from '../../../hooks/stores/useDictionary';
 import { Button } from '@kursor/react/form/button';
+import { useTranslations } from 'next-intl';
 
 export const GoogleProvider = () => {
   const fetch = useFetch();
@@ -11,7 +11,7 @@ export const GoogleProvider = () => {
     window.location.href = link;
   }, []);
 
-  const { dictionary } = useDictionary();
+  const t = useTranslations('auth');
 
   return (
     <Button
@@ -43,7 +43,7 @@ export const GoogleProvider = () => {
           />
         </svg>
       </div>
-      <div className="ml-2">{dictionary.auth.signWithGoogle}</div>
+      <div className="ml-2">{t('signWithGoogle')}</div>
     </Button>
   );
 };
