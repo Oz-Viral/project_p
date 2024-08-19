@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { FC, useCallback } from 'react';
-import { Post as PrismaPost } from '.prisma/client';
+import { Post as PrismaPost } from '@prisma/client';
 import { Providers } from '@kursor/frontend/components/launches/providers/show.all.providers';
 
 export const PreviewPopupDynamic: FC<{
@@ -14,7 +14,7 @@ export const PreviewPopupDynamic: FC<{
   };
 }> = (props) => {
   const { component: ProviderComponent } = Providers.find(
-    (p) => p.identifier === props.providerId
+    (p) => p.identifier === props.providerId,
   )!;
 
   return (

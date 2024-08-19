@@ -18,6 +18,8 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.627.0",
     "@aws-sdk/s3-request-presigner": "^3.410.0",
+    "@blueprintjs/core": "^5.11.0",
+    "@blueprintjs/icons": "^5.11.0",
     "@casl/ability": "^6.5.0",
     "@copilotkit/react-core": "1.1.0",
     "@copilotkit/react-textarea": "1.1.0",
@@ -90,6 +92,7 @@
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "mime-types": "^2.1.35",
+    "mobx-react-lite": "^4.0.7",
     "multer": "^1.4.5-lts.1",
     "nestjs-command": "^3.1.4",
     "next": "^14.2.4",

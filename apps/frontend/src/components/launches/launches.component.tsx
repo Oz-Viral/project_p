@@ -19,10 +19,9 @@ import { Integration } from '@prisma/client';
 import ImageWithFallback from '@kursor/react/helpers/image.with.fallback';
 import { useToaster } from '@kursor/react/toaster/toaster';
 import { useFireEvents } from '@kursor/helpers/utils/use.fire.events';
-import useDictionary from '@kursor/frontend/hooks/stores/useDictionary';
-
+import { useTranslations } from 'next-intl';
 export const LaunchesComponent = () => {
-  const { dictionary } = useDictionary();
+  const t = useTranslations('luanches');
   const fetch = useFetch();
   const router = useRouter();
   const search = useSearchParams();
@@ -120,12 +119,10 @@ export const LaunchesComponent = () => {
         <div className="relative flex flex-1">
           <div className="scrollbar scrollbar-thumb-tableBorder scrollbar-track-secondary absolute grid h-full w-full grid-cols-[220px_minmax(0,1fr)] gap-[30px] overflow-hidden overflow-y-scroll">
             <div className="flex min-h-[100%] w-[220px] flex-col gap-[24px] p-[16px]">
-              <h2 className="text-[20px]">{dictionary.launches.channels}</h2>
+              <h2 className="text-[20px]">{t('channels')}</h2>
               <div className="flex flex-col gap-[16px]">
                 {sortedIntegrations.length === 0 && (
-                  <div className="text-[12px]">
-                    {dictionary.launches.noChannels}
-                  </div>
+                  <div className="text-[12px]">{t('noChannels')}</div>
                 )}
                 {sortedIntegrations.map((integration) => (
                   <div

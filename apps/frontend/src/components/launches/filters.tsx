@@ -2,11 +2,9 @@
 import { useCalendar } from '@kursor/frontend/components/launches/calendar.context';
 import dayjs from 'dayjs';
 import { useCallback } from 'react';
-import useDictionary from '@kursor/frontend/hooks/stores/useDictionary';
 import { useTranslations } from 'next-intl';
 
 export const Filters = () => {
-  const { dictionary } = useDictionary();
   const t = useTranslations('filters');
 
   const week = useCalendar();

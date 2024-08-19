@@ -11,6 +11,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
     "plugins": [
       {
         "name": "next"
