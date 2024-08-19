@@ -5,19 +5,19 @@ import { IntegrationService } from '@kursor/nestjs-libraries/database/prisma/int
 import { OrganizationService } from '@kursor/nestjs-libraries/database/prisma/organizations/organization.service';
 import { Organization } from '@prisma/client';
 import dayjs from 'dayjs';
-import { makeId } from '@gitroom/nestjs-libraries/services/make.is';
+import { makeId } from '@kursor/nestjs-libraries/services/make.is';
 
 @Injectable()
 export class SubscriptionService {
   constructor(
     private readonly _subscriptionRepository: SubscriptionRepository,
     private readonly _integrationService: IntegrationService,
-    private readonly _organizationService: OrganizationService
+    private readonly _organizationService: OrganizationService,
   ) {}
 
   getSubscriptionByOrganizationId(organizationId: string) {
     return this._subscriptionRepository.getSubscriptionByOrganizationId(
-      organizationId
+      organizationId,
     );
   }
 
@@ -41,75 +41,75 @@ export class SubscriptionService {
     await this.modifySubscription(
       customerId,
       pricing.FREE.channel || 0,
-      'FREE'
+      'FREE',
     );
     return this._subscriptionRepository.deleteSubscriptionByCustomerId(
-      customerId
+      customerId,
     );
   }
 
   updateCustomerId(organizationId: string, customerId: string) {
     return this._subscriptionRepository.updateCustomerId(
       organizationId,
-      customerId
+      customerId,
     );
   }
 
   checkSubscription(organizationId: string, subscriptionId: string) {
     return this._subscriptionRepository.checkSubscription(
       organizationId,
-      subscriptionId
+      subscriptionId,
     );
   }
 
   updateConnectedStatus(account: string, accountCharges: boolean) {
     return this._subscriptionRepository.updateConnectedStatus(
       account,
-      accountCharges
+      accountCharges,
     );
   }
 
   async modifySubscription(
     customerId: string,
     totalChannels: number,
-    billing: 'FREE' | 'STANDARD' | 'PRO'
+    billing: 'FREE' | 'STANDARD' | 'PRO',
   ) {
     const getOrgByCustomerId =
       await this._subscriptionRepository.getOrganizationByCustomerId(
-        customerId
+        customerId,
       );
 
     const getCurrentSubscription =
       (await this._subscriptionRepository.getSubscriptionByCustomerId(
-        customerId
+        customerId,
       ))!;
     const from = pricing[getCurrentSubscription?.subscriptionTier || 'FREE'];
     const to = pricing[billing];
 
     const currentTotalChannels = (
       await this._integrationService.getIntegrationsList(
-        getOrgByCustomerId?.id!
+        getOrgByCustomerId?.id!,
       )
     ).filter((f) => !f.disabled);
 
     if (currentTotalChannels.length > totalChannels) {
       await this._integrationService.disableIntegrations(
         getOrgByCustomerId?.id!,
-        currentTotalChannels.length - totalChannels
+        currentTotalChannels.length - totalChannels,
       );
     }
 
     if (from.team_members && !to.team_members) {
       await this._organizationService.disableOrEnableNonSuperAdminUsers(
         getOrgByCustomerId?.id!,
-        true
+        true,
       );
     }
 
     if (!from.team_members && to.team_members) {
       await this._organizationService.disableOrEnableNonSuperAdminUsers(
         getOrgByCustomerId?.id!,
-        false
+        false,
       );
     }
 
@@ -139,7 +139,7 @@ export class SubscriptionService {
     period: 'MONTHLY' | 'YEARLY',
     cancelAt: number | null,
     code?: string,
-    org?: string
+    org?: string,
   ) {
     if (!code) {
       await this.modifySubscription(customerId, totalChannels, billing);
@@ -152,7 +152,7 @@ export class SubscriptionService {
       period,
       cancelAt,
       code,
-      org ? { id: org } : undefined
+      org ? { id: org } : undefined,
     );
   }
 
@@ -179,7 +179,7 @@ export class SubscriptionService {
 
     const totalUse = await this._subscriptionRepository.getCreditsFrom(
       organization.id,
-      checkFromMonth
+      checkFromMonth,
     );
 
     return {
@@ -197,9 +197,7 @@ export class SubscriptionService {
       'MONTHLY',
       null,
       undefined,
-       orgId
+      orgId,
     );
   }
-
-
 }
