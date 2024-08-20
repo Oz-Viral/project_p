@@ -15,7 +15,15 @@
     "privacyPolicy": "개인정보 보호정책",
     "agreeCommentSuffix": "에 동의합니다.",
     "createAccount": "계정 생성",
-    "haveAccount": "이미 계정이 있으신가요?"
+    "haveAccount": "이미 계정이 있으신가요?",
+    "passwordReset": "비밀번호 초기화",
+    "sendPasswordResetEmail": "메일 전송",
+    "goBackToLogin": "로그인으로 돌아가기",
+    "afterSendNotification": "작성하신 이메일로 비밀번호 초기화 링크를 발송하였습니다.",
+    "newPassword": "신규 비밀번호",
+    "repeatPassword": "비밀번호 확인",
+    "changePassword": "비밀번호 변경",
+    "passwordChangeSuccessNotification": "비밀번호가 성공적으로 변경되었습니다. 변경된 비밀번호로 로그인해주세요."
   },
   "launches": {
     "channels": "채널",

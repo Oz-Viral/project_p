@@ -13,7 +13,7 @@ export class EmailService {
 
     console.log('Sending email to', to);
     const sends = await resend.emails.send({
-      from: process.env.IS_GENERAL === 'true' ? 'P <noreply@oz-test.p-e.kr>' : 'P <noreply@oz-test.p-e.kr>',
+      from: 'Kursor <noreply@kursor.kr>',
       to,
       subject,
       html,

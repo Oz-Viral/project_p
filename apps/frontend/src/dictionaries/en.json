@@ -14,7 +14,16 @@
     "and": "and",
     "privacyPolicy": "Privacy Policy",
     "agreeCommentSuffix": "",
-    "createAccount": "Create Account"
+    "createAccount": "Create Account",
+    "haveAccount": "Already Have An Account?",
+    "passwordReset": "Reset Password",
+    "sendPasswordResetEmail": "Send Password Reset Email",
+    "goBackToLogin": "Go back to login",
+    "afterSendNotification": "We have send you an email with a link to reset your password.",
+    "newPassword": "New Password",
+    "repeatPassword": "Repeat Password",
+    "changePassword": "Change Password",
+    "passwordChangeSuccessNotification": "We successfully reset your password. You can now login with your new password."
   },
   "launches": {
     "channels": "Channels",
