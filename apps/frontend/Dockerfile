@@ -43,7 +43,7 @@ COPY --from=build /app/package.json ./
 ENV NODE_ENV=production
 
 # Expose the Next.js default port
-EXPOSE 3000
+EXPOSE 4200
 
 # Start the Next.js application
-CMD ["pnpm", "start"]
+CMD ["pnpm", "start:frontend", "--port", "4200"]
