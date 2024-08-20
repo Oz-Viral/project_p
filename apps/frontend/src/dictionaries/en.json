@@ -1,5 +1,12 @@
 {
   "test": "hi",
+  "topMenu": {
+    "Calendar": "Calendar",
+    "Dashboard": "Dashboard",
+    "Settings": "Settings",
+    "Messages": "Messages",
+    "Billing": "Billing"
+  },
   "auth": {
     "signIn": "Sign In",
     "signUp": " Sign Up",
@@ -32,6 +39,16 @@
   },
   "filters": {
     "week": "Week {week}"
+  },
+  "calendar": {
+    "": "",
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday",
+    "Sunday": "Sunday"
   },
   "common": {
     "save": "save",

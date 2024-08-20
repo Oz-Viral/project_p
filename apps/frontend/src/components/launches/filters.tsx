@@ -13,13 +13,13 @@ export const Filters = () => {
       .year(week.currentYear)
       .isoWeek(week.currentWeek)
       .startOf('isoWeek')
-      .format('DD/MM/YYYY') +
+      .format('YY.MM.DD') +
     ' - ' +
     dayjs()
       .year(week.currentYear)
       .isoWeek(week.currentWeek)
       .endOf('isoWeek')
-      .format('DD/MM/YYYY');
+      .format('YY.MM.DD');
 
   const nextWeek = useCallback(() => {
     week.setFilters({

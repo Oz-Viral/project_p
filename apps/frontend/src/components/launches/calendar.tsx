@@ -22,6 +22,7 @@ import { useToaster } from '@kursor/react/toaster/toaster';
 import { useUser } from '@kursor/frontend/components/layout/user.context';
 import { IntegrationContext } from '@kursor/frontend/components/launches/helpers/use.integration';
 import { PreviewPopup } from '@kursor/frontend/components/marketplace/special.message';
+import { useTranslations } from 'next-intl';
 
 export const days = [
   '',
@@ -62,6 +63,7 @@ export const hours = [
 
 export const Calendar = () => {
   const { currentWeek, currentYear, comments } = useCalendar();
+  const t = useTranslations('calendar');
 
   const firstDay = useMemo(() => {
     return dayjs().year(currentYear).isoWeek(currentWeek).isoWeekday(1);
@@ -76,9 +78,9 @@ export const Calendar = () => {
               className="border-tableBorder bg-input sticky top-0 z-[100] flex h-[36px] items-center justify-center gap-[4px] border-b border-l border-t text-[14px]"
               key={day}
             >
-              <div>{day} </div>
+              <div>{t(day)} </div>
               <div className="text-[12px]">
-                {day && `(${firstDay.add(index - 1, 'day').format('DD/MM')})`}
+                {day && `(${firstDay.add(index - 1, 'day').format('MM.DD')})`}
               </div>
             </div>
           ))}

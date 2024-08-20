@@ -21,7 +21,7 @@ import { useToaster } from '@kursor/react/toaster/toaster';
 import { useFireEvents } from '@kursor/helpers/utils/use.fire.events';
 import { useTranslations } from 'next-intl';
 export const LaunchesComponent = () => {
-  const t = useTranslations('luanches');
+  const t = useTranslations('launches');
   const fetch = useFetch();
   const router = useRouter();
   const search = useSearchParams();

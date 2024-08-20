@@ -6,48 +6,32 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { useUser } from '@kursor/frontend/components/layout/user.context';
 import { isGeneral } from '@kursor/react/helpers/is.general';
+import { useTranslations } from 'next-intl';
 
 const general = isGeneral();
 
 export const menuItems = [
-  ...(!general
-    ? [
-        {
-          name: 'Analytics',
-          icon: 'analytics',
-          path: '/analytics',
-        },
-      ]
-    : []),
   {
-    name: isGeneral() ? 'Calendar' : 'Launches',
+    name: 'Calendar',
     icon: 'launches',
     path: '/launches',
   },
-  ...(general
-    ? [
-        {
-          name: 'Analytics',
-          icon: 'analytics',
-          path: '/analytics',
-        },
-      ]
-    : []),
-  ...(!general
-    ? [
-        {
-          name: 'Settings',
-          icon: 'settings',
-          path: '/settings',
-          role: ['ADMIN', 'SUPERADMIN'],
-        },
-      ]
-    : []),
   {
-    name: 'Marketplace',
-    icon: 'marketplace',
-    path: '/marketplace',
+    name: 'Dashboard',
+    icon: 'analytics',
+    path: '/analytics',
   },
+  {
+    name: 'Settings',
+    icon: 'settings',
+    path: '/settings',
+    role: ['ADMIN', 'SUPERADMIN'],
+  },
+  // {
+  //   name: 'Marketplace',
+  //   icon: 'marketplace',
+  //   path: '/marketplace',
+  // },
   {
     name: 'Messages',
     icon: 'messages',
@@ -65,10 +49,11 @@ export const menuItems = [
 export const TopMenu: FC = () => {
   const path = usePathname();
   const user = useUser();
+  const t = useTranslations('topMenu');
 
   return (
-    <div className="flex flex-col h-full animate-normalFadeDown">
-      <ul className="gap-5 flex flex-1 items-center text-[18px]">
+    <div className="animate-normalFadeDown flex h-full flex-col">
+      <ul className="flex flex-1 items-center gap-5 text-[18px]">
         {menuItems
           .filter((f) => {
             if (f.requireBilling && process.env.isBillingEnabled === 'false') {
@@ -85,7 +70,7 @@ export const TopMenu: FC = () => {
                 prefetch={true}
                 href={item.path}
                 className={clsx(
-                  'flex gap-2 items-center box',
+                  'box flex items-center gap-2',
                   menuItems
                     .filter((f) => {
                       if (f.role) {
@@ -96,10 +81,10 @@ export const TopMenu: FC = () => {
                     .map((p) => (path.indexOf(p.path) > -1 ? index : -1))
                     .indexOf(index) === index
                     ? 'text-primary showbox'
-                    : 'text-gray'
+                    : 'text-gray',
                 )}
               >
-                <span>{item.name}</span>
+                <span>{t(item.name)}</span>
               </Link>
             </li>
           ))}

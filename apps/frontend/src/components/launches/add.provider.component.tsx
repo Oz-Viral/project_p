@@ -13,7 +13,6 @@ import { TopTitle } from '@kursor/frontend/components/launches/helpers/top.title
 import { isGeneral } from '@kursor/react/helpers/is.general';
 import { useTranslations } from 'next-intl';
 const resolver = classValidatorResolver(ApiKeyDto);
-const t = useTranslations('launches');
 
 export const useAddProvider = (update?: () => void) => {
   const modal = useModals();
@@ -35,6 +34,7 @@ export const useAddProvider = (update?: () => void) => {
 export const AddProviderButton: FC<{ update?: () => void }> = (props) => {
   const { update } = props;
   const add = useAddProvider(update);
+  const t = useTranslations('launches');
   return (
     <button className="bg-forth rounded-md p-[8px] text-white" onClick={add}>
       {t('addChannel')}

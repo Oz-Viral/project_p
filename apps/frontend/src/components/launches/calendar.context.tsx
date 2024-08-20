@@ -40,28 +40,40 @@ export interface Integrations {
 }
 
 function getWeekNumber(date: Date) {
-    // Copy date so don't modify original
-    const targetDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-    // Set to nearest Thursday: current date + 4 - current day number
-    // Make Sunday's day number 7
-    targetDate.setUTCDate(targetDate.getUTCDate() + 4 - (targetDate.getUTCDay() || 7));
-    // Get first day of year
-    const yearStart = new Date(Date.UTC(targetDate.getUTCFullYear(), 0, 1));
-    // Calculate full weeks to nearest Thursday
-    return Math.ceil((((targetDate.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
+  // Copy date so don't modify original
+  const targetDate = new Date(
+    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
+  );
+  // Set to nearest Thursday: current date + 4 - current day number
+  // Make Sunday's day number 7
+  targetDate.setUTCDate(
+    targetDate.getUTCDate() + 4 - (targetDate.getUTCDay() || 7),
+  );
+  // Get first day of year
+  const yearStart = new Date(Date.UTC(targetDate.getUTCFullYear(), 0, 1));
+  // Calculate full weeks to nearest Thursday
+  return Math.ceil(
+    ((targetDate.getTime() - yearStart.getTime()) / 86400000 + 1) / 7,
+  );
 }
 
 function isISOWeek(date: Date, weekNumber: number): boolean {
-    // Copy date so don't modify original
-    const targetDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-    // Set to nearest Thursday: current date + 4 - current day number
-    // Make Sunday's day number 7
-    targetDate.setUTCDate(targetDate.getUTCDate() + 4 - (targetDate.getUTCDay() || 7));
-    // Get first day of year
-    const yearStart = new Date(Date.UTC(targetDate.getUTCFullYear(), 0, 1));
-    // Calculate full weeks to nearest Thursday
-    const isoWeekNo = Math.ceil((((targetDate.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
-    return isoWeekNo === weekNumber;
+  // Copy date so don't modify original
+  const targetDate = new Date(
+    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
+  );
+  // Set to nearest Thursday: current date + 4 - current day number
+  // Make Sunday's day number 7
+  targetDate.setUTCDate(
+    targetDate.getUTCDate() + 4 - (targetDate.getUTCDay() || 7),
+  );
+  // Get first day of year
+  const yearStart = new Date(Date.UTC(targetDate.getUTCFullYear(), 0, 1));
+  // Calculate full weeks to nearest Thursday
+  const isoWeekNo = Math.ceil(
+    ((targetDate.getTime() - yearStart.getTime()) / 86400000 + 1) / 7,
+  );
+  return isoWeekNo === weekNumber;
 }
 
 export const CalendarWeekProvider: FC<{
@@ -77,10 +89,11 @@ export const CalendarWeekProvider: FC<{
 
   useEffect(() => {
     (async () => {
+      // TODO
       if (isGeneral()) {
         return [];
       }
-      setTrendings(await (await fetch('/posts/predict-trending')).json());
+      // setTrendings(await (await fetch('/posts/predict-trending')).json());
     })();
   }, []);
 
@@ -97,13 +110,13 @@ export const CalendarWeekProvider: FC<{
     (filters: { currentWeek: number; currentYear: number }) => {
       setFilters(filters);
       router.replace(
-        `/launches?week=${filters.currentWeek}&year=${filters.currentYear}`
+        `/launches?week=${filters.currentWeek}&year=${filters.currentYear}`,
       );
       setTimeout(() => {
         mutate('/posts');
       });
     },
-    [filters]
+    [filters],
   );
 
   const params = useMemo(() => {
@@ -119,7 +132,7 @@ export const CalendarWeekProvider: FC<{
       const data = (await fetch(`${url}?${params}`)).json();
       return data;
     },
-    [filters]
+    [filters],
   );
 
   const swr = useSWR(`/posts`, loadData, {
@@ -142,10 +155,10 @@ export const CalendarWeekProvider: FC<{
             };
           }
           return post;
-        })
+        }),
       );
     },
-    [posts, internalData]
+    [posts, internalData],
   );
 
   useEffect(() => {
