@@ -59,7 +59,7 @@ export const AddProviderButton = () => {
               key={item.identifier}
               onClick={getSocialLink(item.identifier)}
               className={
-                'bg-input flex h-[100px] w-[120px] cursor-pointer flex-col items-center justify-center gap-[10px]'
+                'flex h-[100px] w-[120px] cursor-pointer flex-col items-center justify-center gap-[10px] rounded-lg bg-zinc-200 hover:bg-zinc-300'
               }
             >
               <div>
@@ -80,7 +80,7 @@ export const AddProviderButton = () => {
                   />
                 )}
               </div>
-              <div>{item.name}</div>
+              <div className="text-sm">{item.name}</div>
             </div>
           ))}
         </div>
