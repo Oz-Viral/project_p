@@ -14,10 +14,12 @@ RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
 
 # Install dependencies including dev dependencies
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 # Copy the rest of the project files
 COPY . .
+
+RUN npx prisma generate
 
 # Build the Next.js application
 RUN pnpm nx build frontend --configuration=production

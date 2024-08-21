@@ -19,6 +19,8 @@ RUN pnpm install
 # Copy the entire project to the container
 COPY . .
 
+RUN npx prisma generate
+
 # Build the backend application
 RUN pnpm nx build backend --configuration=production
 
