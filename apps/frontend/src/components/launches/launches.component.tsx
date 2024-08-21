@@ -1,6 +1,7 @@
 'use client';
 
 import { AddProviderButton } from '@kursor/frontend/components/launches/add.provider.component';
+import { AddProviderButton as KursorAddProviderButton } from '@kursor/frontend/components/launches/kursor.add.provider.component';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { orderBy } from 'lodash';
@@ -208,7 +209,8 @@ export const LaunchesComponent = () => {
                   </div>
                 ))}
               </div>
-              <AddProviderButton update={() => update(true)} />
+              {/* <AddProviderButton update={() => update(true)} /> */}
+              <KursorAddProviderButton />
               {/*{sortedIntegrations?.length > 0 && user?.tier?.ai && <GeneratorComponent />}*/}
             </div>
             <div className="flex flex-1 flex-col gap-[14px]">

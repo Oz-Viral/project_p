@@ -43,7 +43,7 @@ export const GoogleProvider = () => {
           />
         </svg>
       </div>
-      <div className="ml-2">{t('signWithGoogle')}</div>
+      <div className="ml-2 text-black">{t('signWithGoogle')}</div>
     </Button>
   );
 };

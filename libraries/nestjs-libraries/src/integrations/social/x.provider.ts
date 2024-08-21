@@ -54,6 +54,7 @@ export class XProvider extends SocialAbstract implements SocialProvider {
       appKey: process.env.X_API_KEY!,
       appSecret: process.env.X_API_SECRET!,
     });
+
     const { url, oauth_token, oauth_token_secret } =
       await client.generateAuthLink(
         process.env.FRONTEND_URL +
@@ -62,8 +63,9 @@ export class XProvider extends SocialAbstract implements SocialProvider {
           authAccessType: 'write',
           linkMode: 'authenticate',
           forceLogin: false,
-        }
+        },
       );
+
     return {
       url,
       codeVerifier: oauth_token + ':' + oauth_token_secret,
@@ -82,13 +84,11 @@ export class XProvider extends SocialAbstract implements SocialProvider {
       accessSecret: oauth_token_secret,
     });
 
-    const { accessToken, client, accessSecret } = await startingClient.login(
-      code
-    );
+    const { accessToken, client, accessSecret } =
+      await startingClient.login(code);
 
-    const { id, name, profile_image_url_https } = await client.currentUser(
-      true
-    );
+    const { id, name, profile_image_url_https } =
+      await client.currentUser(true);
 
     const {
       data: { username },
@@ -110,7 +110,7 @@ export class XProvider extends SocialAbstract implements SocialProvider {
   async post(
     id: string,
     accessToken: string,
-    postDetails: PostDetails[]
+    postDetails: PostDetails[],
   ): Promise<PostResponse[]> {
     const [accessTokenSplit, accessSecretSplit] = accessToken.split(':');
     const client = new TwitterApi({
@@ -144,23 +144,26 @@ export class XProvider extends SocialAbstract implements SocialProvider {
                       .toBuffer(),
                 {
                   mimeType: lookup(m.path) || '',
-                }
+                },
               ),
               postId: p.id,
             };
-          })
-        )
+          }),
+        ),
       )
-    ).reduce((acc, val) => {
-      if (!val?.id) {
+    ).reduce(
+      (acc, val) => {
+        if (!val?.id) {
+          return acc;
+        }
+
+        acc[val.postId] = acc[val.postId] || [];
+        acc[val.postId].push(val.id);
+
         return acc;
-      }
-
-      acc[val.postId] = acc[val.postId] || [];
-      acc[val.postId].push(val.id);
-
-      return acc;
-    }, {} as Record<string, string[]>);
+      },
+      {} as Record<string, string[]>,
+    );
 
     const ids: Array<{ postId: string; id: string; releaseURL: string }> = [];
     for (const post of postDetails) {
@@ -169,9 +172,15 @@ export class XProvider extends SocialAbstract implements SocialProvider {
       const { data }: { data: { id: string } } = await client.v2.tweet({
         text: removeMd(post.message.replace('\n', '𝔫𝔢𝔴𝔩𝔦𝔫𝔢')).replace(
           '𝔫𝔢𝔴𝔩𝔦𝔫𝔢',
-          '\n'
+          '\n',
         ),
-        ...(media_ids.length ? { media: { media_ids: media_ids as [string, string, string, string] } } : {}),
+        ...(media_ids.length
+          ? {
+              media: {
+                media_ids: media_ids as [string, string, string, string],
+              },
+            }
+          : {}),
         ...(ids.length
           ? { reply: { in_reply_to_tweet_id: ids[ids.length - 1].postId } }
           : {}),

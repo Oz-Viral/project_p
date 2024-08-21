@@ -44,7 +44,7 @@ export class TiktokProvider extends SocialAbstract implements SocialProvider {
           headers: {
             Authorization: `Bearer ${access_token}`,
           },
-        }
+        },
       )
     ).json();
 
@@ -71,7 +71,7 @@ export class TiktokProvider extends SocialAbstract implements SocialProvider {
             process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
               ? `https://integration.git.sn/integrations/social/tiktok`
               : `${process.env.FRONTEND_URL}/integrations/social/tiktok`
-          }${refresh ? `?refresh=${refresh}` : ''}`
+          }${refresh ? `?refresh=${refresh}` : ''}`,
         )}` +
         `&state=${state}` +
         `&response_type=code` +
@@ -122,7 +122,7 @@ export class TiktokProvider extends SocialAbstract implements SocialProvider {
           headers: {
             Authorization: `Bearer ${access_token}`,
           },
-        }
+        },
       )
     ).json();
 
@@ -140,7 +140,7 @@ export class TiktokProvider extends SocialAbstract implements SocialProvider {
   async post(
     id: string,
     accessToken: string,
-    postDetails: PostDetails<TikTokDto>[]
+    postDetails: PostDetails<TikTokDto>[],
   ): Promise<PostResponse[]> {
     try {
       const [firstPost, ...comments] = postDetails;
@@ -170,7 +170,7 @@ export class TiktokProvider extends SocialAbstract implements SocialProvider {
                 video_url: firstPost?.media?.[0]?.url!,
               },
             }),
-          }
+          },
         )
       ).json();
 

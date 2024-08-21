@@ -17,24 +17,24 @@ import { LinkedinPageProvider } from '@kursor/nestjs-libraries/integrations/soci
 import { ThreadsProvider } from '@kursor/nestjs-libraries/integrations/social/threads.provider';
 
 const socialIntegrationList = [
-  ...(process.env.IS_GENERAL !== 'true' ? [new XProvider()] : []),
-  new LinkedinProvider(),
-  new LinkedinPageProvider(),
-  new RedditProvider(),
+  new XProvider(),
+  // new LinkedinProvider(),
+  // new LinkedinPageProvider(),
+  // new RedditProvider(),
   new FacebookProvider(),
   new InstagramProvider(),
   new ThreadsProvider(),
   new YoutubeProvider(),
   new TiktokProvider(),
-  new PinterestProvider(),
-  new DribbbleProvider(),
+  // new PinterestProvider(),
+  // new DribbbleProvider(),
 ];
 
 const articleIntegrationList = [
-  new DevToProvider(),
-  new HashnodeProvider(),
-  new MediumProvider(),
-];
+  // new DevToProvider(),
+  // new HashnodeProvider(),
+  // new MediumProvider(),
+] as any[];
 
 @Injectable()
 export class IntegrationManager {
