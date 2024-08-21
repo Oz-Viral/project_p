@@ -33,7 +33,7 @@ export class IntegrationsController {
   constructor(
     private _integrationManager: IntegrationManager,
     private _integrationService: IntegrationService,
-    private _postService: PostsService
+    private _postService: PostsService,
   ) {}
   @Get('/')
   getIntegration() {
@@ -64,13 +64,13 @@ export class IntegrationsController {
     @Param('id') id: string,
     @Query('order') order: string,
     @GetUserFromRequest() user: User,
-    @GetOrgFromRequest() org: Organization
+    @GetOrgFromRequest() org: Organization,
   ) {
     return this._integrationService.getIntegrationForOrder(
       id,
       order,
       user.id,
-      org.id
+      org.id,
     );
   }
 
@@ -78,7 +78,7 @@ export class IntegrationsController {
   @CheckPolicies([AuthorizationActions.Create, Sections.CHANNEL])
   async getIntegrationUrl(
     @Param('integration') integration: string,
-    @Query('refresh') refresh: string
+    @Query('refresh') refresh: string,
   ) {
     if (
       !this._integrationManager
@@ -90,6 +90,7 @@ export class IntegrationsController {
 
     const integrationProvider =
       this._integrationManager.getSocialIntegration(integration);
+
     const { codeVerifier, state, url } =
       await integrationProvider.generateAuthUrl(refresh);
     await ioRedis.set(`login:${state}`, codeVerifier, 'EX', 300);
@@ -100,11 +101,11 @@ export class IntegrationsController {
   @Post('/function')
   async functionIntegration(
     @GetOrgFromRequest() org: Organization,
-    @Body() body: IntegrationFunctionDto
+    @Body() body: IntegrationFunctionDto,
   ) {
     const getIntegration = await this._integrationService.getIntegrationById(
       org.id,
-      body.id
+      body.id,
     );
     if (!getIntegration) {
       throw new Error('Invalid integration');
@@ -112,7 +113,7 @@ export class IntegrationsController {
 
     if (getIntegration.type === 'social') {
       const integrationProvider = this._integrationManager.getSocialIntegration(
-        getIntegration.providerIdentifier
+        getIntegration.providerIdentifier,
       );
       if (!integrationProvider) {
         throw new Error('Invalid provider');
@@ -127,7 +128,7 @@ export class IntegrationsController {
     if (getIntegration.type === 'article') {
       const integrationProvider =
         this._integrationManager.getArticlesIntegration(
-          getIntegration.providerIdentifier
+          getIntegration.providerIdentifier,
         );
       if (!integrationProvider) {
         throw new Error('Invalid provider');
@@ -145,7 +146,7 @@ export class IntegrationsController {
   async connectArticle(
     @GetOrgFromRequest() org: Organization,
     @Param('integration') integration: string,
-    @Body() api: ApiKeyDto
+    @Body() api: ApiKeyDto,
   ) {
     if (
       !this._integrationManager
@@ -179,7 +180,7 @@ export class IntegrationsController {
       '',
       undefined,
       username,
-      false
+      false,
     );
   }
 
@@ -189,7 +190,7 @@ export class IntegrationsController {
   async connectSocialMedia(
     @GetOrgFromRequest() org: Organization,
     @Param('integration') integration: string,
-    @Body() body: ConnectIntegrationDto
+    @Body() body: ConnectIntegrationDto,
   ) {
     if (
       !this._integrationManager
@@ -238,14 +239,14 @@ export class IntegrationsController {
       expiresIn,
       username,
       integrationProvider.isBetweenSteps,
-      body.refresh
+      body.refresh,
     );
   }
 
   @Post('/disable')
   disableChannel(
     @GetOrgFromRequest() org: Organization,
-    @Body('id') id: string
+    @Body('id') id: string,
   ) {
     return this._integrationService.disableChannel(org.id, id);
   }
@@ -254,7 +255,7 @@ export class IntegrationsController {
   async saveInstagram(
     @Param('id') id: string,
     @Body() body: { pageId: string; id: string },
-    @GetOrgFromRequest() org: Organization
+    @GetOrgFromRequest() org: Organization,
   ) {
     return this._integrationService.saveInstagram(org.id, id, body);
   }
@@ -263,7 +264,7 @@ export class IntegrationsController {
   async saveFacebook(
     @Param('id') id: string,
     @Body() body: { page: string },
-    @GetOrgFromRequest() org: Organization
+    @GetOrgFromRequest() org: Organization,
   ) {
     return this._integrationService.saveFacebook(org.id, id, body.page);
   }
@@ -272,7 +273,7 @@ export class IntegrationsController {
   async saveLinkedin(
     @Param('id') id: string,
     @Body() body: { page: string },
-    @GetOrgFromRequest() org: Organization
+    @GetOrgFromRequest() org: Organization,
   ) {
     return this._integrationService.saveLinkedin(org.id, id, body.page);
   }
@@ -280,24 +281,24 @@ export class IntegrationsController {
   @Post('/enable')
   enableChannel(
     @GetOrgFromRequest() org: Organization,
-    @Body('id') id: string
+    @Body('id') id: string,
   ) {
     return this._integrationService.enableChannel(
       org.id,
       // @ts-ignore
       org?.subscription?.totalChannels || pricing.FREE.channel,
-      id
+      id,
     );
   }
 
   @Delete('/')
   async deleteChannel(
     @GetOrgFromRequest() org: Organization,
-    @Body('id') id: string
+    @Body('id') id: string,
   ) {
     const isTherePosts = await this._integrationService.getPostsForChannel(
       org.id,
-      id
+      id,
     );
     if (isTherePosts.length) {
       for (const post of isTherePosts) {

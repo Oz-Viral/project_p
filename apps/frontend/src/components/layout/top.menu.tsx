@@ -5,10 +5,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { useUser } from '@kursor/frontend/components/layout/user.context';
-import { isGeneral } from '@kursor/react/helpers/is.general';
 import { useTranslations } from 'next-intl';
-
-const general = isGeneral();
 
 export const menuItems = [
   {
