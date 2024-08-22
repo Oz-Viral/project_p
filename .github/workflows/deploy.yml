@@ -16,7 +16,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. AWS CLI 설정
+      # 2. Docker Compose 설치
+      - name: Set up Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K[0-9.]+')" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          docker-compose --version
+
+      # 3. AWS CLI 설정
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -24,12 +31,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2 # 리전
 
-        # 3. ECR 로그인
+      # 4. ECR 로그인
       - name: Log in to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # 4. Docker Compose 빌드 및 푸시
+      # 5. Docker Compose 빌드 및 푸시
       - name: Build and push Docker images
         run: |
           docker-compose -f docker-compose.yml build
@@ -76,7 +83,7 @@ jobs:
           TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
 
-      # 5. ECS 서비스 업데이트
+      # 6. ECS 서비스 업데이트
       - name: Deploy to ECS
         run: |
           aws ecs update-service \
