@@ -16,11 +16,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Docker Compose 설치
-      - name: Run docker-compose
-        uses: hoverkraft-tech/compose-action@v2.0.1
-        with:
-          compose-file: './docker-compose-deploy.yml'
+      # # 2. Docker Compose 설치
+      # - name: Run docker-compose
+      #   uses: hoverkraft-tech/compose-action@v2.0.1
+      #   with:
+      #     compose-file: './docker-compose-deploy.yml'
 
       # 3. AWS CLI 설정
       - name: Configure AWS credentials
@@ -38,8 +38,8 @@ jobs:
       # 5. Docker Compose 빌드 및 푸시
       - name: Build and push Docker images
         run: |
-          docker-compose -f docker-compose.yml build
-          docker-compose -f docker-compose.yml push
+          docker compose -f docker-compose.yml build
+          docker compose -f docker-compose.yml push
         env:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           API_KEY: ${{ secrets.API_KEY }}
@@ -57,7 +57,7 @@ jobs:
           LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
-          GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
+          GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}`
           GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           BEEHIIVE_API_KEY: ${{ secrets.BEEHIIVE_API_KEY }}
