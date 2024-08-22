@@ -1,0 +1,85 @@
+name: Deploy to ECS
+
+on:
+  workflow_dispatch: # 수동 배포
+  push:
+    tags:
+      - 'deploy/**'
+
+jobs:
+  deploy:
+    name: Deploy to AWS ECS
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. GitHub 리포지토리 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. AWS CLI 설정
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: northeast-2 # 리전
+
+        # 3. ECR 로그인
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # 4. Docker Compose 빌드 및 푸시
+      - name: Build and push Docker images
+        run: |
+          docker-compose -f docker-compose.yml build
+          docker-compose -f docker-compose.yml push
+        env:
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          API_KEY: ${{ secrets.API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          REDIS_URL: ${{ secrets.REDIS_URL }}
+          UPLOAD_DIRECTORY: ${{ secrets.UPLOAD_DIRECTORY }}
+          NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY: ${{ secrets.NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+          NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
+          BACKEND_INTERNAL_URL: ${{ secrets.BACKEND_INTERNAL_URL }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
+          GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          BEEHIIVE_API_KEY: ${{ secrets.BEEHIIVE_API_KEY }}
+          BEEHIIVE_PUBLICATION_ID: ${{ secrets.BEEHIIVE_PUBLICATION_ID }}
+          NX_ADD_PLUGINS: ${{ secrets.NX_ADD_PLUGINS }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_ACCESS_KEY: ${{ secrets.CLOUDFLARE_ACCESS_KEY }}
+          CLOUDFLARE_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_SECRET_ACCESS_KEY }}
+          CLOUDFLARE_BUCKETNAME: ${{ secrets.CLOUDFLARE_BUCKETNAME }}
+          CLOUDFLARE_BUCKET_URL: ${{ secrets.CLOUDFLARE_BUCKET_URL }}
+          CLOUDFLARE_REGION: ${{ secrets.CLOUDFLARE_REGION }}
+          FEE_AMOUNT: ${{ secrets.FEE_AMOUNT }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          FACEBOOK_APP_ID: ${{ secrets.FACEBOOK_APP_ID }}
+          FACEBOOK_APP_SECRET: ${{ secrets.FACEBOOK_APP_SECRET }}
+          INSTAGRAM_CLIENT_ID: ${{ secrets.INSTAGRAM_CLIENT_ID }}
+          INSTAGRAM_CLIENT_SECRET: ${{ secrets.INSTAGRAM_CLIENT_SECRET }}
+          THREADS_APP_ID: ${{ secrets.THREADS_APP_ID }}
+          THREADS_APP_SECRET: ${{ secrets.THREADS_APP_SECRET }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+
+      # 5. ECS 서비스 업데이트
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service \
+            --cluster kursor-cluster \
+            --service kursor-service \
+            --force-new-deployment
