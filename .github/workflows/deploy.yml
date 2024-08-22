@@ -22,7 +22,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: northeast-2 # 리전
+          aws-region: ap-northeast-2 # 리전
 
         # 3. ECR 로그인
       - name: Log in to Amazon ECR
