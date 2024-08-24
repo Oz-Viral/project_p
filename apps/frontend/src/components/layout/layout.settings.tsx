@@ -72,7 +72,7 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
             <ContinueProvider />
             <div className="mx-auto flex min-h-[100vh] w-full max-w-[1440px] flex-col px-[12px]">
               {user?.admin && <Impersonate />}
-              <div className="sticky top-0 z-[200] flex h-[80px] items-center justify-between px-[23px]">
+              <div className="bg-background sticky top-0 z-[200] flex h-[80px] items-center justify-between px-[23px]">
                 <Link href="/" className="flex items-center gap-[4px] text-2xl">
                   <div className="min-w-[32px]">
                     {/* <Image

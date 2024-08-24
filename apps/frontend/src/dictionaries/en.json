@@ -50,6 +50,15 @@
     "Saturday": "Saturday",
     "Sunday": "Sunday"
   },
+  "analytics": {
+    "dashboard": "Dahboard",
+    "channels": "Channels",
+    "refreshNeeded": "Please refresh the integration from the calendar",
+    "cantShowAnalytics": "Can't show analytics yet",
+    "addSocialMediaNotification": "You have to add Social Media channels",
+    "supported": "Supported",
+    "goToCalendar": "Go to the calendar to add channels"
+  },
   "common": {
     "save": "save",
     "cancel": "cancel",

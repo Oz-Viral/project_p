@@ -12,6 +12,7 @@ import { Select } from '@kursor/react/form/select';
 import { Button } from '@kursor/react/form/button';
 import { useRouter } from 'next/navigation';
 import { useToaster } from '@kursor/react/toaster/toaster';
+import { useTranslations } from 'next-intl';
 
 const allowedIntegrations = [
   'facebook',
@@ -30,6 +31,9 @@ export const PlatformAnalytics = () => {
   const [key, setKey] = useState(7);
   const [refresh, setRefresh] = useState(false);
   const toaster = useToaster();
+
+  const t = useTranslations();
+
   const load = useCallback(async () => {
     const int = (await (await fetch('/integrations/list')).json()).integrations;
     return int.filter((f: any) => allowedIntegrations.includes(f.identifier));
@@ -68,7 +72,7 @@ export const PlatformAnalytics = () => {
     ) {
       arr.push({
         key: 7,
-        value: '7 Days',
+        value: t('filters.day', { day: 7 }),
       });
     }
 
@@ -84,7 +88,7 @@ export const PlatformAnalytics = () => {
     ) {
       arr.push({
         key: 30,
-        value: '30 Days',
+        value: t('filters.day', { day: 30 }),
       });
     }
 
@@ -95,7 +99,7 @@ export const PlatformAnalytics = () => {
     ) {
       arr.push({
         key: 90,
-        value: '90 Days',
+        value: t('filters.day', { day: 90 }),
       });
     }
 
@@ -124,15 +128,16 @@ export const PlatformAnalytics = () => {
           <img src="/peoplemarketplace.svg" />
         </div>
         <div className="text-[48px]">
-          Can{"'"}t show analytics yet
+          {t('analytics.cantShowAnalytics')}
           <br />
-          You have to add Social Media channels
+          {t('analytics.addSocialMediaNotification')}
         </div>
         <div className="text-[20px]">
-          Supported: {allowedIntegrations.map((p) => capitalize(p)).join(', ')}
+          {t('analytics.supported')}:{' '}
+          {allowedIntegrations.map((p) => capitalize(p)).join(', ')}
         </div>
         <Button onClick={() => router.push('/launches')}>
-          Go to the calendar to add channels
+          {t('analytics.goToCalendar')}
         </Button>
       </div>
     );
@@ -142,16 +147,13 @@ export const PlatformAnalytics = () => {
     <div className="flex flex-1 gap-[30px]">
       <div className="flex w-[220px] overflow-hidden p-[16px]">
         <div className="flex flex-col gap-[16px] overflow-hidden">
-          <div className="mb-[8px] text-[20px]">Channels</div>
+          <div className="mb-[8px] text-[20px]">{t('analytics.channels')}</div>
           {sortedIntegrations.map((integration, index) => (
             <div
               key={integration.id}
               onClick={() => {
                 if (integration.refreshNeeded) {
-                  toaster.show(
-                    'Please refresh the integration from the calendar',
-                    'warning',
-                  );
+                  toaster.show(t('analytics.refreshNeeded'), 'warning');
                   return;
                 }
                 setRefresh(true);

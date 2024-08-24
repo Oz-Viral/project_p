@@ -1,5 +1,3 @@
-import { isGeneral } from '@kursor/react/helpers/is.general';
-
 export const dynamic = 'force-dynamic';
 
 import { AnalyticsComponent } from '@kursor/frontend/components/analytics/analytics.component';
@@ -12,5 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default async function Index() {
-  return <>{isGeneral() ? <PlatformAnalytics /> : <AnalyticsComponent />}</>;
+  return <PlatformAnalytics />;
 }
