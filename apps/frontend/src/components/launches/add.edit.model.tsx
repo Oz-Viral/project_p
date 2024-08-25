@@ -411,7 +411,7 @@ export const AddEditModal: FC<{
           instructions="You are an assistant that help the user to schedule their social media posts, everytime somebody write something, try to use a function call, if not prompt the user that the request is invalid and you are here to assists with social media posts"
         />
       )}
-      <div className={clsx('flex gap-[20px] bg-black')}>
+      <div className={clsx('flex gap-[20px]')}>
         <div
           className={clsx(
             'flex flex-col gap-[16px] whitespace-nowrap transition-all duration-700',
@@ -420,7 +420,7 @@ export const AddEditModal: FC<{
               : 'w-0 overflow-hidden',
           )}
         >
-          <div className="relative flex flex-1 flex-col gap-[20px] rounded-[4px] border border-[#172034] bg-[#0B101B] p-[16px] pt-0">
+          <div className="relative flex flex-1 flex-col gap-[20px] rounded-[4px] border border-[#172034] p-[16px] pt-0">
             <TopTitle title={existingData?.group ? 'Edit Post' : 'Create Post'}>
               <div className="flex items-center">
                 <PostToOrganization
@@ -486,7 +486,7 @@ export const AddEditModal: FC<{
                                 name="image"
                                 onChange={changeImage(index)}
                               />
-                              <div className="flex flex-1 gap-[8px] rounded-br-[8px] bg-[#131B2C] pl-2">
+                              <div className="flex flex-1 gap-[8px] rounded-br-[8px] pl-2">
                                 <Button
                                   className="flex gap-[4px] rounded-[3px] text-[12px] font-[500]"
                                   onClick={generateHashTags(p.content, index)}
@@ -495,7 +495,7 @@ export const AddEditModal: FC<{
                                 </Button>
                               </div>
                             </div>
-                            <div className="flex rounded-br-[8px] bg-[#121b2c] text-[#F97066]">
+                            <div className="flex rounded-br-[8px] text-[#F97066]">
                               {value.length > 1 && (
                                 <div
                                   className="flex flex-1 cursor-pointer items-center justify-center gap-[4px]"
@@ -542,7 +542,7 @@ export const AddEditModal: FC<{
               </>
             ) : null}
           </div>
-          <div className="relative flex h-[68px] flex-col rounded-[4px] border border-[#172034] bg-[#0B101B]">
+          <div className="relative flex h-[68px] flex-col rounded-[4px] border border-[#172034]">
             <div className="relative flex flex-1 gap-[10px]">
               <div className="absolute right-[16px] flex h-full w-full items-center justify-end gap-[10px]">
                 <Button
@@ -623,7 +623,7 @@ export const AddEditModal: FC<{
         </div>
         <div
           className={clsx(
-            'flex flex-1 flex-col gap-[20px] rounded-[4px] border-[#172034] bg-[#0B101B] transition-all duration-700',
+            'flex flex-1 flex-col gap-[20px] rounded-[4px] border-[#172034] transition-all duration-700',
             !selectedIntegrations.length
               ? 'flex-grow-0 overflow-hidden'
               : 'flex-grow-1 animate-overflow border',

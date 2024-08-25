@@ -21,6 +21,7 @@ import ImageWithFallback from '@kursor/react/helpers/image.with.fallback';
 import { useToaster } from '@kursor/react/toaster/toaster';
 import { useFireEvents } from '@kursor/helpers/utils/use.fire.events';
 import { useTranslations } from 'next-intl';
+import { KursorCalendar } from './kursor.calendar';
 export const LaunchesComponent = () => {
   const t = useTranslations('launches');
   const fetch = useFetch();
@@ -215,6 +216,7 @@ export const LaunchesComponent = () => {
             </div>
             <div className="flex flex-1 flex-col gap-[14px]">
               <Filters />
+              <KursorCalendar />
               <Calendar />
             </div>
           </div>

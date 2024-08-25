@@ -327,20 +327,24 @@ body {
 /*    display: none;*/
 /*}*/
 .w-md-editor {
-  background-color: #131b2c !important;
-  border: 0 !important;
+  /* background-color: #131b2c !important; */
+  background-color: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+  /* border: 0 !important;
   box-shadow: none !important;
   border-radius: 8px !important;
   border-bottom-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important; */
 }
 
 .w-md-editor-toolbar {
   height: 40px !important;
   min-height: 40px !important;
-  background-color: #131b2c !important;
+  /* background-color: #131b2c !important; */
+  background-color: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
   padding: 0 8px !important;
-  border-color: #28344f !important;
+  /* border-color: #28344f !important; */
 }
 
 .wmde-markdown {
@@ -353,7 +357,7 @@ body {
 }
 
 .editor * {
-  color: white;
+  /* color: white; */
 }
 
 .editor .polonto * {
@@ -374,7 +378,7 @@ body {
 
 :root {
   --copilot-kit-primary-color: #612ad5 !important;
-  --copilot-kit-background-color: #0b0f1c !important;
+  /* --copilot-kit-background-color: #0b0f1c !important; */
   --copilot-kit-separator-color: #1f2941 !important;
   --copilot-kit-contrast-color: #ffffff !important;
   --copilot-kit-secondary-contrast-color: #ffffff !important;
@@ -384,7 +388,7 @@ body {
 }
 
 .copilotKitWindow {
-  background-color: #0b0f1c !important;
+  /* background-color: #0b0f1c !important; */
 }
 
 .copilotKitButtonIconOpen svg {

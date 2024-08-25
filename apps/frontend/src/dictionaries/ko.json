@@ -59,7 +59,11 @@
     "addSocialMediaNotification": "SNS 계정을 연동해주세요.",
     "supported": "지원하는 미디어",
     "goToCalendar": "캘린더에서 채널을 추가해주세요.",
-    "selectDuration": "Select Duration"
+    "selectDuration": "조회 기간 선택"
+  },
+  "media": {
+    "insertMedia": "미디어 추가",
+    "designMedia": "미디어 수정"
   },
   "common": {
     "save": "저장",

@@ -18,7 +18,7 @@ export const Editor = forwardRef<
       currentWatching: string;
       isGlobal: boolean;
     },
-    ref: React.ForwardedRef<RefMDEditor>
+    ref: React.ForwardedRef<RefMDEditor>,
   ) => {
     const user = useUser();
     useCopilotReadable({
@@ -42,12 +42,12 @@ export const Editor = forwardRef<
     });
 
     return (
-      <div className="relative bg-[#141C2C]">
+      <div className="relative">
         {user?.tier?.ai ? (
           <CopilotTextarea
             disableBranding={true}
             className={clsx(
-              '!min-h-40 !max-h-80 p-2 overflow-hidden bg-[#141C2C] outline-none'
+              '!max-h-80 !min-h-40 overflow-hidden p-2 outline-none',
             )}
             value={props.value}
             onChange={(e) => props?.onChange?.(e.target.value)}
@@ -62,5 +62,5 @@ export const Editor = forwardRef<
         )}
       </div>
     );
-  }
+  },
 );

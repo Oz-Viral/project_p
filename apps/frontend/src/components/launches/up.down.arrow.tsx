@@ -30,7 +30,7 @@ export const UpDownArrow: FC<{
     (type: 'up' | 'down') => () => {
       onChange(type);
     },
-    []
+    [],
   );
 
   return (
@@ -38,10 +38,10 @@ export const UpDownArrow: FC<{
       <button
         onClick={changePosition('up')}
         className={clsx(
-          'outline-none rounded-tl-[20px] rounded-tr-[20px] w-[24px] h-[24px] flex justify-center items-center',
+          'flex h-[24px] w-[24px] items-center justify-center rounded-tl-[20px] rounded-tr-[20px] outline-none',
           isUp
             ? 'bg-input hover:bg-seventh cursor-pointer'
-            : 'bg-[#0F1524] pointer-events-none text-[#1F2941]'
+            : 'pointer-events-none text-[#1F2941]',
         )}
       >
         <Arrow flip={true} />
@@ -49,10 +49,10 @@ export const UpDownArrow: FC<{
       <button
         onClick={changePosition('down')}
         className={clsx(
-          'outline-none rounded-bl-[20px] rounded-br-[20px] w-[24px] h-[24px] flex justify-center items-center',
+          'flex h-[24px] w-[24px] items-center justify-center rounded-bl-[20px] rounded-br-[20px] outline-none',
           isDown
             ? 'bg-input hover:bg-seventh cursor-pointer'
-            : 'bg-[#0F1524] pointer-events-none text-[#1F2941]'
+            : 'pointer-events-none text-[#1F2941]',
         )}
       >
         <Arrow flip={false} />
