@@ -8,8 +8,14 @@ import ImageWithFallback from '@kursor/react/helpers/image.with.fallback';
 import Image from 'next/image';
 import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import { RenderAnalytics } from '@kursor/frontend/components/platform-analytics/render.analytics';
-import { Select } from '@kursor/react/form/select';
 import { Button } from '@kursor/react/form/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@kursor/react/components/ui/select';
 import { useRouter } from 'next/navigation';
 import { useToaster } from '@kursor/react/toaster/toaster';
 import { useTranslations } from 'next-intl';
@@ -213,7 +219,7 @@ export const PlatformAnalytics = () => {
       {!!options.length && (
         <div className="flex flex-1 flex-col gap-[14px]">
           <div className="max-w-[200px]">
-            <Select
+            {/* <Select
               className="!border-0 bg-[#0A0B14]"
               label=""
               name="date"
@@ -226,6 +232,23 @@ export const PlatformAnalytics = () => {
                   {option.value}
                 </option>
               ))}
+            </Select> */}
+            <Select
+              defaultValue={`${keys}`}
+              onValueChange={(duration) => {
+                setKey(+duration);
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder={t('analytics.selectDuration')} />
+              </SelectTrigger>
+              <SelectContent>
+                {options.map((option) => (
+                  <SelectItem key={option.key} value={`${option.key}`}>
+                    {option.value}
+                  </SelectItem>
+                ))}
+              </SelectContent>
             </Select>
           </div>
           <div className="flex-1">

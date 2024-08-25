@@ -58,7 +58,8 @@
     "cantShowAnalytics": "대시보드를 조회할 수 없습니다.",
     "addSocialMediaNotification": "SNS 계정을 연동해주세요.",
     "supported": "지원하는 미디어",
-    "goToCalendar": "캘린더에서 채널을 추가해주세요."
+    "goToCalendar": "캘린더에서 채널을 추가해주세요.",
+    "selectDuration": "Select Duration"
   },
   "common": {
     "save": "저장",
