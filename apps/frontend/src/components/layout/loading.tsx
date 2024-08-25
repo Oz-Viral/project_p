@@ -1,7 +1,11 @@
 'use client';
-import ReactLoading from 'react-loading';
+
+import { LuLoader2 } from 'react-icons/lu';
 
 export const LoadingComponent = () => {
-  return <div className="flex-1 flex justify-center pt-[100px]"><ReactLoading type="spin" color="#fff" width={100} height={100} /></div>;
+  return (
+    <div className="flex flex-1 justify-center pt-[100px]">
+      <LuLoader2 className="h-20 w-20 animate-spin" />
+    </div>
+  );
 };
-
