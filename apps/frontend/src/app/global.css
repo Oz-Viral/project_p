@@ -375,10 +375,10 @@ body {
 .mantine-Paper-root {
   outline: none !important;
 }
-
+/*
 :root {
   --copilot-kit-primary-color: #612ad5 !important;
-  /* --copilot-kit-background-color: #0b0f1c !important; */
+   --copilot-kit-background-color: #0b0f1c !important;
   --copilot-kit-separator-color: #1f2941 !important;
   --copilot-kit-contrast-color: #ffffff !important;
   --copilot-kit-secondary-contrast-color: #ffffff !important;
@@ -388,7 +388,7 @@ body {
 }
 
 .copilotKitWindow {
-  /* background-color: #0b0f1c !important; */
+  background-color: #0b0f1c !important;
 }
 
 .copilotKitButtonIconOpen svg {
@@ -413,8 +413,9 @@ body {
 }
 
 .copilotKitWindow {
-  /*right: -5rem !important;*/
+  right: -5rem !important;
 }
+*/
 
 .uppy-FileInput-container {
   @apply flex h-[25px] w-[107px] cursor-pointer items-center justify-center gap-[4px] rounded-[4px] border-[2px] border-[#506490] bg-[#0b0f1c] text-[12px] font-[500] text-white;

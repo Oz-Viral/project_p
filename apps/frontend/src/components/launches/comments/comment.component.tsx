@@ -24,7 +24,7 @@ export const CommentBox: FC<{
     (event: { target: { value: string } }) => {
       setNewComment(event.target.value);
     },
-    [newComment]
+    [newComment],
   );
 
   const changeIt = useCallback(() => {
@@ -36,7 +36,7 @@ export const CommentBox: FC<{
     <div
       className={clsx(
         'flex',
-        type === 'textarea' ? 'flex-col' : 'flex-row flex items-end gap-[10px]'
+        type === 'textarea' ? 'flex-col' : 'flex flex-row items-end gap-[10px]',
       )}
     >
       <div className={clsx(type === 'input' && 'flex-1')}>
@@ -89,7 +89,7 @@ export const EditableCommentComponent: FC<{
     if (
       await deleteDialog(
         'Are you sure you want to delete this comment?',
-        'Yes, Delete'
+        'Yes, Delete',
       )
     ) {
       onDelete();
@@ -173,7 +173,7 @@ export const CommentComponent: FC<{ date: dayjs.Dayjs }> = (props) => {
         }),
       });
     },
-    []
+    [],
   );
 
   const addComment = useCallback(
@@ -198,7 +198,7 @@ export const CommentComponent: FC<{ date: dayjs.Dayjs }> = (props) => {
         ...list,
       ]);
     },
-    [commentsList, setCommentsList]
+    [commentsList, setCommentsList],
   );
 
   const deleteComment = useCallback(
@@ -208,7 +208,7 @@ export const CommentComponent: FC<{ date: dayjs.Dayjs }> = (props) => {
       });
       setCommentsList((list) => list.filter((item) => item.id !== comment.id));
     },
-    [commentsList, setCommentsList]
+    [commentsList, setCommentsList],
   );
 
   const deleteChildrenComment = useCallback(
@@ -223,15 +223,15 @@ export const CommentComponent: FC<{ date: dayjs.Dayjs }> = (props) => {
             return {
               ...item,
               childrenComment: item.childrenComment.filter(
-                (child) => child.id !== children.id
+                (child) => child.id !== children.id,
               ),
             };
           }
           return item;
-        })
+        }),
       );
     },
-    [commentsList, setCommentsList]
+    [commentsList, setCommentsList],
   );
 
   const addChildrenComment = useCallback(
@@ -263,10 +263,10 @@ export const CommentComponent: FC<{ date: dayjs.Dayjs }> = (props) => {
             };
           }
           return item;
-        })
+        }),
       );
     },
-    [commentsList]
+    [commentsList],
   );
 
   const extractNameFromEmailAndCapitalize = useCallback((email: string) => {
@@ -276,11 +276,11 @@ export const CommentComponent: FC<{ date: dayjs.Dayjs }> = (props) => {
   }, []);
 
   return (
-    <div className="relative flex gap-[20px] flex-col flex-1 rounded-[4px] border border-[#172034] bg-[#0B101B] p-[16px] pt-0">
+    <div className="relative flex flex-1 flex-col gap-[20px] rounded-[4px] border border-[#172034] bg-[#0B101B] p-[16px] pt-0">
       <TopTitle title={`Comments for ${date.format('DD/MM/YYYY HH:mm')}`} />
       <button
         onClick={closeAll}
-        className="outline-none absolute right-[20px] top-[15px] mantine-UnstyledButton-root mantine-ActionIcon-root hover:bg-tableBorder cursor-pointer mantine-Modal-close mantine-1dcetaa"
+        className="mantine-UnstyledButton-root mantine-ActionIcon-root hover:bg-tableBorder mantine-Modal-close mantine-1dcetaa absolute right-[20px] top-[15px] cursor-pointer outline-none"
         type="button"
       >
         <svg
@@ -305,18 +305,20 @@ export const CommentComponent: FC<{ date: dayjs.Dayjs }> = (props) => {
             <div
               key={`comment_${index}_${comment.content}`}
               className={clsx(
-                `flex relative flex-col`,
-                comment?.childrenComment?.length && 'gap-[10px]'
+                `relative flex flex-col`,
+                comment?.childrenComment?.length && 'gap-[10px]',
               )}
             >
               <div className="flex gap-[8px]">
-                <div className="w-[40px] flex flex-col items-center">
-                  <div className={`rounded-full relative z-[2] text-blue-500 font-bold ${interClass} flex justify-center items-center w-[40px] h-[40px] bg-white border-tableBorder border`}>
+                <div className="flex w-[40px] flex-col items-center">
+                  <div
+                    className={`relative z-[2] rounded-full font-bold text-blue-500 ${interClass} border-tableBorder flex h-[40px] w-[40px] items-center justify-center border bg-white`}
+                  >
                     {comment.user.email[0].toUpperCase()}
                   </div>
-                  <div className="flex-1 w-[2px] h-[calc(100%-10px)] bg-[#2E3336] absolute top-[10px] z-[1]" />
+                  <div className="absolute top-[10px] z-[1] h-[calc(100%-10px)] w-[2px] flex-1 bg-[#2E3336]" />
                 </div>
-                <div className="flex-1 flex flex-col gap-[4px]">
+                <div className="flex flex-1 flex-col gap-[4px]">
                   <div className="flex">
                     <div className="h-[22px] text-[15px] font-[700]">
                       {extractNameFromEmailAndCapitalize(comment.user.email)}
@@ -334,18 +336,20 @@ export const CommentComponent: FC<{ date: dayjs.Dayjs }> = (props) => {
                 {comment?.childrenComment?.map((childComment, index2) => (
                   <div
                     key={`comment2_${index2}_${childComment.content}`}
-                    className={clsx(`flex gap-[8px] relative`)}
+                    className={clsx(`relative flex gap-[8px]`)}
                   >
-                    <div className="w-[40px] flex flex-col items-center">
-                      <div className={`rounded-full relative z-[2] text-blue-500 font-bold ${interClass} flex justify-center items-center w-[40px] h-[40px] bg-white border-tableBorder border`}>
+                    <div className="flex w-[40px] flex-col items-center">
+                      <div
+                        className={`relative z-[2] rounded-full font-bold text-blue-500 ${interClass} border-tableBorder flex h-[40px] w-[40px] items-center justify-center border bg-white`}
+                      >
                         {childComment.user.email[0].toUpperCase()}
                       </div>
                     </div>
-                    <div className="flex-1 flex flex-col gap-[4px]">
+                    <div className="flex flex-1 flex-col gap-[4px]">
                       <div className="flex">
                         <div className="h-[22px] text-[15px] font-[700]">
                           {extractNameFromEmailAndCapitalize(
-                            childComment.user.email
+                            childComment.user.email,
                           )}
                         </div>
                       </div>
@@ -360,9 +364,9 @@ export const CommentComponent: FC<{ date: dayjs.Dayjs }> = (props) => {
               </div>
             </div>
             <div className="flex">
-              <div className="relative w-[40px] flex flex-col items-center">
-                <div className="h-[30px] w-[2px] bg-[#2E3336] absolute top-0 z-[1]" />
-                <div className="h-[2px] w-[21px] bg-[#2E3336] absolute top-[30px] right-0 z-[1]" />
+              <div className="relative flex w-[40px] flex-col items-center">
+                <div className="absolute top-0 z-[1] h-[30px] w-[2px] bg-[#2E3336]" />
+                <div className="absolute right-0 top-[30px] z-[1] h-[2px] w-[21px] bg-[#2E3336]" />
               </div>
               <div className="flex-1">
                 <CommentBox

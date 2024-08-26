@@ -217,7 +217,7 @@ export const LaunchesComponent = () => {
             <div className="flex flex-1 flex-col gap-[14px]">
               <Filters />
               <KursorCalendar />
-              <Calendar />
+              {/* <Calendar /> */}
             </div>
           </div>
         </div>

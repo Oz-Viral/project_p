@@ -1,7 +1,6 @@
 'use client';
 
 import { ChangeEvent, FC, useCallback, useEffect, useState } from 'react';
-import { Button } from '@kursor/react/form/button';
 import useSWR from 'swr';
 import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import { Media } from '@prisma/client';
@@ -19,6 +18,7 @@ import { useUser } from '@kursor/frontend/components/layout/user.context';
 import { useTranslations } from 'next-intl';
 
 import { PiImages } from 'react-icons/pi';
+import { Button } from '@kursor/react/components/ui/button';
 
 const Polonto = dynamic(
   () => import('@kursor/frontend/components/launches/polonto'),
@@ -266,38 +266,38 @@ export const MultiMediaComponent: FC<{
 
   return (
     <>
-      <div className="mt-4 flex flex-col gap-[8px] rounded-bl-[8px]">
+      <div className="flex flex-col gap-[8px] rounded-bl-[8px]">
         {modal && <MediaBox setMedia={changeMedia} closeModal={showModal} />}
         {mediaModal && !!user?.tier?.ai && (
           <Polonto setMedia={changeMedia} closeModal={closeDesignModal} />
         )}
         <div className="flex gap-[10px]">
           <div className="flex">
-            <Button
-              onClick={showModal}
-              className="mb-[10px] flex w-[127px] items-center justify-center gap-[8px] rounded-[4px] border border-dashed border-[#506490]"
-            >
-              <div>
+            <Button onClick={showModal} className="w-[127px] rounded-sm">
+              <div className="flex items-center gap-1">
                 <PiImages />
+                <div className="text-[12px] font-[500]">{t('insertMedia')}</div>
               </div>
-              <div className="text-[12px] font-[500]">{t('insertMedia')}</div>
             </Button>
 
             <Button
               onClick={designMedia}
-              className="mb-[10px] ml-[10px] flex w-[127px] items-center justify-center gap-[8px] rounded-[4px] border border-dashed border-[#506490]"
+              className="ml-[10px] w-[127px] rounded-sm"
             >
-              <div>
+              <div className="flex items-center gap-1">
                 <PiImages />
+                <div className="text-[12px] font-[500]">{t('designMedia')}</div>
               </div>
-              <div className="text-[12px] font-[500]">{t('designMedia')}</div>
             </Button>
           </div>
 
           {!!currentMedia &&
             currentMedia.map((media, index) => (
               <>
-                <div className="border-tableBorder relative flex h-[40px] w-[40px] cursor-pointer border-2">
+                <div
+                  key={index}
+                  className="border-tableBorder relative flex h-[40px] w-[40px] cursor-pointer border-2"
+                >
                   <div
                     onClick={() => window.open(mediaDirectory.set(media.path))}
                   >
@@ -326,6 +326,7 @@ export const MultiMediaComponent: FC<{
   );
 };
 
+// 블로그용 컴포넌트
 export const MediaComponent: FC<{
   label: string;
   description: string;
@@ -404,9 +405,7 @@ export const MediaComponent: FC<{
         <Button onClick={showDesignModal} className="!bg-[#832AD5]">
           Editor
         </Button>
-        <Button secondary={true} onClick={clearMedia}>
-          Clear
-        </Button>
+        <Button onClick={clearMedia}>Clear</Button>
       </div>
     </div>
   );

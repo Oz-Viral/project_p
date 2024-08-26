@@ -452,6 +452,10 @@ const CalendarColumnRender: FC<{ day: number; hour: string }> = (props) => {
                   </div>
                 </DialogTrigger>
                 <DialogContent className="w-full max-w-[1400px]">
+                  <DialogHeader>
+                    <DialogTitle>Create Post</DialogTitle>
+                    <DialogDescription> </DialogDescription>
+                  </DialogHeader>
                   <AddEditModal
                     integrations={integrations.slice(0).map((p) => ({ ...p }))}
                     date={getDate}
