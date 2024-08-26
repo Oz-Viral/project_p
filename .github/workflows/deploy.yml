@@ -38,52 +38,67 @@ jobs:
       # 5. Docker Compose 빌드 및 푸시
       - name: Build and push Docker images
         run: |
-          docker compose -f docker-compose.yml build
-          docker compose -f docker-compose.yml push
-        env:
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          API_KEY: ${{ secrets.API_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          REDIS_URL: ${{ secrets.REDIS_URL }}
-          UPLOAD_DIRECTORY: ${{ secrets.UPLOAD_DIRECTORY }}
-          NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY: ${{ secrets.NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
-          NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
-          BACKEND_INTERNAL_URL: ${{ secrets.BACKEND_INTERNAL_URL }}
-          X_API_KEY: ${{ secrets.X_API_KEY }}
-          X_API_SECRET: ${{ secrets.X_API_SECRET }}
-          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
-          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
-          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
-          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
-          GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}`
-          GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          BEEHIIVE_API_KEY: ${{ secrets.BEEHIIVE_API_KEY }}
-          BEEHIIVE_PUBLICATION_ID: ${{ secrets.BEEHIIVE_PUBLICATION_ID }}
-          NX_ADD_PLUGINS: ${{ secrets.NX_ADD_PLUGINS }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_ACCESS_KEY: ${{ secrets.CLOUDFLARE_ACCESS_KEY }}
-          CLOUDFLARE_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_SECRET_ACCESS_KEY }}
-          CLOUDFLARE_BUCKETNAME: ${{ secrets.CLOUDFLARE_BUCKETNAME }}
-          CLOUDFLARE_BUCKET_URL: ${{ secrets.CLOUDFLARE_BUCKET_URL }}
-          CLOUDFLARE_REGION: ${{ secrets.CLOUDFLARE_REGION }}
-          FEE_AMOUNT: ${{ secrets.FEE_AMOUNT }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          FACEBOOK_APP_ID: ${{ secrets.FACEBOOK_APP_ID }}
-          FACEBOOK_APP_SECRET: ${{ secrets.FACEBOOK_APP_SECRET }}
-          INSTAGRAM_CLIENT_ID: ${{ secrets.INSTAGRAM_CLIENT_ID }}
-          INSTAGRAM_CLIENT_SECRET: ${{ secrets.INSTAGRAM_CLIENT_SECRET }}
-          THREADS_APP_ID: ${{ secrets.THREADS_APP_ID }}
-          THREADS_APP_SECRET: ${{ secrets.THREADS_APP_SECRET }}
-          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
-          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
-          TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
-          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          docker compose -f docker-compose-deploy.yaml build
+          docker compose -f docker-compose-deploy.yaml push
 
-      # 6. ECS 서비스 업데이트
-      - name: Deploy to ECS
+      # 4. .env 파일에서 환경 변수 로드 및 `envsub` 실행
+      - name: Load environment variables from .env and substitute
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+          export $(cat .env | xargs)
+          npx envsub .aws/task-definition.json task-definition.json
+
+      # 5. 작업 정의 JSON 파일에서 환경 변수 대체
+      # - name: Environment variables substitution
+      #   run: | # 작업 정의 json
+      #     npx envsub .aws/task-definition.json task-definition.json
+      #   env:
+      #     NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
+      #     BACKEND_INTERNAL_URL: ${{ secrets.BACKEND_INTERNAL_URL }}
+      #     FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+      #     DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      #     REDIS_URL: ${{ secrets.REDIS_URL }}
+      #     UPLOAD_DIRECTORY: ${{ secrets.UPLOAD_DIRECTORY }}
+      #     JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      #     X_API_KEY: ${{ secrets.X_API_KEY }}
+      #     X_API_SECRET: ${{ secrets.X_API_SECRET }}
+      #     LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+      #     LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+      #     REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+      #     REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+      #     GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
+      #     GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
+      #     RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      #     BEEHIIVE_API_KEY: ${{ secrets.BEEHIIVE_API_KEY }}
+      #     BEEHIIVE_PUBLICATION_ID: ${{ secrets.BEEHIIVE_PUBLICATION_ID }}
+      #     NX_ADD_PLUGINS: ${{ secrets.NX_ADD_PLUGINS }}
+      #     CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      #     CLOUDFLARE_ACCESS_KEY: ${{ secrets.CLOUDFLARE_ACCESS_KEY }}
+      #     CLOUDFLARE_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_SECRET_ACCESS_KEY }}
+      #     CLOUDFLARE_BUCKETNAME: ${{ secrets.CLOUDFLARE_BUCKETNAME }}
+      #     CLOUDFLARE_BUCKET_URL: ${{ secrets.CLOUDFLARE_BUCKET_URL }}
+      #     CLOUDFLARE_REGION: ${{ secrets.CLOUDFLARE_REGION }}
+      #     FEE_AMOUNT: ${{ secrets.FEE_AMOUNT }}
+      #     OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      #     FACEBOOK_APP_ID: ${{ secrets.FACEBOOK_APP_ID }}
+      #     FACEBOOK_APP_SECRET: ${{ secrets.FACEBOOK_APP_SECRET }}
+      #     INSTAGRAM_CLIENT_ID: ${{ secrets.INSTAGRAM_CLIENT_ID }}
+      #     INSTAGRAM_CLIENT_SECRET: ${{ secrets.INSTAGRAM_CLIENT_SECRET }}
+      #     THREADS_APP_ID: ${{ secrets.THREADS_APP_ID }}
+      #     THREADS_APP_SECRET: ${{ secrets.THREADS_APP_SECRET }}
+      #     YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+      #     YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+      #     TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
+
+      # 6. 태스크 정의 새로 등록
+      - name: Register ECS Task Definition
+        id: register-task-def
+        run: |
+          aws ecs register-task-definition \
+            --cli-input-json file://task-definition.json
+
+      # 7. ECS 서비스 업데이트
+      - name: Update ECS Service
         run: |
           aws ecs update-service \
             --cluster kursor-cluster \
