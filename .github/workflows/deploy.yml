@@ -16,13 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # # 2. Docker Compose 설치
-      # - name: Run docker-compose
-      #   uses: hoverkraft-tech/compose-action@v2.0.1
-      #   with:
-      #     compose-file: './docker-compose-deploy.yml'
-
-      # 3. AWS CLI 설정
+      # 2. AWS CLI 설정
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -30,35 +24,40 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2 # 리전
 
-      # 4. ECR 로그인
+      # 3. ECR 로그인
       - name: Log in to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # 5. Docker Compose 빌드 및 푸시
+      # 4. Docker Compose 빌드 및 푸시
       - name: Build and push Docker images
         run: |
           docker compose -f docker-compose-deploy.yaml build
           docker compose -f docker-compose-deploy.yaml push
 
-      # 6. .env 파일에서 환경 변수 로드 및 `envsub` 실행
+      # 4. .env 파일에서 환경 변수 로드 및 `envsub` 실행
       - name: Load environment variables from .env and substitute
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
           export $(cat .env | xargs)
           npx envsub .aws/task-definition.json task-definition.json
 
-      # 7. 태스크 정의 새로 등록
+      # 5. 태스크 정의 새로 등록
       - name: Register ECS Task Definition
         id: register-task-def
         run: |
           aws ecs register-task-definition \
             --cli-input-json file://task-definition.json
 
-      # 8. ECS 서비스 업데이트
+      # 6. ECS 서비스 업데이트
       - name: Update ECS Service
         run: |
+          NEW_TASK_DEF_ARN=$(aws ecs describe-task-definition \
+            --task-definition kursor-frontend \
+            --query "taskDefinition.taskDefinitionArn" --output text)
+
           aws ecs update-service \
             --cluster kursor \
             --service kursor-service \
+            --task-definition $NEW_TASK_DEF_ARN \
             --force-new-deployment
