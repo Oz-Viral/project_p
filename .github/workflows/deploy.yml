@@ -53,7 +53,7 @@ jobs:
       - name: Update ECS Service
         run: |
           NEW_TASK_DEF_ARN=$(aws ecs describe-task-definition \
-            --task-definition kursor-frontend \
+            --task-definition kursor-task \
             --query "taskDefinition.taskDefinitionArn" --output text)
 
           aws ecs update-service \
