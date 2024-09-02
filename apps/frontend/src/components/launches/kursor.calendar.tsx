@@ -16,7 +16,7 @@ import { DNDProvider } from '@kursor/frontend/components/launches/helpers/dnd.pr
 import { Integration, Post, State } from '@prisma/client';
 import { useAddProvider } from '@kursor/frontend/components/launches/add.provider.component';
 import { CommentComponent } from '@kursor/frontend/components/launches/comments/comment.component';
-import { useSWRConfig } from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 import { useIntersectionObserver } from '@uidotdev/usehooks';
 import { useToaster } from '@kursor/react/toaster/toaster';
 import { useUser } from '@kursor/frontend/components/layout/user.context';
@@ -34,6 +34,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@kursor/react/components/ui/dialog';
+import Image from 'next/image';
 
 export const days = [
   '',
@@ -338,6 +339,7 @@ const CalendarColumnRender: FC<{ day: number; hour: string }> = (props) => {
       if (user?.orgId === post.submittedForOrganizationId) {
         return previewPublication(post);
       }
+
       const data = await (await fetch(`/posts/${post.id}`)).json();
 
       modal.openModal({
@@ -489,30 +491,114 @@ const CalendarItem: FC<{
     }),
     [],
   );
+
+  const fetch = useFetch();
+
+  const load = useCallback(
+    async (path: string) => {
+      return await (await fetch(`/posts/${post.id}`)).json();
+    },
+    [post.id],
+  );
+
+  const { data } = useSWR(`/posts/${post.id}`, load);
+
   return (
-    <div
-      ref={dragRef}
-      onClick={editPost}
-      className={clsx('relative', state === 'DRAFT' && '!grayscale')}
-      data-tooltip-id="tooltip"
-      style={{ opacity }}
-      data-tooltip-content={`${state === 'DRAFT' ? 'Draft: ' : ''}${
-        integrations.find(
-          (p) => p.identifier === post.integration?.providerIdentifier,
-        )?.name
-      }: ${post.content.slice(0, 100)}`}
-    >
-      <img
-        className="h-[20px] w-[20px] rounded-full"
-        src={post.integration.picture!}
-      />
-      <img
-        className="border-fifth absolute bottom-[0] right-0 z-10 h-[12px] w-[12px] rounded-full border"
-        src={`/icons/platforms/${post.integration?.providerIdentifier}.png`}
-      />
-    </div>
+    <Dialog>
+      <DialogTrigger asChild>
+        <div
+          ref={dragRef}
+          className={clsx('relative', state === 'DRAFT' && '!grayscale')}
+          data-tooltip-id="tooltip"
+          style={{ opacity }}
+          data-tooltip-content={`${state === 'DRAFT' ? 'Draft: ' : ''}${
+            integrations.find(
+              (p) => p.identifier === post.integration?.providerIdentifier,
+            )?.name
+          }: ${post.content.slice(0, 100)}`}
+        >
+          <Image
+            className="h-[20px] w-[20px] rounded-full"
+            src={post.integration.picture!}
+            height="20"
+            width="20"
+            alt="Integration"
+          />
+          <Image
+            width="12"
+            height="12"
+            alt=""
+            className="border-fifth absolute bottom-[0] right-0 z-10 h-[12px] w-[12px] rounded-full border"
+            src={`/icons/platforms/${post.integration?.providerIdentifier}.png`}
+          />
+        </div>
+      </DialogTrigger>
+      <DialogContent className="w-full max-w-[1400px]">
+        <DialogHeader>
+          <DialogTitle>Edit Post</DialogTitle>
+          <DialogDescription> </DialogDescription>
+        </DialogHeader>
+        {data && (
+          <ExistingDataContextProvider value={data}>
+            <AddEditModal
+              reopenModal={() => {
+                return;
+              }}
+              integrations={integrations
+                .slice(0)
+                .filter((f) => f.id === data.integration)
+                .map((p) => ({ ...p, picture: data.integrationPicture }))}
+              date={date}
+            />
+          </ExistingDataContextProvider>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 };
+
+// const CalendarItem: FC<{
+//   date: dayjs.Dayjs;
+//   editPost: () => void;
+//   integrations: Integrations[];
+//   state: State;
+//   post: Post & { integration: Integration };
+// }> = (props) => {
+//   const { editPost, post, date, integrations, state } = props;
+//   const [{ opacity }, dragRef] = useDrag(
+//     () => ({
+//       type: 'post',
+//       item: { id: post.id, date },
+//       collect: (monitor) => ({
+//         opacity: monitor.isDragging() ? 0 : 1,
+//       }),
+//     }),
+//     [],
+//   );
+//   return (
+//     <div
+//       ref={dragRef}
+//       onClick={editPost}
+//       className={clsx('relative', state === 'DRAFT' && '!grayscale')}
+//       data-tooltip-id="tooltip"
+//       style={{ opacity }}
+//       data-tooltip-content={`${state === 'DRAFT' ? 'Draft: ' : ''}${
+//         integrations.find(
+//           (p) => p.identifier === post.integration?.providerIdentifier,
+//         )?.name
+//       }: ${post.content.slice(0, 100)}`}
+//     >
+//       <img
+//         className="h-[20px] w-[20px] rounded-full"
+//         src={post.integration.picture!}
+//       />
+//       <img
+//         className="border-fifth absolute bottom-[0] right-0 z-10 h-[12px] w-[12px] rounded-full border"
+//         src={`/icons/platforms/${post.integration?.providerIdentifier}.png`}
+//       />
+//     </div>
+//   );
+// };
 
 export const CommentBox: FC<{ totalComments: number; date: dayjs.Dayjs }> = (
   props,

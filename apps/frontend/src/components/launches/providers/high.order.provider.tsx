@@ -72,8 +72,10 @@ export const withProvider = (
   SettingsComponent: FC | null,
   PreviewComponent: FC,
   dto?: any,
-  checkValidity?: (value: Array<Array<{path: string}>>) => Promise<string|true>,
-  maximumCharacters?: number
+  checkValidity?: (
+    value: Array<Array<{ path: string }>>,
+  ) => Promise<string | true>,
+  maximumCharacters?: number,
 ) => {
   return (props: {
     identifier: string;
@@ -89,8 +91,11 @@ export const withProvider = (
     const existingData = useExistingData();
     const { integration, date } = useIntegration();
     useCopilotReadable({
-      description: integration?.type === 'social' ? 'force content always in MD format' : 'force content always to be fit to social media',
-      value: ''
+      description:
+        integration?.type === 'social'
+          ? 'force content always in MD format'
+          : 'force content always to be fit to social media',
+      value: '',
     });
     const [editInPlace, setEditInPlace] = useState(!!existingData.integration);
     const [InPlaceValue, setInPlaceValue] = useState<
@@ -107,7 +112,7 @@ export const withProvider = (
             content: p.content,
             image: p.image,
           }))
-        : [{ content: '' }]
+        : [{ content: '' }],
     );
     const [showTab, setShowTab] = useState(0);
 
@@ -116,11 +121,15 @@ export const withProvider = (
     }, [SettingsComponent]);
 
     // in case there is an error on submit, we change to the settings tab for the specific provider
-    useMoveToIntegrationListener([props.id], true, ({identifier, toPreview}) => {
-      if (identifier === props.id) {
-        setShowTab(toPreview ? 1 : 2);
-      }
-    });
+    useMoveToIntegrationListener(
+      [props.id],
+      true,
+      ({ identifier, toPreview }) => {
+        if (identifier === props.id) {
+          setShowTab(toPreview ? 1 : 2);
+        }
+      },
+    );
 
     // this is a smart function, it updates the global value without updating the states (too heavy) and set the settings validation
     const form = useValues(
@@ -130,7 +139,7 @@ export const withProvider = (
       editInPlace ? InPlaceValue : props.value,
       dto,
       checkValidity,
-      maximumCharacters
+      maximumCharacters,
     );
 
     // change editor value
@@ -141,7 +150,7 @@ export const withProvider = (
           return [...prev];
         });
       },
-      [InPlaceValue]
+      [InPlaceValue],
     );
 
     const changeImage = useCallback(
@@ -154,24 +163,27 @@ export const withProvider = (
             return [...prev];
           });
         },
-      [InPlaceValue]
+      [InPlaceValue],
     );
 
     // add another local editor
     const addValue = useCallback(
       (index: number) => () => {
         setInPlaceValue((prev) => {
-          return prev.reduce((acc, p, i) => {
-            acc.push(p);
-            if (i === index) {
-              acc.push({ content: '' });
-            }
+          return prev.reduce(
+            (acc, p, i) => {
+              acc.push(p);
+              if (i === index) {
+                acc.push({ content: '' });
+              }
 
-            return acc;
-          }, [] as Array<{ content: string }>);
+              return acc;
+            },
+            [] as Array<{ content: string }>,
+          );
         });
       },
-      []
+      [],
     );
 
     const changePosition = useCallback(
@@ -186,7 +198,7 @@ export const withProvider = (
           });
         }
       },
-      []
+      [],
     );
 
     // Delete post
@@ -195,7 +207,7 @@ export const withProvider = (
         if (
           !(await deleteDialog(
             'Are you sure you want to delete this post?',
-            'Yes, delete it!'
+            'Yes, delete it!',
           ))
         ) {
           return;
@@ -205,7 +217,7 @@ export const withProvider = (
           return [...prev];
         });
       },
-      [InPlaceValue]
+      [InPlaceValue],
     );
 
     // This is a function if we want to switch from the global editor to edit in place
@@ -215,7 +227,7 @@ export const withProvider = (
           !editInPlace
             ? 'Are you sure you want to edit only this?'
             : 'Are you sure you want to revert it back to global editing?',
-          'Yes, edit in place!'
+          'Yes, edit in place!',
         ))
       ) {
         return false;
@@ -229,13 +241,17 @@ export const withProvider = (
               id: p.id,
               content: p.content,
               image: p.image,
-            }))
+            })),
       );
     }, [props.value, editInPlace]);
 
     useCopilotAction({
-      name: editInPlace ? 'switchToGlobalEdit' : `editInPlace_${integration?.identifier}`,
-      description: editInPlace ? 'Switch to global editing' : `Edit only ${integration?.identifier} this, if you want a different identifier, you have to use setSelectedIntegration first`,
+      name: editInPlace
+        ? 'switchToGlobalEdit'
+        : `editInPlace_${integration?.identifier}`,
+      description: editInPlace
+        ? 'Switch to global editing'
+        : `Edit only ${integration?.identifier} this, if you want a different identifier, you have to use setSelectedIntegration first`,
       handler: async () => {
         await changeToEditor();
       },
@@ -249,12 +265,12 @@ export const withProvider = (
     return (
       <FormProvider {...form}>
         <SetTab changeTab={() => setShowTab(0)} />
-        <div className="mt-[15px] w-full flex flex-col flex-1">
+        <div className="mt-[15px] flex w-full flex-1 flex-col">
           {!props.hideMenu && (
             <div className="flex gap-[4px]">
-              <div className="flex-1 flex">
+              <div className="flex flex-1">
                 <Button
-                  className="rounded-[4px] flex-1 overflow-hidden whitespace-nowrap"
+                  className="flex-1 overflow-hidden whitespace-nowrap rounded-[4px]"
                   secondary={showTab !== 0}
                   onClick={() => setShowTab(0)}
                 >
@@ -262,11 +278,11 @@ export const withProvider = (
                 </Button>
               </div>
               {!!SettingsComponent && (
-                <div className="flex-1 flex">
+                <div className="flex flex-1">
                   <Button
                     className={clsx(
                       'flex-1 overflow-hidden whitespace-nowrap',
-                      showTab === 2 && 'rounded-[4px]'
+                      showTab === 2 && 'rounded-[4px]',
                     )}
                     secondary={showTab !== 2}
                     onClick={() => setShowTab(2)}
@@ -275,13 +291,15 @@ export const withProvider = (
                   </Button>
                 </div>
               )}
-              <div className="flex-1 flex">
+              <div className="flex flex-1">
                 <Button
-                  className="rounded-[4px] flex-1 !bg-red-700 overflow-hidden whitespace-nowrap"
+                  className="flex-1 overflow-hidden whitespace-nowrap rounded-[4px] !bg-red-700"
                   secondary={showTab !== 1}
                   onClick={changeToEditor}
                 >
-                  {editInPlace ? 'Edit globally' : `Edit only ${integration?.name} (${capitalize(integration?.identifier.replace('-', ' '))})`}
+                  {editInPlace
+                    ? 'Edit globally'
+                    : `Edit only ${integration?.name} (${capitalize(integration?.identifier.replace('-', ' '))})`}
                 </Button>
               </div>
             </div>
@@ -292,14 +310,15 @@ export const withProvider = (
                 <div className="flex flex-col gap-[20px]">
                   {!existingData?.integration && (
                     <div className="bg-red-800">
-                      You are now editing only {integration?.name} ({capitalize(integration?.identifier.replace('-', ' '))})
+                      You are now editing only {integration?.name} (
+                      {capitalize(integration?.identifier.replace('-', ' '))})
                     </div>
                   )}
                   {InPlaceValue.map((val, index) => (
                     <Fragment key={`edit_inner_${index}`}>
                       <div>
                         <div className="flex gap-[4px]">
-                          <div className="flex-1 text-white editor">
+                          <div className="editor flex-1">
                             <Editor
                               order={index}
                               height={InPlaceValue.length > 1 ? 200 : 250}
@@ -312,7 +331,7 @@ export const withProvider = (
                                 postSelector(date),
                                 ...linkedinCompany(
                                   integration?.identifier!,
-                                  integration?.id!
+                                  integration?.id!,
                                 ),
                               ]}
                               preview="edit"
@@ -320,7 +339,7 @@ export const withProvider = (
                               onChange={changeValue(index)}
                             />
                             {(!val.content || val.content.length < 6) && (
-                              <div className="my-[5px] text-[#F97066] text-[12px] font-[500]">
+                              <div className="my-[5px] text-[12px] font-[500] text-[#F97066]">
                                 The post should be at least 6 characters long
                               </div>
                             )}
@@ -334,10 +353,10 @@ export const withProvider = (
                                   onChange={changeImage(index)}
                                 />
                               </div>
-                              <div className="flex bg-[#121b2c] rounded-br-[8px] text-[#F97066]">
+                              <div className="flex rounded-br-[8px] bg-[#121b2c] text-[#F97066]">
                                 {InPlaceValue.length > 1 && (
                                   <div
-                                    className="flex cursor-pointer gap-[4px] justify-center items-center flex-1"
+                                    className="flex flex-1 cursor-pointer items-center justify-center gap-[4px]"
                                     onClick={deletePost(index)}
                                   >
                                     <div>
@@ -354,7 +373,7 @@ export const withProvider = (
                                         />
                                       </svg>
                                     </div>
-                                    <div className="text-[12px] font-[500] pr-[10px]">
+                                    <div className="pr-[10px] text-[12px] font-[500]">
                                       Delete Post
                                     </div>
                                   </div>
@@ -381,10 +400,10 @@ export const withProvider = (
                   ))}
                 </div>
               </EditorWrapper>,
-              document.querySelector('#renderEditor')!
+              document.querySelector('#renderEditor')!,
             )}
           {(showTab === 0 || showTab === 2) && (
-            <div className={clsx("mt-[20px]", showTab !== 2 && 'hidden')}>
+            <div className={clsx('mt-[20px]', showTab !== 2 && 'hidden')}>
               <Component />
             </div>
           )}
@@ -400,7 +419,9 @@ export const withProvider = (
                 {(editInPlace ? InPlaceValue : props.value)
                   .map((p) => p.content)
                   .join('').length ? (
-                  <GeneralPreviewComponent maximumCharacters={maximumCharacters} />
+                  <GeneralPreviewComponent
+                    maximumCharacters={maximumCharacters}
+                  />
                 ) : (
                   <>No Content Yet</>
                 )}

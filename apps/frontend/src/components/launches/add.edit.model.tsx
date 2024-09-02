@@ -53,6 +53,8 @@ import { useUser } from '@kursor/frontend/components/layout/user.context';
 import { Button } from '@kursor/react/components/ui/button';
 import { FaRegTrashCan } from 'react-icons/fa6';
 
+import useConfirmationStore from '@kursor/react/store/dialog/confirmationStore';
+
 export const AddEditModal: FC<{
   date: dayjs.Dayjs;
   integrations: Integrations[];
@@ -61,6 +63,8 @@ export const AddEditModal: FC<{
   const { date, integrations, reopenModal } = props;
   const [dateState, setDateState] = useState(date);
   const { mutate } = useSWRConfig();
+
+  const { openConfirmation } = useConfirmationStore();
 
   // hook to open a new modal
   const modal = useModals();
@@ -212,14 +216,28 @@ export const AddEditModal: FC<{
 
   // override the close modal to ask the user if he is sure to close
   const askClose = useCallback(async () => {
-    if (
-      await deleteDialog(
+    // if (
+    //   await deleteDialog(
+    //     'Are you sure you want to close this modal? (all data will be lost)',
+    //     'Yes, close it!',
+    //   )
+    // ) {
+    //   modal.closeAll();
+    // }
+
+    openConfirmation({
+      title: 'Close Confirmation',
+      description:
         'Are you sure you want to close this modal? (all data will be lost)',
-        'Yes, close it!',
-      )
-    ) {
-      modal.closeAll();
-    }
+      // cancelLabel: 'Cancel',
+      // actionLabel: 'Close',
+      onAction: () => {
+        modal.closeAll();
+      },
+      onCancel: () => {
+        reopenModal();
+      },
+    });
   }, []);
 
   // sometimes it's easier to click escape to close

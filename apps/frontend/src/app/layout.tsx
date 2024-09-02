@@ -11,6 +11,7 @@ import localFont from 'next/font/local';
 import { ThemeProvider } from '@kursor/react/provider/theme-provider';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+import ConfirmationDialog from '@kursor/react/helpers/kursor.confirm.dialog';
 
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
@@ -50,6 +51,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             <LayoutContext>
               <NextIntlClientProvider messages={messages}>
                 {children}
+                <ConfirmationDialog />
               </NextIntlClientProvider>
             </LayoutContext>
           </PlausibleProvider>
