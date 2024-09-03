@@ -1,0 +1,83 @@
+{
+  "family": "kursor-frontend",
+  "containerDefinitions": [
+    {
+      "name": "kursor-frontend-container",
+      "image": "202533533194.dkr.ecr.ap-northeast-2.amazonaws.com/kursor-frontend",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "name": "frontend-port",
+          "containerPort": 4200,
+          "hostPort": 4200,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "environmentFiles": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "disableNetworking": false,
+      "ulimits": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/kursor-frontend",
+          "mode": "non-blocking",
+          "awslogs-create-group": "true",
+          "max-buffer-size": "25m",
+          "awslogs-region": "ap-northeast-2",
+          "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": []
+      },
+      "systemControls": []
+    },
+    {
+      "name": "kursor-backend-container",
+      "image": "202533533194.dkr.ecr.ap-northeast-2.amazonaws.com/kursor-backend",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "name": "back-port",
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "environmentFiles": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/kursor-backend",
+          "mode": "non-blocking",
+          "awslogs-create-group": "true",
+          "max-buffer-size": "25m",
+          "awslogs-region": "ap-northeast-2",
+          "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": []
+      },
+      "systemControls": []
+    }
+  ],
+  "taskRoleArn": "arn:aws:iam::202533533194:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::202533533194:role/ecsTaskExecutionRole",
+  "networkMode": "host",
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "cpu": "1024",
+  "memory": "1024",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  }
+}

@@ -40,6 +40,8 @@ COPY --from=build /app/dist/apps/frontend ./dist
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/package.json ./
 
+ARG ENV
+RUN echo "ENV=${ENV}" > /app/.env
 
 # Set the environment to production
 ENV NODE_ENV=production

@@ -1,10 +1,10 @@
-name: Deploy to ECS
+name: Deploy Frontend to ECS
 
 on:
   workflow_dispatch: # 수동 배포
   push:
     tags:
-      - 'deploy/**'
+      - 'frontend/**'
 
 jobs:
   deploy:
@@ -32,15 +32,15 @@ jobs:
       # 4. Docker Compose 빌드 및 푸시
       - name: Build and push Docker images
         run: |
-          docker compose -f docker-compose-deploy.yaml build
-          docker compose -f docker-compose-deploy.yaml push
+          docker build -f apps/frontend/Dockerfile -t 202533533194.dkr.ecr.ap-northeast-2.amazonaws.com/kursor-frontend:latest . \
+          docker push 202533533194.dkr.ecr.ap-northeast-2.amazonaws.com/kursor-frontend:latest
 
       # 4. .env 파일에서 환경 변수 로드 및 `envsub` 실행
       - name: Load environment variables from .env and substitute
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
           export $(cat .env | xargs)
-          npx envsub .aws/task-definition.json task-definition.json
+          npx envsub .aws/task-definition.frontend.json task-definition.json
 
       # 5. 태스크 정의 새로 등록
       - name: Register ECS Task Definition
@@ -53,11 +53,11 @@ jobs:
       - name: Update ECS Service
         run: |
           NEW_TASK_DEF_ARN=$(aws ecs describe-task-definition \
-            --task-definition kursor-task \
+            --task-definition kursor-frontend \
             --query "taskDefinition.taskDefinitionArn" --output text)
 
           aws ecs update-service \
             --cluster kursor \
-            --service kursor-service \
+            --service kursor-frontend \
             --task-definition $NEW_TASK_DEF_ARN \
             --force-new-deployment

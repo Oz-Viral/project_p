@@ -1,0 +1,63 @@
+name: Deploy Backend to ECS
+
+on:
+  workflow_dispatch: # 수동 배포
+  push:
+    tags:
+      - 'backend/**'
+
+jobs:
+  deploy:
+    name: Deploy to AWS ECS
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. GitHub 리포지토리 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. AWS CLI 설정
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2 # 리전
+
+      # 3. ECR 로그인
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # 4. Docker Compose 빌드 및 푸시
+      - name: Build and push Docker images
+        run: |
+          docker build -f apps/backend/Dockerfile -t 202533533194.dkr.ecr.ap-northeast-2.amazonaws.com/kursor-backend:latest .
+          docker push 202533533194.dkr.ecr.ap-northeast-2.amazonaws.com/kursor-backend:latest
+
+      # 4. .env 파일에서 환경 변수 로드 및 `envsub` 실행
+      - name: Load environment variables from .env and substitute
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+          export $(cat .env | xargs)
+          npx envsub .aws/task-definition.backend.json task-definition.json
+
+      # 5. 태스크 정의 새로 등록
+      - name: Register ECS Task Definition
+        id: register-task-def
+        run: |
+          aws ecs register-task-definition \
+            --cli-input-json file://task-definition.json
+
+      # 6. ECS 서비스 업데이트
+      - name: Update ECS Service
+        run: |
+          NEW_TASK_DEF_ARN=$(aws ecs describe-task-definition \
+            --task-definition kursor-backend \
+            --query "taskDefinition.taskDefinitionArn" --output text)
+
+          aws ecs update-service \
+            --cluster kursor \
+            --service kursor-backend \
+            --task-definition $NEW_TASK_DEF_ARN \
+            --force-new-deployment

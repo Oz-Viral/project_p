@@ -52,7 +52,6 @@ import { CopilotPopup } from '@copilotkit/react-ui';
 import { useUser } from '@kursor/frontend/components/layout/user.context';
 import { Button } from '@kursor/react/components/ui/button';
 import { FaRegTrashCan } from 'react-icons/fa6';
-
 import useConfirmationStore from '@kursor/react/store/dialog/confirmationStore';
 
 export const AddEditModal: FC<{

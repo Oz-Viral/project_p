@@ -5,6 +5,7 @@ import { ApiModule } from '@kursor/backend/api/api.module';
 import { APP_GUARD } from '@nestjs/core';
 import { PoliciesGuard } from '@kursor/backend/services/auth/permissions/permissions.guard';
 import { ConfigModule } from '@nestjs/config';
+import { AppController } from './app.controller';
 
 @Global()
 @Module({
@@ -15,7 +16,7 @@ import { ConfigModule } from '@nestjs/config';
     DatabaseModule,
     ApiModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [
     {
       provide: APP_GUARD,
