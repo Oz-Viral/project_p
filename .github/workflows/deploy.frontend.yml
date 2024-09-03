@@ -29,18 +29,18 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # 4. Docker Compose 빌드 및 푸시
-      - name: Build and push Docker images
-        run: |
-          docker build -f apps/frontend/Dockerfile -t 202533533194.dkr.ecr.ap-northeast-2.amazonaws.com/kursor-frontend:latest .
-          docker push 202533533194.dkr.ecr.ap-northeast-2.amazonaws.com/kursor-frontend:latest
-
       # 4. .env 파일에서 환경 변수 로드 및 `envsub` 실행
       - name: Load environment variables from .env and substitute
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
           export $(cat .env | xargs)
           npx envsub .aws/task-definition.frontend.json task-definition.json
+
+      # 4. Docker Compose 빌드 및 푸시
+      - name: Build and push Docker images
+        run: |
+          docker build -f apps/frontend/Dockerfile -t 202533533194.dkr.ecr.ap-northeast-2.amazonaws.com/kursor-frontend:latest .
+          docker push 202533533194.dkr.ecr.ap-northeast-2.amazonaws.com/kursor-frontend:latest
 
       # 5. 태스크 정의 새로 등록
       - name: Register ECS Task Definition
