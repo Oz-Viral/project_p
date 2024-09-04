@@ -34,6 +34,8 @@ WORKDIR /app
 COPY --from=build /app/dist/apps/backend ./dist
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/package.json ./
+COPY --from=build /app/libraries/nestjs-libraries/src/database/prisma/schema.prisma ./libraries/nestjs-libraries/src/database/prisma/schema.prisma
+COPY --from=build /app/libraries/nestjs-libraries/src/database/prisma/migrations ./libraries/nestjs-libraries/src/database/prisma/migrations
 
 # Set the environment to production
 ENV NODE_ENV=production
@@ -41,5 +43,6 @@ ENV NODE_ENV=production
 # Expose the backend application's port (adjust this according to your application)
 EXPOSE 4000
 
+
 # Command to run the backend application
-CMD ["node", "dist/main.js"]
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main.js"]
