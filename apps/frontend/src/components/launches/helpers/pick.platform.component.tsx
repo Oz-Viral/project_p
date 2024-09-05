@@ -8,6 +8,7 @@ import { useCopilotAction, useCopilotReadable } from '@copilotkit/react-core';
 import { useStateCallback } from '@kursor/react/helpers/use.state.callback';
 import { timer } from '@kursor/helpers/utils/timer';
 import dayjs from 'dayjs';
+import useConfirmationStore from '@kursor/react/store/dialog/confirmationStore';
 
 export const PickPlatforms: FC<{
   integrations: Integrations[];
@@ -19,6 +20,8 @@ export const PickPlatforms: FC<{
 }> = (props) => {
   const { hide, isMain, integrations, selectedIntegrations, onChange } = props;
   const ref = useRef<HTMLDivElement>(null);
+
+  const { openConfirmation } = useConfirmationStore();
 
   const [isLeft, setIsLeft] = useState(false);
   const [isRight, setIsRight] = useState(false);
@@ -55,7 +58,7 @@ export const PickPlatforms: FC<{
         checkLeftRight();
       }
     },
-    [selectedIntegrations, integrations, selectedAccounts]
+    [selectedIntegrations, integrations, selectedAccounts],
   );
 
   useEffect(() => {
@@ -65,13 +68,13 @@ export const PickPlatforms: FC<{
   useMoveToIntegrationListener(
     [integrations],
     props.singleSelect,
-    ({identifier, toPreview}: {identifier: string, toPreview: boolean}) => {
+    ({ identifier, toPreview }: { identifier: string; toPreview: boolean }) => {
       const findIntegration = integrations.find((p) => p.id === identifier);
 
       if (findIntegration) {
         addPlatform(findIntegration)();
       }
-    }
+    },
   );
 
   const addPlatform = useCallback(
@@ -83,43 +86,56 @@ export const PickPlatforms: FC<{
             onChange([integration], () => {
               res('');
             });
-          })
+          }),
         );
         promises.push(
           new Promise((res) => {
             setSelectedAccounts([integration], () => {
               res('');
             });
-          })
+          }),
         );
         return;
       }
       if (selectedAccounts.includes(integration)) {
         const changedIntegrations = selectedAccounts.filter(
-          ({ id }) => id !== integration.id
+          ({ id }) => id !== integration.id,
         );
 
         if (
           !props.singleSelect &&
           !(await deleteDialog(
-            'Are you sure you want to remove this platform?'
+            'Are you sure you want to remove this platform?',
           ))
         ) {
           return;
         }
+
+        // TODO
+        // openConfirmation({
+        //   title: 'Delte Confirmation',
+        //   description: 'Are you sure you want to delete this post?',
+        //   // cancelLabel: 'Cancel',
+        //   actionLabel: 'Delete',
+        //   onAction: () => {},
+        //   onCancel: () => {
+        //     return;
+        //   },
+        // });
+
         promises.push(
           new Promise((res) => {
             onChange(changedIntegrations, () => {
               res('');
             });
-          })
+          }),
         );
         promises.push(
           new Promise((res) => {
             setSelectedAccounts(changedIntegrations, () => {
               res('');
             });
-          })
+          }),
         );
       } else {
         const changedIntegrations = [...selectedAccounts, integration];
@@ -128,21 +144,21 @@ export const PickPlatforms: FC<{
             onChange(changedIntegrations, () => {
               res('');
             });
-          })
+          }),
         );
         promises.push(
           new Promise((res) => {
             setSelectedAccounts(changedIntegrations, () => {
               res('');
             });
-          })
+          }),
         );
       }
 
       await timer(500);
       await Promise.all(promises);
     },
-    [onChange, props.singleSelect, selectedAccounts, setSelectedAccounts]
+    [onChange, props.singleSelect, selectedAccounts, setSelectedAccounts],
   );
 
   const handler = async ({ integrationsId }: { integrationsId: string[] }) => {
@@ -150,7 +166,7 @@ export const PickPlatforms: FC<{
       'setSelectedIntegration',
       integrations,
       integrationsId,
-      dayjs().unix()
+      dayjs().unix(),
     );
 
     const selected = selectedIntegrations.map((p) => p.id);
@@ -162,11 +178,11 @@ export const PickPlatforms: FC<{
       .filter((p) => p);
 
     setSelectedAccounts(newIntegrations, () => {
-      console.log('changed')
+      console.log('changed');
     });
 
     onChange(newIntegrations, () => {
-      console.log('changed')
+      console.log('changed');
     });
   };
 
@@ -200,7 +216,7 @@ export const PickPlatforms: FC<{
       onChange,
       props.singleSelect,
       setSelectedAccounts,
-    ]
+    ],
   );
 
   if (hide) {
@@ -232,15 +248,15 @@ export const PickPlatforms: FC<{
       )}
       <div
         className={clsx(
-          'flex-1 flex',
-          props.singleSelect && 'relative h-[40px]'
+          'flex flex-1',
+          props.singleSelect && 'relative h-[40px]',
         )}
       >
         <div
           className={clsx(
             props.singleSelect
-              ? 'absolute w-full h-[40px] flex flex-nowrap overflow-hidden transition-all'
-              : 'flex-1 flex'
+              ? 'absolute flex h-[40px] w-full flex-nowrap overflow-hidden transition-all'
+              : 'flex flex-1',
           )}
           ref={ref}
         >
@@ -252,17 +268,17 @@ export const PickPlatforms: FC<{
                   !props.singleSelect ? (
                     <div
                       key={integration.id}
-                      className="flex gap-[8px] items-center mr-[10px]"
+                      className="mr-[10px] flex items-center gap-[8px]"
                     >
                       <div
                         onClick={addPlatform(integration)}
                         className={clsx(
-                          'cursor-pointer relative w-[34px] h-[34px] rounded-full flex justify-center items-center bg-fifth filter transition-all duration-500',
+                          'bg-fifth relative flex h-[34px] w-[34px] cursor-pointer items-center justify-center rounded-full filter transition-all duration-500',
                           selectedAccounts.findIndex(
-                            (p) => p.id === integration.id
+                            (p) => p.id === integration.id,
                           ) === -1
                             ? 'opacity-40'
-                            : ''
+                            : '',
                         )}
                       >
                         <Image
@@ -275,13 +291,13 @@ export const PickPlatforms: FC<{
                         {integration.identifier === 'youtube' ? (
                           <img
                             src="/icons/platforms/youtube.svg"
-                            className="absolute z-10 -bottom-[5px] -right-[5px]"
+                            className="absolute -bottom-[5px] -right-[5px] z-10"
                             width={20}
                           />
                         ) : (
                           <Image
                             src={`/icons/platforms/${integration.identifier}.png`}
-                            className="rounded-full absolute z-10 -bottom-[5px] -right-[5px] border border-fifth"
+                            className="border-fifth absolute -bottom-[5px] -right-[5px] z-10 rounded-full border"
                             alt={integration.identifier}
                             width={20}
                             height={20}
@@ -294,12 +310,12 @@ export const PickPlatforms: FC<{
                       <div
                         onClick={addPlatform(integration)}
                         className={clsx(
-                          'cursor-pointer rounded-[50px] w-[200px] relative h-[40px] flex justify-center items-center bg-fifth filter transition-all duration-500',
+                          'bg-fifth relative flex h-[40px] w-[200px] cursor-pointer items-center justify-center rounded-[50px] filter transition-all duration-500',
                           selectedAccounts.findIndex(
-                            (p) => p.id === integration.id
+                            (p) => p.id === integration.id,
                           ) === -1
-                            ? 'bg-third border border-third'
-                            : 'bg-[#291259] border border-[#5826C2]'
+                            ? 'bg-third border-third border'
+                            : 'border border-[#5826C2] bg-[#291259]',
                         )}
                       >
                         <div className="flex items-center justify-center gap-[10px]">
@@ -313,7 +329,7 @@ export const PickPlatforms: FC<{
                             />
                             <Image
                               src={`/icons/platforms/${integration.identifier}.png`}
-                              className="rounded-full absolute z-10 -bottom-[5px] -right-[5px] border border-fifth"
+                              className="border-fifth absolute -bottom-[5px] -right-[5px] z-10 rounded-full border"
                               alt={integration.identifier}
                               width={15}
                               height={15}
@@ -323,7 +339,7 @@ export const PickPlatforms: FC<{
                         </div>
                       </div>
                     </div>
-                  )
+                  ),
                 )}
             </div>
           </div>

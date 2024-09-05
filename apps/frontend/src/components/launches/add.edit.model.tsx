@@ -197,17 +197,33 @@ export const AddEditModal: FC<{
   // Delete post
   const deletePost = useCallback(
     (index: number) => async () => {
-      if (
-        !(await deleteDialog(
-          'Are you sure you want to delete this post?',
-          'Yes, delete it!',
-        ))
-      ) {
-        return;
-      }
-      setValue((prev) => {
-        prev.splice(index, 1);
-        return [...prev];
+      // if (
+      //   !(await deleteDialog(
+      //     'Are you sure you want to delete this post?',
+      //     'Yes, delete it!',
+      //   ))
+      // ) {
+      //   return;
+      // }
+      // setValue((prev) => {
+      //   prev.splice(index, 1);
+      //   return [...prev];
+      // });
+
+      openConfirmation({
+        title: 'Delte Confirmation',
+        description: 'Are you sure you want to delete this post?',
+        // cancelLabel: 'Cancel',
+        actionLabel: 'Delete',
+        onAction: () => {
+          setValue((prev) => {
+            prev.splice(index, 1);
+            return [...prev];
+          });
+        },
+        onCancel: () => {
+          return;
+        },
       });
     },
     [value],
@@ -256,19 +272,38 @@ export const AddEditModal: FC<{
   const schedule = useCallback(
     (type: 'draft' | 'now' | 'schedule' | 'delete') => async () => {
       if (type === 'delete') {
-        if (
-          !(await deleteDialog(
-            'Are you sure you want to delete this post?',
-            'Yes, delete it!',
-          ))
-        ) {
-          return;
-        }
-        await fetch(`/posts/${existingData.group}`, {
-          method: 'DELETE',
+        // if (
+        //   !(await deleteDialog(
+        //     'Are you sure you want to delete this post?',
+        //     'Yes, delete it!',
+        //   ))
+        // ) {
+        //   return;
+        // }
+
+        // await fetch(`/posts/${existingData.group}`, {
+        //   method: 'DELETE',
+        // });
+        // mutate('/posts');
+        // modal.closeAll();
+        // return;
+
+        openConfirmation({
+          title: 'Delte Confirmation',
+          description: 'Are you sure you want to delete this post?',
+          // cancelLabel: 'Cancel',
+          actionLabel: 'Delte',
+          onAction: async () => {
+            await fetch(`/posts/${existingData.group}`, {
+              method: 'DELETE',
+            });
+            mutate('/posts');
+            modal.closeAll();
+          },
+          onCancel: () => {
+            return;
+          },
         });
-        mutate('/posts');
-        modal.closeAll();
         return;
       }
 
@@ -301,6 +336,24 @@ export const AddEditModal: FC<{
             (p) => p.content.length > (key.maximumCharacters || 1000000),
           )
         ) {
+          openConfirmation({
+            title: 'Close Confirmation',
+            description: 'Are you sure you want to delete this post?',
+            // cancelLabel: 'Cancel',
+            // actionLabel: 'Close',
+            onAction: async () => {
+              await key.trigger();
+              moveToIntegration({
+                identifier: key?.integration?.id!,
+                toPreview: true,
+              });
+              return;
+            },
+            onCancel: () => {
+              return;
+            },
+          });
+
           if (
             !(await deleteDialog(
               `${key?.integration?.name} post is too long, it will be cropped, do you want to continue?`,
