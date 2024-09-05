@@ -102,26 +102,31 @@ export const PickPlatforms: FC<{
           ({ id }) => id !== integration.id,
         );
 
-        if (
-          !props.singleSelect &&
-          !(await deleteDialog(
-            'Are you sure you want to remove this platform?',
-          ))
-        ) {
-          return;
-        }
+        // if (
+        //   !props.singleSelect &&
+        //   !(await deleteDialog(
+        //     'Are you sure you want to remove this platform?',
+        //   ))
+        // ) {
+        //   return;
+        // }
 
-        // TODO
-        // openConfirmation({
-        //   title: 'Delte Confirmation',
-        //   description: 'Are you sure you want to delete this post?',
-        //   // cancelLabel: 'Cancel',
-        //   actionLabel: 'Delete',
-        //   onAction: () => {},
-        //   onCancel: () => {
-        //     return;
-        //   },
-        // });
+        // TODO - 상태 변경 후 onAction을 이어서 처리할 수 있는 플로우 필요
+        const result = await openConfirmation({
+          title: 'Delte Confirmation',
+          description: 'Are you sure you want to delete this post?',
+          // cancelLabel: 'Cancel',
+          actionLabel: 'Delete',
+          onAction: () => {
+            return true;
+          },
+          onCancel: () => {
+            return false;
+          },
+        });
+
+        console.log(result);
+        return false;
 
         promises.push(
           new Promise((res) => {

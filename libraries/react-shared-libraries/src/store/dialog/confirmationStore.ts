@@ -1,4 +1,3 @@
-// confirmationStore.ts
 import { create } from 'zustand';
 
 interface ConfirmationState {
@@ -17,9 +16,9 @@ interface ConfirmationActions {
     description: string;
     cancelLabel?: string;
     actionLabel?: string;
-    onAction: () => void;
-    onCancel: () => void;
-  }) => void;
+    onAction?: () => void;
+    onCancel?: () => void;
+  }) => Promise<boolean>;
   closeConfirmation: () => void;
 }
 
@@ -34,16 +33,27 @@ const useConfirmationStore = create<ConfirmationState & ConfirmationActions>(
     onAction: () => {},
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     onCancel: () => {},
-    openConfirmation: (data) =>
-      set((state) => ({
-        open: true,
-        title: data.title,
-        description: data.description,
-        cancelLabel: data.cancelLabel || 'Cancel',
-        actionLabel: data.actionLabel || '',
-        onAction: data.onAction,
-        onCancel: data.onCancel,
-      })),
+    openConfirmation: (data) => {
+      return new Promise<boolean>((resolve, reject) => {
+        set((state) => ({
+          open: true,
+          title: data.title,
+          description: data.description,
+          cancelLabel: data.cancelLabel || 'Cancel',
+          actionLabel: data.actionLabel || 'Confirm',
+          onAction: () => {
+            if (data.onAction) data.onAction();
+            resolve(true); // Resolve the promise on action
+            set({ open: false }); // Close confirmation
+          },
+          onCancel: () => {
+            if (data.onCancel) data.onCancel();
+            resolve(false);
+            set({ open: false }); // Close confirmation
+          },
+        }));
+      });
+    },
     closeConfirmation: () =>
       set((state) => ({
         open: false,
