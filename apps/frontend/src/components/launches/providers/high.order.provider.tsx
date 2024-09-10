@@ -34,6 +34,7 @@ import { useCopilotAction, useCopilotReadable } from '@copilotkit/react-core';
 import { AddPostButton } from '@kursor/frontend/components/launches/add.post.button';
 import { GeneralPreviewComponent } from '@kursor/frontend/components/launches/general.preview.component';
 import { capitalize } from 'lodash';
+import useConfirmationStore from '@kursor/react/store/dialog/confirmationStore';
 
 // Simple component to change back to settings on after changing tab
 export const SetTab: FC<{ changeTab: () => void }> = (props) => {
@@ -201,14 +202,28 @@ export const withProvider = (
       [],
     );
 
+    const { openConfirmation } = useConfirmationStore();
+
     // Delete post
     const deletePost = useCallback(
       (index: number) => async () => {
         if (
-          !(await deleteDialog(
-            'Are you sure you want to delete this post?',
-            'Yes, delete it!',
-          ))
+          // !(await deleteDialog(
+          //   'Are you sure you want to delete this post?',
+          //   'Yes, delete it!',
+          // ))
+          !(await openConfirmation({
+            title: 'Confirmation',
+            description: 'Are you sure you want to delete this post?',
+            actionLabel: 'Yes, delete it!',
+            cancelLabel: 'Cancel',
+            onAction: () => {
+              return true;
+            },
+            onCancel: () => {
+              return false;
+            },
+          }))
         ) {
           return;
         }
@@ -223,12 +238,24 @@ export const withProvider = (
     // This is a function if we want to switch from the global editor to edit in place
     const changeToEditor = useCallback(async () => {
       if (
-        !(await deleteDialog(
-          !editInPlace
-            ? 'Are you sure you want to edit only this?'
-            : 'Are you sure you want to revert it back to global editing?',
-          'Yes, edit in place!',
-        ))
+        // !(await deleteDialog(
+        //   !editInPlace
+        //     ? 'Are you sure you want to edit only this?'
+        //     : 'Are you sure you want to revert it back to global editing?',
+        //   'Yes, edit in place!',
+        // ))
+        !(await openConfirmation({
+          title: 'Confirmation',
+          description: 'Are you sure you want to delete this post?',
+          actionLabel: 'Yes, delete it!',
+          cancelLabel: 'Cancel',
+          onAction: () => {
+            return true;
+          },
+          onCancel: () => {
+            return false;
+          },
+        }))
       ) {
         return false;
       }

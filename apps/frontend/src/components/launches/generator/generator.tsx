@@ -23,6 +23,7 @@ import { Button } from '@kursor/react/form/button';
 import { PostSelector } from '@kursor/frontend/components/post-url-selector/post.url.selector';
 import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import clsx from 'clsx';
+import useConfirmationStore from '@kursor/react/store/dialog/confirmationStore';
 
 const ThirdStep: FC<{ week: number; year: number }> = (props) => {
   const { week, year } = props;
@@ -32,7 +33,7 @@ const ThirdStep: FC<{ week: number; year: number }> = (props) => {
   }, [week, year]);
   return (
     <div>
-      <div className="text-[20px] mb-[20px] flex flex-col items-center justify-center text-center mt-[20px] gap-[20px]">
+      <div className="mb-[20px] mt-[20px] flex flex-col items-center justify-center gap-[20px] text-center text-[20px]">
         <img src="/success.svg" alt="success" />
         Your posts have been scheduled as drafts.
         <br />
@@ -67,7 +68,7 @@ const SecondStep: FC<{
       }
       setSelected([...selected, index]);
     },
-    [selected]
+    [selected],
   );
 
   const list = useMemo(() => {
@@ -108,7 +109,7 @@ const SecondStep: FC<{
         year: values.date.year,
       });
     },
-    [selected, postId, url]
+    [selected, postId, url],
   );
 
   return (
@@ -131,36 +132,36 @@ const SecondStep: FC<{
               </option>
             ))}
           </Select>
-          <div className="text-[20px] mb-[20px]">
+          <div className="mb-[20px] text-[20px]">
             Click on the posts you would like to schedule.
             <br />
             They will be saved as drafts and you can edit them later.
           </div>
-          <div className="grid grid-cols-3 gap-[25px] select-none cursor-pointer">
+          <div className="grid cursor-pointer select-none grid-cols-3 gap-[25px]">
             {posts.map((post, index) => (
               <div
                 onClick={addPost(String(index))}
                 className={clsx(
-                  'flex flex-col h-[200px] border rounded-[4px] group hover:border-white relative',
+                  'group relative flex h-[200px] flex-col rounded-[4px] border hover:border-white',
                   selected.includes(String(index))
                     ? 'border-white'
-                    : 'border-fifth'
+                    : 'border-fifth',
                 )}
                 key={post[0].post}
               >
                 {post.length > 1 && (
-                  <div className="bg-[#612AD5] absolute -left-[15px] -top-[15px] z-[100] p-[3px] rounded-[10px]">
+                  <div className="absolute -left-[15px] -top-[15px] z-[100] rounded-[10px] bg-[#612AD5] p-[3px]">
                     a thread
                   </div>
                 )}
                 <div
                   className={clsx(
-                    'flex-1 relative h-full w-full group-hover:bg-black',
-                    selected.includes(String(index)) && 'bg-black'
+                    'relative h-full w-full flex-1 group-hover:bg-black',
+                    selected.includes(String(index)) && 'bg-black',
                   )}
                 >
-                  <div className="absolute left-0 top-0 w-full h-full p-[16px]">
-                    <div className="w-full h-full overflow-hidden text-ellipsis group-hover:bg-black resize-none outline-none">
+                  <div className="absolute left-0 top-0 h-full w-full p-[16px]">
+                    <div className="h-full w-full resize-none overflow-hidden text-ellipsis outline-none group-hover:bg-black">
                       {post[0].post.split('\n\n')[0]}
                     </div>
                   </div>
@@ -183,7 +184,7 @@ const FirstStep: FC<{
   nextStep: (
     posts: Array<Array<{ post: string }>>,
     url: string,
-    postId?: string
+    postId?: string,
   ) => void;
 }> = (props) => {
   const { nextStep } = props;
@@ -226,7 +227,7 @@ const FirstStep: FC<{
         message: '',
       });
     },
-    [post, url]
+    [post, url],
   );
 
   const onSubmit: SubmitHandler<{
@@ -251,14 +252,14 @@ const FirstStep: FC<{
     >
       <FormProvider {...form}>
         <div className="flex flex-col">
-          <div className="p-[20px] border border-fifth rounded-[4px]">
+          <div className="border-fifth rounded-[4px] border p-[20px]">
             <div className="flex">
               <div className="flex-1">
                 <Input label="URL" {...form.register('url')} />
               </div>
             </div>
             <div className="flex flex-col-reverse">
-              <div className="p-[16px] bg-input border-fifth border rounded-[4px] min-h-[500px] empty:hidden">
+              <div className="bg-input border-fifth min-h-[500px] rounded-[4px] border p-[16px] empty:hidden">
                 <PostSelector
                   noModal={true}
                   onClose={() => null}
@@ -267,7 +268,7 @@ const FirstStep: FC<{
                   only="article"
                 />
               </div>
-              <div className="pb-[10px] existing-empty">
+              <div className="existing-empty pb-[10px]">
                 Or select from exising posts
               </div>
             </div>
@@ -304,10 +305,10 @@ export const GeneratorPopup = () => {
   }, []);
 
   return (
-    <div className="bg-sixth p-[32px] w-full max-w-[920px] mx-auto flex flex-col gap-[24px] rounded-[4px] border border-[#172034] relative">
+    <div className="bg-sixth relative mx-auto flex w-full max-w-[920px] flex-col gap-[24px] rounded-[4px] border border-[#172034] p-[32px]">
       <button
         onClick={closeAll}
-        className="outline-none absolute right-[20px] top-[15px] mantine-UnstyledButton-root mantine-ActionIcon-root hover:bg-tableBorder cursor-pointer mantine-Modal-close mantine-1dcetaa"
+        className="mantine-UnstyledButton-root mantine-ActionIcon-root hover:bg-tableBorder mantine-Modal-close mantine-1dcetaa absolute right-[20px] top-[15px] cursor-pointer outline-none"
         type="button"
       >
         <svg
@@ -365,14 +366,28 @@ export const GeneratorComponent = () => {
   const router = useRouter();
   const modal = useModals();
 
+  const { openConfirmation } = useConfirmationStore();
+
   const generate = useCallback(async () => {
     if (!user?.tier?.ai) {
       if (
-        await deleteDialog(
-          'You need to upgrade to use this feature',
-          'Move to billing',
-          'Payment Required'
-        )
+        // await deleteDialog(
+        //   'You need to upgrade to use this feature',
+        //   'Move to billing',
+        //   'Payment Required',
+        // )
+        await openConfirmation({
+          title: 'Confirmation',
+          description: 'You need to upgrade to use this feature',
+          actionLabel: 'Move to billing',
+          cancelLabel: 'Payment Required',
+          onAction: () => {
+            return true;
+          },
+          onCancel: () => {
+            return false;
+          },
+        })
       ) {
         router.push('/billing');
       }
@@ -392,7 +407,7 @@ export const GeneratorComponent = () => {
 
   return (
     <button
-      className="text-white p-[8px] rounded-md bg-red-700 flex justify-center items-center gap-[5px] outline-none"
+      className="flex items-center justify-center gap-[5px] rounded-md bg-red-700 p-[8px] text-white outline-none"
       onClick={generate}
     >
       <svg

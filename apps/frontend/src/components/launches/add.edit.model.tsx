@@ -336,30 +336,20 @@ export const AddEditModal: FC<{
             (p) => p.content.length > (key.maximumCharacters || 1000000),
           )
         ) {
-          openConfirmation({
-            title: 'Close Confirmation',
-            description: 'Are you sure you want to delete this post?',
+          const result = await openConfirmation({
+            title: 'Contents Alert',
+            description: `${key?.integration?.name} post is too long, it will be cropped, do you want to continue?`,
             // cancelLabel: 'Cancel',
-            // actionLabel: 'Close',
+            actionLabel: 'Continue',
             onAction: async () => {
-              await key.trigger();
-              moveToIntegration({
-                identifier: key?.integration?.id!,
-                toPreview: true,
-              });
-              return;
+              return true;
             },
             onCancel: () => {
-              return;
+              return false;
             },
           });
 
-          if (
-            !(await deleteDialog(
-              `${key?.integration?.name} post is too long, it will be cropped, do you want to continue?`,
-              'Yes, continue',
-            ))
-          ) {
+          if (!result) {
             await key.trigger();
             moveToIntegration({
               identifier: key?.integration?.id!,

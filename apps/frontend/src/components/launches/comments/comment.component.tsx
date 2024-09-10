@@ -10,6 +10,7 @@ import { Input } from '@kursor/react/form/input';
 import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 import interClass from '@kursor/react/helpers/inter.font';
+import useConfirmationStore from '@kursor/react/store/dialog/confirmationStore';
 
 export const CommentBox: FC<{
   value?: string;
@@ -77,6 +78,8 @@ export const EditableCommentComponent: FC<{
   const [editMode, setEditMode] = useState(false);
   const user = useUser();
 
+  const { openConfirmation } = useConfirmationStore();
+
   const updateComment = useCallback((commentValue: string) => {
     if (commentValue !== comment.content) {
       setCommentContent(commentValue);
@@ -87,10 +90,22 @@ export const EditableCommentComponent: FC<{
 
   const deleteCommentFunction = useCallback(async () => {
     if (
-      await deleteDialog(
-        'Are you sure you want to delete this comment?',
-        'Yes, Delete',
-      )
+      // await deleteDialog(
+      //   'Are you sure you want to delete this comment?',
+      //   'Yes, Delete',
+      // )
+      await openConfirmation({
+        title: 'Confirmation',
+        description: 'Are you sure you want to delete this comment?',
+        actionLabel: 'Yes, Delte',
+        cancelLabel: 'Cancel',
+        onAction: () => {
+          return true;
+        },
+        onCancel: () => {
+          return false;
+        },
+      })
     ) {
       onDelete();
     }

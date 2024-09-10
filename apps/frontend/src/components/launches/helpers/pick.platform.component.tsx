@@ -125,8 +125,7 @@ export const PickPlatforms: FC<{
           },
         });
 
-        console.log(result);
-        return false;
+        if (!result) return;
 
         promises.push(
           new Promise((res) => {

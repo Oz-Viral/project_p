@@ -4,6 +4,7 @@ import { useFetch } from '@kursor/helpers/utils/custom.fetch';
 import { deleteDialog } from '@kursor/react/helpers/delete.dialog';
 import { useToaster } from '@kursor/react/toaster/toaster';
 import interClass from '@kursor/react/helpers/inter.font';
+import useConfirmationStore from '@kursor/react/store/dialog/confirmationStore';
 
 export const Menu: FC<{
   canEnable: boolean;
@@ -15,6 +16,9 @@ export const Menu: FC<{
   const fetch = useFetch();
   const toast = useToaster();
   const [show, setShow] = useState(false);
+
+  const { openConfirmation } = useConfirmationStore();
+
   const ref = useClickOutside<HTMLDivElement>(() => {
     setShow(false);
   });
@@ -25,10 +29,22 @@ export const Menu: FC<{
 
   const disableChannel = useCallback(async () => {
     if (
-      !(await deleteDialog(
-        'Are you sure you want to disable this channel?',
-        'Disable Channel',
-      ))
+      // !(await deleteDialog(
+      //   'Are you sure you want to disable this channel?',
+      //   'Disable Channel',
+      // ))
+      !(await openConfirmation({
+        title: 'Confirmation',
+        description: 'Are you sure you want to disable this channel?',
+        actionLabel: 'Disable Channel',
+        cancelLabel: 'Cancel',
+        onAction: () => {
+          return true;
+        },
+        onCancel: () => {
+          return false;
+        },
+      }))
     ) {
       return;
     }
@@ -44,10 +60,22 @@ export const Menu: FC<{
 
   const deleteChannel = useCallback(async () => {
     if (
-      !(await deleteDialog(
-        'Are you sure you want to delete this channel?',
-        'Delete Channel',
-      ))
+      // !(await deleteDialog(
+      //   'Are you sure you want to delete this channel?',
+      //   'Delete Channel',
+      // ))
+      !(await openConfirmation({
+        title: 'Confirmation',
+        description: 'Are you sure you want to disable this channel?',
+        actionLabel: 'Disable Channel',
+        cancelLabel: 'Cancel',
+        onAction: () => {
+          return true;
+        },
+        onCancel: () => {
+          return false;
+        },
+      }))
     ) {
       return;
     }

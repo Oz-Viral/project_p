@@ -20,6 +20,7 @@ import { useUser } from '@kursor/frontend/components/layout/user.context';
 import interClass from '@kursor/react/helpers/inter.font';
 import { useRouter } from 'next/navigation';
 import { isGeneral } from '@kursor/react/helpers/is.general';
+import useConfirmationStore from '@kursor/react/store/dialog/confirmationStore';
 
 export interface Tiers {
   month: Array<{
@@ -56,7 +57,7 @@ export const Prorate: FC<{
             }),
           })
         ).json()
-      ).price
+      ).price,
     );
     setLoading(false);
   }, 500);
@@ -79,7 +80,7 @@ export const Prorate: FC<{
   }
 
   return (
-    <div className="text-[12px] flex pt-[12px]">
+    <div className="flex pt-[12px] text-[12px]">
       (Pay Today ${(price < 0 ? 0 : price)?.toFixed(1)})
     </div>
   );
@@ -99,7 +100,7 @@ export const Features: FC<{
         currentPricing.posts_per_month > 10000
           ? 'Unlimited'
           : currentPricing.posts_per_month
-      } posts per month`
+      } posts per month`,
     );
     if (currentPricing.team_members) {
       list.push(`Unlimited team members`);
@@ -115,7 +116,7 @@ export const Features: FC<{
 
     if (currentPricing?.image_generator) {
       list.push(
-        `${currentPricing?.image_generation_count} AI Images per month`
+        `${currentPricing?.image_generation_count} AI Images per month`,
       );
     }
 
@@ -125,7 +126,7 @@ export const Features: FC<{
   }, [pack]);
 
   return (
-    <div className="flex flex-col gap-[10px] justify-center text-[16px] text-[#AAA]">
+    <div className="flex flex-col justify-center gap-[10px] text-[16px] text-[#AAA]">
       {features.map((feature) => (
         <div key={feature} className="flex gap-[20px]">
           <div>
@@ -159,20 +160,22 @@ export const MainBillingComponent: FC<{
   const user = useUser();
   const router = useRouter();
 
+  const { openConfirmation } = useConfirmationStore();
+
   const [subscription, setSubscription] = useState<Subscription | undefined>(
-    sub
+    sub,
   );
 
   const [loading, setLoading] = useState<boolean>(false);
   const [period, setPeriod] = useState<'MONTHLY' | 'YEARLY'>(
-    subscription?.period || 'MONTHLY'
+    subscription?.period || 'MONTHLY',
   );
   const [monthlyOrYearly, setMonthlyOrYearly] = useState<'on' | 'off'>(
-    period === 'MONTHLY' ? 'off' : 'on'
+    period === 'MONTHLY' ? 'off' : 'on',
   );
 
   const [initialChannels, setInitialChannels] = useState(
-    sub?.totalChannels || 1
+    sub?.totalChannels || 1,
   );
 
   useEffect(() => {
@@ -183,7 +186,7 @@ export const MainBillingComponent: FC<{
     if (period !== sub?.period) {
       setPeriod(sub?.period || 'MONTHLY');
       setMonthlyOrYearly(
-        (sub?.period || 'MONTHLY') === 'MONTHLY' ? 'off' : 'on'
+        (sub?.period || 'MONTHLY') === 'MONTHLY' ? 'off' : 'on',
       );
     }
 
@@ -220,20 +223,49 @@ export const MainBillingComponent: FC<{
         pricing[subscription?.subscriptionTier!]?.team_members
       ) {
         messages.push(
-          `Your team members will be removed from your organization`
+          `Your team members will be removed from your organization`,
         );
       }
+
+      openConfirmation({
+        title: 'Cancel Subscription',
+        description: `Are you sure you want to cancel your subscription? ${messages.join(
+          ', ',
+        )}`,
+        cancelLabel: 'Yes, cancel',
+        actionLabel: 'Cancel Subscription',
+        onAction: () => {
+          return true;
+        },
+        onCancel: () => {
+          return false;
+        },
+      });
 
       if (billing === 'FREE') {
         if (
           subscription?.cancelAt ||
-          (await deleteDialog(
-            `Are you sure you want to cancel your subscription? ${messages.join(
-              ', '
+          // (await deleteDialog(
+          //   `Are you sure you want to cancel your subscription? ${messages.join(
+          //     ', ',
+          //   )}`,
+          //   'Yes, cancel',
+          //   'Cancel Subscription',
+          // ))
+          (await openConfirmation({
+            title: 'Cancel Subscription',
+            description: `Are you sure you want to cancel your subscription? ${messages.join(
+              ', ',
             )}`,
-            'Yes, cancel',
-            'Cancel Subscription'
-          ))
+            actionLabel: 'Yes, cancel',
+            cancelLabel: 'Cancel Subscription',
+            onAction: () => {
+              return true;
+            },
+            onCancel: () => {
+              return false;
+            },
+          }))
         ) {
           setLoading(true);
           const { cancel_at } = await (
@@ -254,7 +286,19 @@ export const MainBillingComponent: FC<{
 
       if (
         messages.length &&
-        !(await deleteDialog(messages.join(', '), 'Yes, continue'))
+        // !(await deleteDialog(messages.join(', '), 'Yes, continue'))
+        !(await openConfirmation({
+          title: 'Confirmation',
+          description: messages.join(', '),
+          actionLabel: 'Yes, continue',
+          cancelLabel: 'Cancel',
+          onAction: () => {
+            return true;
+          },
+          onCancel: () => {
+            return false;
+          },
+        }))
       ) {
         return;
       }
@@ -277,11 +321,24 @@ export const MainBillingComponent: FC<{
 
       if (portal) {
         if (
-          await deleteDialog(
-            'We could not charge your credit card, please update your payment method',
-            'Update',
-            'Payment Method Required'
-          )
+          // await deleteDialog(
+          //   'We could not charge your credit card, please update your payment method',
+          //   'Update',
+          //   'Payment Method Required',
+          // )
+          await openConfirmation({
+            title: 'Confirmation',
+            description:
+              'We could not charge your credit card, please update your payment method',
+            actionLabel: 'Update',
+            cancelLabel: 'Payment Method Required',
+            onAction: () => {
+              return true;
+            },
+            onCancel: () => {
+              return false;
+            },
+          })
         ) {
           window.open(portal);
         }
@@ -300,14 +357,14 @@ export const MainBillingComponent: FC<{
           },
           {
             revalidate: false,
-          }
+          },
         );
         toast.show('Subscription updated successfully');
       }
 
       setLoading(false);
     },
-    [monthlyOrYearly, subscription, user]
+    [monthlyOrYearly, subscription, user],
   );
 
   if (user?.isLifetime) {
@@ -333,10 +390,10 @@ export const MainBillingComponent: FC<{
           .map(([name, values]) => (
             <div
               key={name}
-              className="flex-1 bg-sixth border border-[#172034] rounded-[4px] p-[24px] gap-[16px] flex flex-col"
+              className="bg-sixth flex flex-1 flex-col gap-[16px] rounded-[4px] border border-[#172034] p-[24px]"
             >
               <div className="text-[18px]">{name}</div>
-              <div className="text-[38px] flex gap-[2px] items-center">
+              <div className="flex items-center gap-[2px] text-[38px]">
                 <div>
                   $
                   {monthlyOrYearly === 'on'
@@ -347,10 +404,10 @@ export const MainBillingComponent: FC<{
                   {monthlyOrYearly === 'on' ? '/year' : '/month'}
                 </div>
               </div>
-              <div className="text-[14px] flex gap-[10px]">
+              <div className="flex gap-[10px] text-[14px]">
                 {currentPackage === name.toUpperCase() &&
                 subscription?.cancelAt ? (
-                  <div className="gap-[3px] flex flex-col">
+                  <div className="flex flex-col gap-[3px]">
                     <div>
                       <Button
                         onClick={moveToCheckout('FREE')}
@@ -371,25 +428,26 @@ export const MainBillingComponent: FC<{
                     className={clsx(
                       subscription &&
                         name.toUpperCase() === 'FREE' &&
-                        '!bg-red-500'
+                        '!bg-red-500',
                     )}
                     onClick={moveToCheckout(
-                      name.toUpperCase() as 'STANDARD' | 'PRO'
+                      name.toUpperCase() as 'STANDARD' | 'PRO',
                     )}
                   >
                     {currentPackage === name.toUpperCase()
                       ? 'Current Plan'
                       : name.toUpperCase() === 'FREE'
-                      ? subscription?.cancelAt
-                        ? `Downgrade on ${dayjs
-                            .utc(subscription?.cancelAt)
-                            .local()
-                            .format('D MMM, YYYY')}`
-                        : 'Cancel subscription'
-                      : // @ts-ignore
-                      user?.tier === 'FREE' || user?.tier?.current === 'FREE'
-                      ? 'Start 7 days free trial'
-                      : 'Purchase'}
+                        ? subscription?.cancelAt
+                          ? `Downgrade on ${dayjs
+                              .utc(subscription?.cancelAt)
+                              .local()
+                              .format('D MMM, YYYY')}`
+                          : 'Cancel subscription'
+                        : // @ts-ignore
+                          user?.tier === 'FREE' ||
+                            user?.tier?.current === 'FREE'
+                          ? 'Start 7 days free trial'
+                          : 'Purchase'}
                   </Button>
                 )}
                 {subscription &&
@@ -409,7 +467,7 @@ export const MainBillingComponent: FC<{
           ))}
       </div>
       {!!subscription?.id && (
-        <div className="flex justify-center mt-[20px] gap-[10px]">
+        <div className="mt-[20px] flex justify-center gap-[10px]">
           <Button onClick={updatePayment}>Update Payment Method</Button>
           {isGeneral() && !subscription?.cancelAt && (
             <Button
